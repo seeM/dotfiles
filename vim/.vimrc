@@ -46,6 +46,8 @@ Plug 'Vimjas/vim-python-pep8-indent'    " better python indenting
 Plug 'hdima/python-syntax'              " better python syntax colors
 Plug 'freitass/todo.txt-vim'            " todo.txt functionality
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }    " cool for note-taking
+Plug 'cocopon/iceberg.vim'
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 " }}}
 " Plugin Settings {{{
@@ -72,9 +74,26 @@ endif
 " Colors {{{
 syntax enable                  " enable syntax highlighting
 set background=dark
-colorscheme solarized
+colorscheme iceberg
+
 let g:python_highlight_all = 1
-call togglebg#map("<F5>")      " map <F5> to toggle solarized light/dark mode
+
+" True color support
+" https://github.com/vim/vim/issues/993
+" Set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+" Highlight current line, bold current line number
+set cursorline
+highlight CursorLineNR cterm=bold
+
+" Customization of status line colors for iceberg theme
+if g:colors_name == 'iceberg'
+    highlight StatusLine guibg=#818596 guifg=#1e2132
+    highlight StatusLineNC guibg=#3e445e guifg=#1e2132
+endif
 " }}}
 " Font {{{
 set guifont='DejaVu\ Sans\ Mono\ 12
