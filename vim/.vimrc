@@ -35,9 +35,10 @@ Plug 'tpope/vim-surround'               " s is a text-object for delimiters; ss 
 Plug 'tpope/vim-commentary'             " gc is an operator to toggle comments; gcc linewise
 Plug 'tpope/vim-repeat'                 " make vim-commentary and vim-surround work with `.`
 Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explorer
-Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive'
+Plug 'lambdalisue/gina.vim'
 Plug 'jpalardy/vim-slime'               " sending text between terminals
-" Plug 'Valloric/YouCompleteMe'           " asynchronous autocompletion
+Plug 'Valloric/YouCompleteMe'           " asynchronous autocompletion
 Plug 'w0rp/ale'                         " asynchronous lint engine
 Plug 'ervandew/supertab'                " fixes tab for insert-mode
 Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
@@ -54,8 +55,8 @@ call plug#end()
 let g:slime_target = 'tmux'
 let g:slime_paste_file = tempname()
 let g:slime_python_ipython = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ale_python_mypy_options = '--ignore-missing-imports'    " '--warn-no-return' may also be useful in future
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ale_python_mypy_options = '--ignore-missing-imports'    " '--warn-no-return' may also be useful in future
 let g:python_highlight_all = 1
 " vimwiki
 let wiki = {}
