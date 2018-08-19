@@ -31,7 +31,7 @@ Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explor
 Plug 'altercation/vim-colors-solarized'
 Plug 'jpalardy/vim-slime'               " sending text between terminals
 " Plug 'Valloric/YouCompleteMe'           " asynchronous autocompletion
-" Plug 'w0rp/ale'                         " asynchronous lint engine
+Plug 'w0rp/ale'                         " asynchronous lint engine
 Plug 'ervandew/supertab'                " fixes tab for insert-mode
 Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
 Plug 'tmhedberg/SimpylFold'             " better python code folding
