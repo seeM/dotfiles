@@ -96,7 +96,4 @@ if g:colors_name == 'iceberg'
     highlight StatusLineNC guibg=#3e445e guifg=#1e2132
 endif
 " }}}
-" Font {{{
-set guifont='DejaVu\ Sans\ Mono\ 12
-" }}}
 " vim: foldmethod=marker:foldlevel=0
