@@ -1,3 +1,9 @@
+# Locale settings in pycharm don't seem to be set while settings in iTerm are
+# correct. We explicitly set locale settings to make pycharm happy.
+LC_ALL=en_us.UTF-8
+LC_CTYPE=en_us.UTF-8
+LANG=en_us.UTF-8
+
 # Pyenv
 PYENV_ROOT="$HOME/.pyenv"
 PATH="$PYENV_ROOT/bin:$PATH"
