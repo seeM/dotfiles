@@ -7,6 +7,7 @@ set number                     " enable line numbering
 set colorcolumn=79             " color 79th column
 set modeline
 let mapleader = ","
+let maplocalleader = ","
 set expandtab                  " expand tabs to spaces
 set shiftwidth=4               " number of spaces to expand a tab to
 set softtabstop=4              " ???
@@ -38,7 +39,7 @@ Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explor
 Plug 'tpope/vim-fugitive'
 Plug 'lambdalisue/gina.vim'
 Plug 'jpalardy/vim-slime'               " sending text between terminals
-Plug 'Valloric/YouCompleteMe'           " asynchronous autocompletion
+" Plug 'Valloric/YouCompleteMe'           " asynchronous autocompletion
 Plug 'w0rp/ale'                         " asynchronous lint engine
 Plug 'ervandew/supertab'                " fixes tab for insert-mode
 Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
@@ -63,6 +64,9 @@ let wiki = {}
 let wiki.path = '~/Dropbox/notes/'
 let wiki.nested_syntaxes = {'python': 'python'}
 let g:vimwiki_list = [wiki]
+" }}}
+" Keymaps {{{
+noremap <Leader>w :update<CR>    " Quick save
 " }}}
 " Mouse {{{
 set mouse=a                    " enable mouse for all modes
