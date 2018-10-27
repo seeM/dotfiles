@@ -45,6 +45,11 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Fix delete button in vi mode
 bindkey "^?" backward-delete-char
 
+# =======
+# Aliases
+# =======
+alias venv='source venv/bin/activate'
+
 # -h : human-readable file sizes (bytes, etc.)
 # -a : show hidden files
 # -l : list files
@@ -53,9 +58,11 @@ alias a='ls -halG'
 
 # Git
 alias gs='git status'
+alias gd='git diff'
 alias gc='git commit'
 alias gl='git pull'
 alias gh='git push'
+alias ga='git add'
 
 # BasicTex
 PATH="/Library/TeX/texbin:$PATH"
@@ -69,3 +76,7 @@ function ssh-tmux() {
         ssh
     fi
 }
+
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

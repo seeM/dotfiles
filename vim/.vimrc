@@ -66,6 +66,7 @@ Plug 'tmhedberg/SimpylFold'             " better python code folding
 Plug 'Vimjas/vim-python-pep8-indent'    " better python indenting
 Plug 'hdima/python-syntax'              " better python syntax colors
 Plug 'freitass/todo.txt-vim'            " todo.txt functionality
+Plug 'davidoc/taskpaper.vim'
 
 " Visual
 Plug 'cocopon/iceberg.vim'
@@ -144,4 +145,3 @@ highlight CursorLineNR cterm=bold
 " endif
 " }}}
 " vim: foldmethod=marker:foldlevel=0
-"

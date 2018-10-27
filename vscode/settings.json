@@ -1,0 +1,72 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.rulers": [
+        79
+    ],
+    "python.linting.mypyEnabled": true,
+    "window.zoomLevel": 0,
+    "breadcrumbs.enabled": true,
+    "files.exclude": {
+        "**/__pycache__/": true,
+        ".mypy_cache/": true,
+        ".idea/": true,
+        // ".vscode/": true,
+        "venv/": true,
+    },
+
+    "explorer.openEditors.visible": 0,
+
+    "workbench.panel.defaultLocation": "bottom",
+    "workbench.editor.showIcons": false,
+    "workbench.statusBar.feedback.visible": false,
+
+    "editor.fontFamily": "'Menlo'",
+
+    "search.smartCase": true,
+
+    "vim.useSystemClipboard": true,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    // "vim.statusBarColorControl": true,
+
+    "python.pythonPath": "${workspaceFolder}/venv/bin/python",
+
+    "todo.embedded.exclude": [
+        "**/venv/**",
+    ],
+    "todo.symbols.box": "[ ]",
+    "todo.symbols.cancelled": "[-]",
+    "todo.symbols.done": "[x]",
+    "editor.fontSize": 12,
+
+    "editor.minimap.enabled": false,
+
+    // "workbench.activityBar.visible": false,
+
+    "python.jediEnabled": false,
+    // "python.autoComplete.preloadModules": [
+    //     "numpy",
+    //     "pandas",
+    //     "matplotlib",
+    //     "keras",
+    //     "django",
+    // ],
+    "workbench.fontAliasing": "auto",
+    "latex-workshop.view.pdf.viewer": "tab",
+    // "python.jediEnabled": false,
+
+    // "terminal.integrated.env.osx": {
+    //     "PATH": ""
+    // }
+
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+
+    "vim.easymotion": true,
+
+    "vim.ignorecase": false,
+
+    "editor.lineNumbers": "relative",
+    "workbench.colorTheme": "Iceberg"
+}
