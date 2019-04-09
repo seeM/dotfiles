@@ -10,21 +10,35 @@ let mapleader = ","
 let maplocalleader = ","
 set expandtab                  " expand tabs to spaces
 set shiftwidth=4               " number of spaces to expand a tab to
-set softtabstop=4              " ???
+set tabstop=4                  " an indent every 4 spaces
+set softtabstop=4              " let backspace delete indent
 set nostartofline              " avoid going to start of line on certain commands
+
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.vim/.undo
+set noswapfile
+" }}}
+" Ignore {{{
+set wildignore+=.DS_Store
+set wildignore+=__pycache__/
+set wildignore+=.mypy_cache/
+set wildignore+=.git/
+set wildignore+=.gitignore
+set wildignore+=.vscode/
+set wildignore+=venv/
 " }}}
 " Line numbers {{{
 " hybrid line numbers, i.e., all relative except current line
 set number relativenumber
-" focused | normal mode -> relative
-" unfocused | insert mode -> absolute
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
-" fix gutter width
-set numberwidth=3
+" Use absolute numbers in insert mode and relative numbers in normal mode
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
+" Always use 4 columns for the line numbers
+set numberwidth=4
 " }}}
 " Panes {{{
 " easy pane movement
