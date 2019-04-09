@@ -11,12 +11,21 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
+# Macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
 source ~/.zplug/init.zsh
 
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
+zplug "plugins/osx", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+
+# Use menu-styled completion
+zstyle ':completion:*' menu select
 
 # Source plugins and add commands to $PATH
 zplug load
@@ -41,9 +50,20 @@ bindkey "^[^[[C" forward-word
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
-# Fix delete button in vi mode
+# Fix backscape button in vi mode
 bindkey "^?" backward-delete-char
+# Fix delete button
+bindkey "\e[3~" delete-char
+bindkey -M vicmd "\e[3~" delete-char
+
+# Fix history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory EXTENDED_HISTORY
 
 # =======
 # Aliases
@@ -54,7 +74,8 @@ alias venv='source venv/bin/activate'
 # -a : show hidden files
 # -l : list files
 # -G : colorize output
-alias a='ls -halG'
+alias ls='ls -G'
+alias a='ls -hal'
 
 # Git
 alias gs='git status'
@@ -80,3 +101,5 @@ function ssh-tmux() {
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
