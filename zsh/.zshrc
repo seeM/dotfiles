@@ -32,37 +32,48 @@ zplug load
 
 alias psql="/Applications/Postgres.app/Contents/Versions/10/bin/psql"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/seem/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/seem/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/seem/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/seem/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 # Keymaps
-bindkey -v    # vim mode
-export KEYTIMEOUT=1    # make vim mode transitions faster
 
+# Currently commenting this out, in favour of trying emacs bindings since
+# remapping caps lock to ctrl.
+# VIM bindings
+# bindkey -v    # vim mode
+# export KEYTIMEOUT=1    # make vim mode transitions faster
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
+# # Fix backscape button in vi mode
+# bindkey "^?" backward-delete-char
+## Fix delete button in vi mode
+# bindkey -M vicmd "\e[3~" delete-char
+
+# Standard Mac bindings
+# fn + left/right: beginning/end of line
+# Can't use cmd + left/right because iterm uses that to switch tabs.
+# TODO: Maybe remap iterm to something more vim like?
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
-
+# option + left/right: next/previous word
 bindkey "^[^[[D" backward-word
 bindkey "^[^[[C" forward-word
 
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# Fix backscape button in vi mode
-bindkey "^?" backward-delete-char
 # Fix delete button
 bindkey "\e[3~" delete-char
-bindkey -M vicmd "\e[3~" delete-char
+
+# Replace up and down (typically previous and next commands in the history) with
+# a more powerful search from the zsh-history-substring-search plugin.
+# NOTE: Changed from ctrl to meta modifier so that it doesn't break readline
+#       ctrl-p and ctrl-n behaviour.
+bindkey '^[p' history-substring-search-up
+bindkey '^[n' history-substring-search-down
+# TODO: Trying to disable in favor of emacs (ctrl+p/n), will see if I miss it?
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 
 # Fix history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+# TODO: Still not sure these are the best history settings.
 setopt appendhistory EXTENDED_HISTORY
 
 # =======
@@ -85,6 +96,12 @@ alias gl='git pull'
 alias gh='git push'
 alias ga='git add'
 
+# docker
+alias dcd='docker compose down'
+alias dcu='docker compose up'
+
+alias lzd='lazydocker'
+
 # BasicTex
 PATH="/Library/TeX/texbin:$PATH"
 
@@ -103,3 +120,20 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# added by pipx (https://github.com/pipxproject/pipx)
+export PATH="/Users/seem/.local/bin:$PATH"
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# Sqlite
+alias sqlite="sqlite3 -column -header"
+
+# Disables flow control (I think?) so we can use ctrl-s to forward search.
+stty stop undef
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/seem/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/seem/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/seem/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/seem/google-cloud-sdk/completion.zsh.inc'; fi
