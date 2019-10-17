@@ -102,6 +102,10 @@ alias dcu='docker compose up'
 
 alias lzd='lazydocker'
 
+# Configs
+alias vrc='vim ~/.vim/vimrc'
+alias zrc='vim ~/.zshrc'
+
 # BasicTex
 PATH="/Library/TeX/texbin:$PATH"
 
@@ -137,3 +141,32 @@ if [ -f '/Users/seem/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/seem/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/seem/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/seem/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Note-taking
+alias pnotes='ranger ~/DropBox'
+alias wnotes='ranger ~/gdrive'
+
+# -------------------------- Journalling ------------------------------
+JOURNAL_DIR=~/DropBox/2_areas/journal
+
+# Open today's journal entry.
+function journal_today() {
+    date=$(date +'%Y-%m-%d')
+    file=$JOURNAL_DIR/$date.md
+    if ! test -f $file; then
+        echo "# $date\n\n" > $file
+    fi
+    vim + '+ normal $' $file
+}
+
+# Main journal entrypoint.
+function jrnl() {
+    if [[ $# -eq 0 ]]; then
+        journal_today
+    elif [[ "$1" == "ls" ]]; then
+        ranger "$JOURNAL_DIR"
+    # TODO: Add elif that checks if an entry exists for the arg and opens it.
+    #       Could even filter down by year / month in a vim buffer or similar...
+    fi
+}
+
