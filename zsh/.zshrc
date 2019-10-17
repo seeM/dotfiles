@@ -105,6 +105,7 @@ alias lzd='lazydocker'
 # Configs
 alias vrc='vim ~/.vim/vimrc'
 alias zrc='vim ~/.zshrc'
+alias trc='vim ~/.tmux.conf'
 
 # BasicTex
 PATH="/Library/TeX/texbin:$PATH"

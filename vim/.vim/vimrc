@@ -138,6 +138,7 @@ Plug 'tpope/vim-commentary'             " gc is an operator to toggle comments; 
 Plug 'tpope/vim-repeat'                 " make vim-commentary and vim-surround work with `.`
 Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explorer
 Plug 'romainl/vim-cool'                 " only highlight search while typing
+Plug 'christoomey/vim-tmux-navigator'
 
 " }}}
 " Features {{{
