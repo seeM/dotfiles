@@ -1,5 +1,6 @@
 " Author: Wasim Lorgat
 " Source: http://github.com/seem/dotfiles/vim/.vimrc
+" TODO: Remove most plugins...
 
 " General {{{
 
