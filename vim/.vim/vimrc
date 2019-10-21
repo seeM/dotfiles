@@ -171,7 +171,7 @@ let g:pymode_python = 'python3'
 let g:pymode_options_max_line_length = 100
 let g:pymode_lint = 0
 let g:slime_target = 'tmux'
-let g:slime_default_config = {"socket_name": "default", "target_pane": :.2}
+let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 
 " }}}
