@@ -33,6 +33,10 @@ set numberwidth=5
 
 " Reload files that are edited externally.
 set autoread
+au FocusGained,BufEnter * :silent! !
+
+" Auto save files on focus lost.
+" au FocusLost,WinLeave * :silent! noautocmd w
 
 " " set shiftround
 " set title
@@ -169,7 +173,7 @@ call plug#end()
 " Plugin Settings
 let g:pymode_python = 'python3'
 let g:pymode_options_max_line_length = 100
-let g:pymode_lint = 0
+" let g:pymode_lint = 0
 let g:slime_target = 'tmux'
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
