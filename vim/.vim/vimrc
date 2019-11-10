@@ -116,9 +116,6 @@ set nowrap
 " Side-scroll 5 columns at a time for long lines
 set sidescroll=5
 
-" TODO: This is file-type-specific...
-" set textwidth=80
-" set colorcolumn=+1
 " TODO: format options
 set formatoptions=qrn1j
 
@@ -154,7 +151,7 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 " Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
 " TODO: Ultisnips?
 " TODO: CtrlP?
-" TODO: NerdTree?
+Plug 'scrooloose/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
@@ -163,8 +160,7 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 Plug 'cocopon/iceberg.vim'
 Plug 'lifepillar/vim-solarized8'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'w0ng/vim-hybrid'
+Plug 'romainl/Apprentice'
 
 " }}}
 
@@ -173,7 +169,6 @@ call plug#end()
 " Plugin Settings
 let g:pymode_python = 'python3'
 let g:pymode_options_max_line_length = 100
-" let g:pymode_lint = 0
 let g:slime_target = 'tmux'
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
@@ -189,9 +184,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 syntax on
-" TODO: Enable these after plugin management is enabled...
 set background=dark
-colorscheme solarized8_high
+colorscheme apprentice
 
 " Highlight git merge conflict markers using the ErrorMsg highlight group
 " TODO: Cause slow down?...
@@ -205,6 +199,10 @@ highlight CursorLineNR cterm=bold
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
 let &showbreak="↪ "
+
+" Add more Todo keywords and use bold instead of standout.
+syntax keyword Todo contained TODO NOTE HACK
+highlight Todo cterm=bold
 
 " }}}
 " GUI {{{
