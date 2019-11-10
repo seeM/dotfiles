@@ -10,7 +10,7 @@ source ~/.zplug/init.zsh
 # TODO: Decide whether to keep this simpler prompt over pure prompt
 PROMPT="%F{green}%B%n@%m%f:%F{blue}%~%f%b$ "
 
-zplug "mafredri/zsh-async"
+# zplug "mafredri/zsh-async"
 # zplug "sindresorhus/pure", use:pure.zsh, as:theme
 zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
