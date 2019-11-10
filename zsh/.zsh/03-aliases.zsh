@@ -11,10 +11,13 @@ alias venv='source venv/bin/activate'
 # -a : show hidden files
 # -l : list files
 # -G : colorize output
-alias l='ls -G'
+alias ls='ls -G'
+alias l='ls'
 alias ll='ls -halG'
 # TODO: Remove a...
 alias a='ls -halG'
+
+alias e="vim"
 
 # Git
 alias g="git"
@@ -39,9 +42,12 @@ alias dcu='docker compose up'
 
 alias lzd='lazydocker'
 
+# Misc
+alias tag='ctags -R --exclude="venv"'
+
 # Configs
 alias vrc='vim ~/.vim/vimrc'
-alias zrc='vim ~/.zshrc'
+alias zrc='vim ~/.zshrc ~/.zsh/*'
 alias trc='vim ~/.tmux.conf'
 
 # Tmux

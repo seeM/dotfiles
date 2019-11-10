@@ -17,3 +17,8 @@ fi
 export EDITOR=vim
 export VISUAL=vim
 
+export LSCOLORS=ExGxcxdxCxegedabagacad
+
+# zsh
+# See: https://superuser.com/questions/645599/why-is-a-percent-sign-appearing-before-each-prompt-on-zsh-in-windows
+export PROMPT_EOL_MARK=""
