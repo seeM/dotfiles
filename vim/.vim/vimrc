@@ -193,16 +193,15 @@ colorscheme apprentice
 
 " Highlight current line, bold current line number
 set cursorline
-highlight CursorLineNR cterm=bold
+highlight CursorLineNR cterm=bold gui=bold
 
 " Precede a long line with '<', end a long line with '>'
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
 let &showbreak="↪ "
 
-" Add more Todo keywords and use bold instead of standout.
-syntax keyword Todo contained TODO NOTE HACK
-highlight Todo cterm=bold
+" Bold Todo instead of standout.
+highlight Todo cterm=bold gui=bold
 
 " }}}
 " GUI {{{
