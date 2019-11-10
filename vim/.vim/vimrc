@@ -203,6 +203,10 @@ let &showbreak="↪ "
 " Bold Todo instead of standout.
 highlight Todo cterm=bold gui=bold
 
+" TODO: Testing...
+" highlight Include cterm=bold gui=bold
+highlight Statement cterm=bold gui=bold
+
 " }}}
 " GUI {{{
 
