@@ -151,7 +151,7 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 " Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
 " TODO: Ultisnips?
 " TODO: CtrlP?
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
@@ -167,11 +167,12 @@ Plug 'romainl/Apprentice'
 call plug#end()
 
 " Plugin Settings
-let g:pymode_python = 'python3'
+let g:pymode_lint_cwindow = 0
 let g:pymode_options_max_line_length = 100
-let g:slime_target = 'tmux'
+let g:pymode_python = 'python3'
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
+let g:slime_target = 'tmux'
 
 " }}}
 " Visual {{{
