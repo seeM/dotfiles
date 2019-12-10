@@ -1,11 +1,9 @@
 # Keymaps
-
 bindkey -e
 
 # Standard Mac bindings
 # fn + left/right: beginning/end of line
 # Can't use cmd + left/right because iterm uses that to switch tabs.
-# TODO: Maybe remap iterm to something more vim like?
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 # option + left/right: next/previous word

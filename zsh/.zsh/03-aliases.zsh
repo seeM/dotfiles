@@ -1,10 +1,5 @@
-# Aliases
-
 alias psql="/Applications/Postgres.app/Contents/Versions/10/bin/psql"
 
-# =======
-# Aliases
-# =======
 alias venv='source venv/bin/activate'
 
 # -h : human-readable file sizes (bytes, etc.)
@@ -14,8 +9,6 @@ alias venv='source venv/bin/activate'
 alias ls='ls -G'
 alias l='ls'
 alias ll='ls -halG'
-# TODO: Remove a...
-alias a='ls -halG'
 
 alias e="vim"
 
@@ -39,7 +32,6 @@ alias gpr="hub pull-request"
 # docker
 alias dcd='docker compose down'
 alias dcu='docker compose up'
-
 alias lzd='lazydocker'
 
 # Misc
@@ -47,7 +39,7 @@ alias tag='ctags -R --exclude="venv"'
 
 # Configs
 alias vrc='vim ~/.vim/vimrc'
-alias zrc='vim ~/.zshrc ~/.zsh/*'
+alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
 
 # Tmux

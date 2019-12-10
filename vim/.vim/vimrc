@@ -128,6 +128,11 @@ set hlsearch
 " }}}
 
 " }}}
+" Keys {{{
+let mapleader = ","
+nnoremap <leader>f :Files .<CR>
+nnoremap <leader>b :Buffers<CR>
+" }}}
 " Plugins {{{
 
 call plug#begin('~/.vim/plugged')
@@ -154,6 +159,10 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 " Plug 'scrooloose/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'dense-analysis/ale'
+Plug 'python-rope/ropevim'
 
 " }}}
 " Colors {{{
@@ -170,6 +179,8 @@ call plug#end()
 let g:pymode_lint_cwindow = 0
 let g:pymode_options_max_line_length = 100
 let g:pymode_python = 'python3'
+" Disable pymode linting in favour of ALE
+let g:pymode_lint = 0
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 let g:slime_target = 'tmux'
