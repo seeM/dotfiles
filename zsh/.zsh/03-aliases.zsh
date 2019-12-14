@@ -67,10 +67,10 @@ alias tn="tmux new-session -s"
 alias td="tmux detach-client"
 
 # Note-taking and journalling
-alias pnotes='ranger ~/DropBox'
-alias wnotes='ranger ~/gdrive'
+alias pnotes='ranger ~/gdrive'
+alias wnotes='ranger ~/gdrive-dp'
 
-JOURNAL_DIR=~/DropBox/2_areas/journal
+JOURNAL_DIR=~/gdrive/journal
 
 # Open today's journal entry.
 function journal_today() {
