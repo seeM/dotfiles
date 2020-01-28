@@ -144,6 +144,7 @@ Plug 'tpope/vim-surround'               " s is a text-object for delimiters; ss 
 Plug 'tpope/vim-commentary'             " gc is an operator to toggle comments; gcc linewise
 Plug 'tpope/vim-repeat'                 " make vim-commentary and vim-surround work with `.`
 Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explorer
+Plug 'tpope/vim-unimpaired'
 Plug 'romainl/vim-cool'                 " only highlight search while typing
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -163,6 +164,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'python-rope/ropevim'
+Plug 'saltstack/salt-vim'
 
 " }}}
 " Colors {{{
