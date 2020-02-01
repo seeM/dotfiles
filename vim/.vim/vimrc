@@ -129,9 +129,14 @@ set hlsearch
 
 " }}}
 " Keys {{{
-let mapleader = ","
-nnoremap <leader>f :Files .<CR>
-nnoremap <leader>b :Buffers<CR>
+" nnoremap <leader>f :Files .<CR>
+" nnoremap <leader>b :Buffers<CR>
+" From: https://romainl.github.io/the-patient-vimmer/3.html
+let mapleader = "\<Space>"
+set path=.,**
+nnoremap <leader>f :find *
+nnoremap <leader>b :buffer <C-z>
+nnoremap gb :ls<CR>:b<Space>
 " }}}
 " Plugins {{{
 
@@ -221,6 +226,9 @@ highlight Todo cterm=bold gui=bold
 " highlight Include cterm=bold gui=bold
 highlight Statement cterm=bold gui=bold
 
+" Status line. From: https://romainl.github.io/the-patient-vimmer/1.html
+set statusline=%<\ %f\ %m%r%y%w%=\ L:\ \%l\/\%L\ C:\ \%c\ 
+
 " }}}
 " GUI {{{
 
@@ -232,6 +240,23 @@ set guioptions=
 " Disable cursor blinking
 set guicursor+=n-v-c:blinkon0
 
+" }}}
+" Grep {{{
+set grepprg=git\ grep
+" From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+function! Grep(args)
+	let args = split(a:args, ' ')
+	return system(join([&grepprg, shellescape(args[0]), len(args) > 1 ? join(args[1:-1], ' ') : ''], ' '))
+endfunction
+
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<q-args>)
+
+augroup quickfix
+	autocmd!
+	autocmd QuickFixCmdPost cgetexpr cwindow
+	autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
 " }}}
 
 " vim: foldmethod=marker:foldlevel=0

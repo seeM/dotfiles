@@ -1,6 +1,6 @@
 c.InteractiveShellApp.exec_lines = [
     'import pdb',
-    'import ipdb',
+    # 'import ipdb',
     'import numpy as np',
     'import pandas as pd',
     # 'import matplotlib.pyplot as plt',
