@@ -55,11 +55,24 @@ au FocusGained,BufEnter * :silent! !
 
 set wildmenu
 set wildignorecase
-" set wildmode=list:full                               " Bash-like completion
-set wildignore+=.DS_Store                            " MacOS
-set wildignore+=__pycache__,mypy_cache,venv,*.pyc    " Python
-set wildignore+=.git                                 " Version control
-set wildignore+=.vscode                              " VSCode
+set wildcharm=<C-z>
+set wildmode=full
+
+" Ignores
+" -------
+" MacOS
+set wildignore+=*.DS_Store
+" Python cache
+set wildignore+=*__pycache__/*
+set wildignore+=*.mypy_cache/*
+set wildignore+=*.pyc
+" Python venvs
+set wildignore+=*.env/*,*.venv/*,*env/*,*venv/*
+" Version control
+set wildignore+=*.git/*
+" IDEs
+set wildignore+=*.vscode/*
+set wildignore+=*.idea/*
 
 " }}}
 " Mouse {{{
@@ -134,8 +147,9 @@ set hlsearch
 " From: https://romainl.github.io/the-patient-vimmer/3.html
 let mapleader = "\<Space>"
 set path=.,**
+nnoremap <leader>e :edit **/*
 nnoremap <leader>f :find *
-nnoremap <leader>b :buffer <C-z>
+nnoremap <leader>b :buffer <C-z><S-tab>
 nnoremap gb :ls<CR>:b<Space>
 " }}}
 " Plugins {{{
