@@ -273,4 +273,6 @@ augroup quickfix
 augroup END
 " }}}
 
+silent! source .vimlocal
+
 " vim: foldmethod=marker:foldlevel=0
