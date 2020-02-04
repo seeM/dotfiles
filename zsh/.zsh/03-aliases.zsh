@@ -1,6 +1,6 @@
 alias psql="/Applications/Postgres.app/Contents/Versions/10/bin/psql"
 
-alias venv='source venv/bin/activate'
+alias venv='source .venv/bin/activate'
 
 # -h : human-readable file sizes (bytes, etc.)
 # -a : show hidden files

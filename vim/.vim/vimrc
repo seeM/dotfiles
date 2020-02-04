@@ -55,7 +55,7 @@ au FocusGained,BufEnter * :silent! !
 
 set wildmenu
 set wildignorecase
-set wildcharm=<C-z>
+" set wildcharm=<C-z>
 set wildmode=full
 
 " Ignores
@@ -149,8 +149,9 @@ let mapleader = "\<Space>"
 set path=.,**
 nnoremap <leader>e :edit **/*
 nnoremap <leader>f :find *
-nnoremap <leader>b :buffer <C-z><S-tab>
+nnoremap <leader>b :buffer
 nnoremap gb :ls<CR>:b<Space>
+nnoremap <C-p> :FZF<CR>
 " }}}
 " Plugins {{{
 
@@ -179,10 +180,12 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 " Plug 'scrooloose/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+  " Both options are optional. You don't have to install fzf in ~/.fzf
+  " and you don't have to run the install script if you use fzf only in Vim.
 Plug 'dense-analysis/ale'
-Plug 'python-rope/ropevim'
+Plug 'python-rope/ropevim', { 'do': './install --all' }
 Plug 'saltstack/salt-vim'
 
 " }}}
