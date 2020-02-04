@@ -185,7 +185,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   " Both options are optional. You don't have to install fzf in ~/.fzf
   " and you don't have to run the install script if you use fzf only in Vim.
 Plug 'dense-analysis/ale'
-Plug 'python-rope/ropevim', { 'do': './install --all' }
 Plug 'saltstack/salt-vim'
 
 " }}}
