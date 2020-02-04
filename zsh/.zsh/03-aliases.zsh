@@ -35,10 +35,10 @@ alias dcu='docker compose up'
 alias lzd='lazydocker'
 
 # Misc
-alias tag='ctags -R --exclude="venv"'
+alias tag='ctags -R --exclude=".venv"'
 
 # Configs
-alias vrc='vim ~/.vim/vimrc'
+alias vrc='vim ~/.vimrc'
 alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
 
