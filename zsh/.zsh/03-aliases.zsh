@@ -35,7 +35,7 @@ alias dcu='docker compose up'
 alias lzd='lazydocker'
 
 # Misc
-alias tag='ctags -R --exclude=".venv"'
+alias tag='ctags --recurse --exclude=.venv --exclude=venv .'
 
 # Configs
 alias vrc='vim ~/.vimrc'

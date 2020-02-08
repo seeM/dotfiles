@@ -50,6 +50,8 @@ au FocusGained,BufEnter * :silent! !
 " set signcolumn=yes
 " set path=.,**
 
+set tags+=.tags
+
 " }}}
 " Wildmenu completion {{{
 
@@ -169,29 +171,28 @@ Plug 'romainl/vim-cool'                 " only highlight search while typing
 Plug 'christoomey/vim-tmux-navigator'
 
 " }}}
+" Languages {{{
+
+" Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'fs111/pydoc.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'saltstack/salt-vim'
+
+" }}}
 " Features {{{
 
 Plug 'tpope/vim-fugitive'
 Plug 'jpalardy/vim-slime'               " sending text between terminals
-" Plug 'w0rp/ale'                         " asynchronous lint engine
-" Plug 'christoomey/vim-tmux-navigator'   " seamless vim-tmux pane movement
 " TODO: Ultisnips?
-" TODO: CtrlP?
-" Plug 'scrooloose/nerdtree'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run the install script
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-  " Both options are optional. You don't have to install fzf in ~/.fzf
-  " and you don't have to run the install script if you use fzf only in Vim.
 Plug 'dense-analysis/ale'
-Plug 'saltstack/salt-vim'
 
 " }}}
 " Colors {{{
 
-Plug 'cocopon/iceberg.vim'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'cocopon/iceberg.vim'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'romainl/Apprentice'
 
 " }}}
@@ -202,8 +203,10 @@ call plug#end()
 let g:pymode_lint_cwindow = 0
 let g:pymode_options_max_line_length = 100
 let g:pymode_python = 'python3'
+let g:pymode_breakpoint_bind = '<leader>d'
 " Disable pymode linting in favour of ALE
 let g:pymode_lint = 0
+let g:pymode_rope = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 let g:slime_target = 'tmux'
@@ -258,23 +261,35 @@ set guicursor+=n-v-c:blinkon0
 
 " }}}
 " Grep {{{
-set grepprg=git\ grep
 " From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+set grepprg=ag\ --vimgrep
+" set grepprg=git\ grep\ -n\ --column
 function! Grep(args)
-	let args = split(a:args, ' ')
-	return system(join([&grepprg, shellescape(args[0]), len(args) > 1 ? join(args[1:-1], ' ') : ''], ' '))
+    let args = split(a:args, ' ')
+    return system(join([&grepprg, shellescape(args[0]), len(args) > 1 ? join(args[1:-1], ' ') : ''], ' '))
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<q-args>)
 
 augroup quickfix
-	autocmd!
-	autocmd QuickFixCmdPost cgetexpr cwindow
-	autocmd QuickFixCmdPost lgetexpr lwindow
+    autocmd!
+    autocmd QuickFixCmdPost cgetexpr cwindow
+    autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
+
+" }}}
+" Git Blame {{{
+
+" From: https://gist.github.com/romainl/5b827f4aafa7ee29bdc70282ecc31640
+command! -range GB echo join(systemlist("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t')), "\n")
+
 " }}}
 
-silent! source .vimlocal
+" smooth searching
+" cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
+" cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+
+" silent! source .vimlocal
 
 " vim: foldmethod=marker:foldlevel=0
