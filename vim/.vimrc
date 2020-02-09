@@ -285,6 +285,18 @@ augroup END
 command! -range GB echo join(systemlist("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t')), "\n")
 
 " }}}
+" Misc {{{
+
+" Cat selection to terminal so we can copy with mouse selection on remote
+" servers.
+function! CatSelection() range
+    execute("!sed -n '" . a:firstline . "," . a:lastline . "p;" . (a:lastline + 1) . "q' %")
+endfunction
+
+nnoremap <leader>c :call CatSelection()<cr>
+vnoremap <leader>c :call CatSelection()<cr>
+
+" }}}
 
 " smooth searching
 " cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
