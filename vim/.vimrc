@@ -296,12 +296,19 @@ endfunction
 nnoremap <leader>c :call CatSelection()<cr>
 vnoremap <leader>c :call CatSelection()<cr>
 
+" Word count
+function! EchoWordCount()
+    let word_count = system("wc -w " . @% . " | awk '{ print $1}'")[:-2]
+    echo("Word count: " . word_count)
+endfunction
+
+command! -nargs=0 WC call EchoWordCount()
+
 " }}}
 
 " smooth searching
 " cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
 " cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
-
 " silent! source .vimlocal
 
 " vim: foldmethod=marker:foldlevel=0
