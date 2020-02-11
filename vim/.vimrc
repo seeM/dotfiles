@@ -207,6 +207,7 @@ let g:pymode_breakpoint_bind = '<leader>d'
 " Disable pymode linting in favour of ALE
 let g:pymode_lint = 0
 let g:pymode_rope = 1
+let g:pymode_rope_completion = 0
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 let g:slime_target = 'tmux'
