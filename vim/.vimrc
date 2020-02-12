@@ -191,8 +191,8 @@ Plug 'dense-analysis/ale'
 " }}}
 " Colors {{{
 
-" Plug 'cocopon/iceberg.vim'
-" Plug 'lifepillar/vim-solarized8'
+Plug 'cocopon/iceberg.vim'
+Plug 'lifepillar/vim-solarized8'
 Plug 'romainl/Apprentice'
 
 " }}}
@@ -224,7 +224,7 @@ set termguicolors
 
 syntax on
 set background=dark
-colorscheme apprentice
+colorscheme iceberg
 
 " Highlight git merge conflict markers using the ErrorMsg highlight group
 " TODO: Cause slow down?...
