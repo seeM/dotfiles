@@ -151,7 +151,7 @@ let mapleader = "\<Space>"
 set path=.,**
 nnoremap <leader>e :edit **/*
 nnoremap <leader>f :find *
-nnoremap <leader>b :buffer
+nnoremap <leader>b :buffer *
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <C-p> :FZF<CR>
 " }}}
