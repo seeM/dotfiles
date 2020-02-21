@@ -1,6 +1,9 @@
 " Author: Wasim Lorgat
 " Source: http://github.com/seem/dotfiles/vim/.vimrc
 " TODO: Remove most plugins...
+" TODO: Add mapping to :Grep for word under cursor
+" TODO: Modify tagging to exclude imports, only include lines starting with
+"       class, def, etc.
 
 " General {{{
 
@@ -224,7 +227,7 @@ set termguicolors
 
 syntax on
 set background=dark
-colorscheme iceberg
+colorscheme Apprentice
 
 " Highlight git merge conflict markers using the ErrorMsg highlight group
 " TODO: Cause slow down?...
@@ -262,17 +265,22 @@ set guicursor+=n-v-c:blinkon0
 
 " }}}
 " Grep {{{
-" From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
-set grepprg=ag\ --vimgrep
-" set grepprg=git\ grep\ -n\ --column
+" Source: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+if executable('ag')
+    set grepprg=ag\ --vimgrep
+else
+    set grepprg=git\ grep\ -n\ --column
+endif
+
 function! Grep(args)
     let args = split(a:args, ' ')
     return system(join([&grepprg, shellescape(args[0]), len(args) > 1 ? join(args[1:-1], ' ') : ''], ' '))
 endfunction
 
-command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
-command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<q-args>)
+command! -nargs=+ -complete=tag_listfiles -bar Grep  cgetexpr Grep(<q-args>)
+command! -nargs=+ -complete=tag_listfiles -bar LGrep lgetexpr Grep(<q-args>)
 
+" Automatically open the quickfix/location list window on c/lgetexpr.
 augroup quickfix
     autocmd!
     autocmd QuickFixCmdPost cgetexpr cwindow
