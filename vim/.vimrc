@@ -4,6 +4,8 @@
 " TODO: Add mapping to :Grep for word under cursor
 " TODO: Modify tagging to exclude imports, only include lines starting with
 "       class, def, etc.
+" TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
+"       venv.
 
 " General {{{
 
