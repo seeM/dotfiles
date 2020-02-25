@@ -272,7 +272,7 @@ set guicursor+=n-v-c:blinkon0
 " Grep {{{
 " Source: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 if executable('ag')
-    set grepprg=ag\ --vimgrep
+    set grepprg=ag\ --vimgrep\ --case-sensitive
 else
     set grepprg=git\ grep\ -n\ --column
 endif
