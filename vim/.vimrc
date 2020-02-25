@@ -6,6 +6,8 @@
 "       class, def, etc.
 " TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
 "       venv.
+" TODO: Why does surround plugin add spaces inside of square brackets in
+"       python?
 
 " General {{{
 
@@ -172,6 +174,7 @@ Plug 'tpope/vim-commentary'             " gc is an operator to toggle comments; 
 Plug 'tpope/vim-repeat'                 " make vim-commentary and vim-surround work with `.`
 Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explorer
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-rsi'
 Plug 'romainl/vim-cool'                 " only highlight search while typing
 Plug 'christoomey/vim-tmux-navigator'
 

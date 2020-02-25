@@ -28,12 +28,20 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package org
+  :ensure t
+  :config
+
+  ;; TODO: Should this use :custom?
+  (setq org-default-notes-file (concat (file-name-as-directory org-directory) "inbox.org")))
+
 ;; Evil Mode
 (use-package evil
   :ensure t
   :config
 
   (evil-mode 1)
+
   (use-package evil-leader
     :ensure t
     :config
@@ -49,13 +57,10 @@
 
   (use-package evil-org
     :ensure t
-    ;; TODO: after necessary? Should all of the above things have :after evil instead of being nested like this?
     :after org
     :config
-    (evil-org-set-key-theme
-	  '(textobjects insert navigation additional shift todo heading))
+    (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading return))
     (add-hook 'org-mode-hook 'evil-org-mode)
-    (add-hook 'evil-org-mode-hook (lambda () (evil-org-set-key-theme)))
     (require 'evil-org-agenda)
     (evil-org-agenda-set-keys))
 
@@ -74,6 +79,10 @@
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t))
 
+;; =========
+;; = Other =
+;; =========
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -90,5 +99,6 @@
 ; (setq mac-option-modifier 'super)
 ; (setq ns-function-modifier 'hyper)
 
+(load-theme 'leuven)
 
 ;; End
