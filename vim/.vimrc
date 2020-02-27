@@ -285,6 +285,40 @@ endfunction
 command! -nargs=+ -complete=tag_listfiles -bar Grep  cgetexpr Grep(<q-args>)
 command! -nargs=+ -complete=tag_listfiles -bar LGrep lgetexpr Grep(<q-args>)
 
+" function! GrepInnerWord()
+"     let reg_save = @@
+"     execute 'normal! "zyiw'
+"     execute 'cgetexpr Grep(' . shellescape(@@) . ')'
+"     let @@ = reg_save
+" endfunction
+
+" nnoremap <leader>giw :call GrepInnerWord()<cr>
+
+" TODO: Currently Grep function doesn't make sense to be called with most motions,
+"       only really inner word. Should it still be an operator?
+"       Should there be gaurd clauses? Not sure the approach
+function! GrepOperator(type, ...)
+    let reg_save = @@
+
+    if a:0  " Invoked from Visual mode
+        silent exec "normal! gvy"
+    elseif a:type == 'line'
+        silent exec "normal! '[V']y"
+    else
+        silent exec "normal! `[v`]y"
+    endif
+
+    " TODO: Better way than this to have the actual contents of @z display in the statusline of the quickfix window?
+    "       This doesn't seem to work: cgetexpr Grep(shellecsape(@z))
+    execute "cgetexpr Grep(" . shellescape(@@) . ")"
+
+    let @@ = reg_save
+endfunction
+
+nnoremap <silent> <leader>g :set opfunc=GrepOperator<CR>g@
+vnoremap <silent> <leader>g :<C-U>call GrepOperator(visualmode(), 1)<CR>
+
+
 " Automatically open the quickfix/location list window on c/lgetexpr.
 augroup quickfix
     autocmd!
