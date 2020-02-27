@@ -1,0 +1,10 @@
+; TODO: Somewhow cleverly rebind option to meta in certain applications,
+;       or simulate the Meta + arrow, or Meta + bf? E.g., this annoys me in iterm
+;       and slack.
+{:main [{:des   "caps to ctrl"
+         :rules [[:caps_lock :left_control]]}
+        {:des   "fn arrow keys"
+         :rules [[:!Fj :left_arrow]
+                 [:!Fi :up_arrow]
+                 [:!Fk :down_arrow]
+                 [:!Fl :right_arrow]]}]}
