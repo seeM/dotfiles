@@ -1,2 +1,9 @@
 zsh/.zsh/completion
 zsh/.zsh/history
+*.el~
+.mypy_cache
+.netrwhist
+vim/.vim/autoload/
+vim/.vim/plugged/
+vim/.vim/plugin/
+vim/.vim/tmp/
