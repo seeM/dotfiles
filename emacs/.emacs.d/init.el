@@ -30,10 +30,14 @@
 
 (use-package org
   :ensure t
-  :config
+  :custom
 
-  ;; TODO: Should this use :custom?
-  (setq org-default-notes-file (concat (file-name-as-directory org-directory) "inbox.org")))
+  (org-directory "~/org")
+  (org-default-notes-file "~/org/inbox.org")
+  (org-agenda-files '("~/org"))
+  (org-log-done 'time)
+  (org-adapt-indentation nil)
+  (org-export-backends '(ascii html icalendar latex odt md)))
 
 ;; Evil Mode
 (use-package evil
