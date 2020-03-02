@@ -308,8 +308,8 @@ function! GrepOperator(type, ...)
         silent exec "normal! `[v`]y"
     endif
 
-    " TODO: Better way than this to have the actual contents of @z display in the statusline of the quickfix window?
-    "       This doesn't seem to work: cgetexpr Grep(shellecsape(@z))
+    " TODO: Better way than this to have the actual contents of @@ display in the statusline of the quickfix window?
+    "       This doesn't seem to work: cgetexpr Grep(shellescape(@@))
     execute "cgetexpr Grep(" . shellescape(@@) . ")"
 
     let @@ = reg_save
