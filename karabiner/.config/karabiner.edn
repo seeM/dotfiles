@@ -2,9 +2,14 @@
 ;       or simulate the Meta + arrow, or Meta + bf? E.g., this annoys me in iterm
 ;       and slack.
 {:main [{:des   "caps to ctrl"
-         :rules [[:caps_lock :left_control]]}
+         :rules [[:##caps_lock :left_control]]}
         {:des   "fn arrow keys"
-         :rules [[:!Fj :left_arrow]
-                 [:!Fi :up_arrow]
-                 [:!Fk :down_arrow]
-                 [:!Fl :right_arrow]]}]}
+         :rules [[:!F##j :left_arrow]
+                 [:!F##i :up_arrow]
+                 [:!F##k :down_arrow]
+                 [:!F##l :right_arrow]]}
+        {:des   "ctrl-[ to esc"
+         :rules [[:!Topen_bracket :escape]]}
+        {:des   "meta movement"
+         :rules [[:!Ob :!Oleft_arrow]
+                 [:!Of :!Oright_arrow]]}]}
