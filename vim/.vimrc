@@ -248,7 +248,7 @@ set termguicolors
 
 syntax on
 set background=dark
-colorscheme Apprentice
+colorscheme apprentice
 
 " Highlight git merge conflict markers using the ErrorMsg highlight group
 " TODO: Cause slow down?...
