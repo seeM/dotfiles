@@ -183,6 +183,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
 Plug 'romainl/vim-cool'                 " only highlight search while typing
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " }}}
 " Languages {{{
@@ -225,6 +226,11 @@ let g:pymode_rope_completion = 0
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 let g:slime_target = 'tmux'
+
+
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_python_brackets_on_separate_lines = 1
+let g:splitjoin_quiet = 1
 
 " }}}
 " Visual {{{
