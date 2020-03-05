@@ -1,7 +1,6 @@
 " Author: Wasim Lorgat
 " Source: http://github.com/seem/dotfiles/vim/.vimrc
 " TODO: Remove most plugins...
-" TODO: Add mapping to :Grep for word under cursor
 " TODO: Modify tagging to exclude imports, only include lines starting with
 "       class, def, etc.
 " TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
@@ -70,18 +69,25 @@ set wildmode=full
 " Ignores
 " -------
 " MacOS
-set wildignore+=*.DS_Store
+set wildignore+=.DS_Store
 " Python cache
-set wildignore+=*__pycache__/*
-set wildignore+=*.mypy_cache/*
+" First is needed for expanding wildcards, e.g., :edit **
+" Second is needed for netrw
+set wildignore+=**/__pycache__,__pycache__
+set wildignore+=**/.mypy_cache,.mypy_cache
+set wildignore+=**/.pytest_cache,.pytest_cache
+set wildignore+=**/.ropeproject,.ropeproject
 set wildignore+=*.pyc
 " Python venvs
-set wildignore+=*.env/*,*.venv/*,*env/*,*venv/*
+set wildignore+=**/.env,.env,**/env,env
+set wildignore+=**/.venv,.venv,**/env,env
 " Version control
-set wildignore+=*.git/*
+set wildignore+=**/.git,.git
 " IDEs
-set wildignore+=*.vscode/*
-set wildignore+=*.idea/*
+set wildignore+=**/.vscode,.vscode
+set wildignore+=**/.idea,.idea
+
+set wildignore+=.tags,tags
 
 " }}}
 " Mouse {{{
