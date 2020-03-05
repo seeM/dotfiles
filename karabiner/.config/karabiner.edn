@@ -1,7 +1,6 @@
-; TODO: Somewhow cleverly rebind option to meta in certain applications,
-;       or simulate the Meta + arrow, or Meta + bf? E.g., this annoys me in iterm
-;       and slack.
-{:main [{:des   "caps to ctrl"
+{:devices {:wasdkb [{:vendor_id 1241 :product_id 321}]}
+
+ :main [{:des   "caps to ctrl"
          :rules [[:##caps_lock :left_control]]}
         {:des   "fn arrow keys"
          :rules [[:!F##j :left_arrow]
@@ -10,6 +9,13 @@
                  [:!F##l :right_arrow]]}
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
-        {:des   "meta movement"
+        {:des   "meta key"
          :rules [[:!Ob :!Oleft_arrow]
-                 [:!Of :!Oright_arrow]]}]}
+                 [:!Of :!Oright_arrow]
+                 ; :!Odelete_forward doesn't work on macos for some reason
+                 [:!Od [:escape :d]]
+                 [:!Oh :!Odelete_or_backspace]]}
+        {:des   "esc key on 60 key kb"
+         :rules [[:escape :grave_accent_and_tilde :wasdkb]
+                 [:!S##escape :!Sgrave_accent_and_tilde :wasdkb]
+                 [:grave_accent_and_tilde :escape :wasdkb]]}]}
