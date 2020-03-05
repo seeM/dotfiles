@@ -58,6 +58,8 @@ au FocusGained,BufEnter * :silent! !
 
 set tags+=.tags
 
+set conceallevel=3
+
 " }}}
 " Wildmenu completion {{{
 
@@ -202,6 +204,7 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 " TODO: Ultisnips?
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'dense-analysis/ale'
+Plug 'dkarter/bullets.vim'
 
 " }}}
 " Colors {{{
@@ -223,6 +226,7 @@ let g:pymode_breakpoint_bind = '<leader>d'
 let g:pymode_lint = 0
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
+
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
 let g:slime_dont_ask_default = 1
 let g:slime_target = 'tmux'
