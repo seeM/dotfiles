@@ -169,8 +169,6 @@ nnoremap <leader>b :buffer *
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <C-p> :FZF<CR>
 nnoremap <leader>w :w<CR>
-" TODO: unlearning
-cabbrev w echo ":w has been disabled, use \<leader\>w instead!"
 
 " }}}
 " Plugins {{{
