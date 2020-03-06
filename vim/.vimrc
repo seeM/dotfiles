@@ -1,12 +1,11 @@
 " Author: Wasim Lorgat
 " Source: http://github.com/seem/dotfiles/vim/.vimrc
 " TODO: Remove most plugins...
-" TODO: Modify tagging to exclude imports, only include lines starting with
-"       class, def, etc.
 " TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
 "       venv.
 " TODO: Why does surround plugin add spaces inside of square brackets in
 "       python?
+" TODO: Change grep command to only use inner word, and give a better letter.
 
 " General {{{
 
@@ -169,6 +168,10 @@ nnoremap <leader>f :find *
 nnoremap <leader>b :buffer *
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <C-p> :FZF<CR>
+nnoremap <leader>w :w<CR>
+" TODO: unlearning
+cabbrev w echo ":w has been disabled, use \<leader\>w instead!"
+
 " }}}
 " Plugins {{{
 
