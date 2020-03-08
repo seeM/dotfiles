@@ -7,6 +7,10 @@
 "       python?
 " TODO: Change grep command to only use inner word, and give a better letter.
 
+augroup vimrcEx
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
 " General {{{
 
 " Basics {{{
@@ -30,7 +34,7 @@ set ruler
 set laststatus=2
 
 " Line numbers
-set number relativenumber
+" set number relativenumber
 set numberwidth=5
 
 " TODO: Keep autowrite and autoread?
@@ -94,9 +98,9 @@ set wildignore+=.tags,tags
 " Mouse {{{
 
 " Enable mouse for all modes
-if has('mouse')
-    set mouse=a                    
-endif
+" if has('mouse')
+"     set mouse=a
+" endif
 
 " Fix mouse pane resizing inside tmux.
 " See: https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
@@ -169,6 +173,11 @@ nnoremap <leader>b :buffer *
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <C-p> :FZF<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>d :bd<CR>
+nnoremap <leader>y "*y
+nnoremap <leader><leader> <c-^>
+
+nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
 
 " }}}
 " Plugins {{{
@@ -349,6 +358,19 @@ augroup END
 " From: https://gist.github.com/romainl/5b827f4aafa7ee29bdc70282ecc31640
 command! -range GB echo join(systemlist("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t')), "\n")
 
+" }}}
+" Rename file {{{
+" https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L284-L296
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+noremap <leader>rn :call RenameFile()<cr>
 " }}}
 " Misc {{{
 
