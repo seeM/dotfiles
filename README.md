@@ -6,6 +6,21 @@ $ cd ~/.dotfiles
 $ stow vim tmux zsh    # for example
 ```
 
+## vim
+
+Install `vim-plug`:
+
+```bash
+$ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+Install plugins:
+
+```bash
+$ vim -c 'PlugUpdate | PlugInstall'
+```
+
 ## Karabiner
 
 The `~/.config/karabiner.edn` file is written in the Karabiner domain specific language [Goku](https://github.com/yqrashawn/GokuRakuJoudo).
