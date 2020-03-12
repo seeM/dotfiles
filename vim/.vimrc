@@ -34,7 +34,7 @@ set ruler
 set laststatus=2
 
 " Line numbers
-" set number relativenumber
+set number relativenumber
 set numberwidth=5
 
 " TODO: Keep autowrite and autoread?
