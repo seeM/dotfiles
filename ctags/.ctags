@@ -1,0 +1,10 @@
+--recurse=yes
+
+--python-kinds=i
+
+--exclude=.venv
+--exclude=venv
+--exclude=.env
+--exclude=env
+
+--exclude=.git
