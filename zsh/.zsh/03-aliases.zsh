@@ -42,9 +42,6 @@ alias dcd='docker compose down'
 alias dcu='docker compose up'
 alias lzd='lazydocker'
 
-# Misc
-alias tag='ctags --recurse --exclude=.venv --exclude=venv --python-kinds=-i .'
-
 # Configs
 alias vrc='vim ~/.vimrc'
 alias zrc='vim ~/.zshrc'

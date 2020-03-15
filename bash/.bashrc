@@ -90,9 +90,6 @@ alias ggg="git graphgpg"
 alias gco="git checkout"
 alias gpr="hub pull-request"
 
-# Tags
-alias tag='ctags --recurse --exclude=.venv --exclude=venv --python-kinds=-i .'
-
 # Dotfiles
 alias vrc='vim ~/.vimrc'
 alias zrc='vim ~/.zshrc'
