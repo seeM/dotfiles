@@ -14,8 +14,6 @@ zplug load
 
 PROMPT="%F{green}%B%n@%m%f:%F{blue}%~%f%b$ "
 
-FZF_DEFAULT_COMMAND='ag -l --hidden'
-
 # zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 # zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
 
@@ -41,3 +39,14 @@ export GREP_OPTIONS="--color"
 
 # export WORDCHARS='*?[]~&;!$%^<>'
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+
+export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+
+# Disables ctrl-q + ctrl-s (I think), so we can use ctrl-q in vim mappings
+stty -ixon
+
+# FZF
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+# export FZF_DEFAULT_COMMAND='ag -l --hidden'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

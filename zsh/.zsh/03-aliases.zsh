@@ -1,3 +1,11 @@
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias vi='vim'
+
 alias psql="/Applications/Postgres.app/Contents/Versions/10/bin/psql"
 
 alias venv='source .venv/bin/activate'
