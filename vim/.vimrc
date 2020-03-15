@@ -7,47 +7,114 @@
 "       python?
 " TODO: Change grep command to only use inner word, and give a better letter.
 
-augroup vimrcEx
+augroup line_return
     autocmd!
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     exe "normal g`\"" |
+        \ endif
+augroup end
 
-" General {{{
+" New stuff -- via steve losh: https://bitbucket.org/sjl/dotfiles/src/default/vim/vimrc
 
+" Junegunn
+function! s:zoom()
+  if winnr('$') > 1
+    tab split
+  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+                  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+    tabclose
+  endif
+endfunction
+nnoremap <silent> <leader>z :call <sid>zoom()<cr>
+
+" function! s:statusline_expr()
+"   let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
+"   let ro  = "%{&readonly ? '[RO] ' : ''}"
+"   let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
+"   let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+"   let sep = ' %= '
+"   let pos = ' %-12(%l : %c%V%) '
+"   let pct = ' %P'
+
+"   return '[%n] %F %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
+" endfunction
+" let &statusline = s:statusline_expr()
+
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
 " Basics {{{
-
-" set nomodeline
-
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-endwise'
+Plug 'romainl/vim-cool'                 " only highlight search while typing
+" Plug 'christoomey/vim-tmux-navigator'
+Plug 'AndrewRadev/splitjoin.vim'
+    let g:splitjoin_trailing_comma = 1
+    let g:splitjoin_python_brackets_on_separate_lines = 1
+    let g:splitjoin_quiet = 1
+" }}}
+" Languages {{{
+" Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'fs111/pydoc.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+    let g:pymode_lint_cwindow = 0
+    let g:pymode_options_max_line_length = 100
+    let g:pymode_python = 'python3'
+    let g:pymode_breakpoint_bind = '<leader>d'
+    let g:pymode_lint = 0
+    let g:pymode_rope = 0
+    let g:pymode_rope_completion = 0
+Plug 'saltstack/salt-vim'
+" }}}
+" Features {{{
+Plug 'tpope/vim-fugitive'
+Plug 'jpalardy/vim-slime'               " sending text between terminals
+    let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
+    let g:slime_dont_ask_default = 1
+    let g:slime_target = 'tmux'
+" TODO: Ultisnips?
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug 'dense-analysis/ale'
+Plug 'dkarter/bullets.vim'
+" }}}
+" Colors {{{
+Plug 'cocopon/iceberg.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'romainl/Apprentice'
+Plug 'romainl/flattened'
+" }}}
+call plug#end()
+" }}}
+" Basics {{{
+set nomodeline
 set hidden
 set ttyfast
 set lazyredraw
-
-" Windows.
 " Set focus to the newly splitted window when using :sp or :vsp.
 set splitbelow
 set splitright
-
 " Allow backspacing over these symbols (sane behaviour)
 set backspace=indent,eol,start
-
 set showcmd
 set ruler
 set laststatus=2
-
-" Line numbers
-set number relativenumber
+" set number relativenumber
 set numberwidth=5
-
 " TODO: Keep autowrite and autoread?
 " set autowrite
-
 " Reload files that are edited externally.
 set autoread
 au FocusGained,BufEnter * :silent! !
-
 " Auto save files on focus lost.
 " au FocusLost,WinLeave * :silent! noautocmd w
-
-" " set shiftround
+set shiftround
 " set title
 " set linebreak
 " set colorcolumn=+1
@@ -58,115 +125,66 @@ au FocusGained,BufEnter * :silent! !
 " set nostartofline              " avoid going to start of line on certain commands
 " set signcolumn=yes
 " set path=.,**
-
 set tags+=.tags
-
 set conceallevel=3
-
-" }}}
-" Wildmenu completion {{{
-
-set wildmenu
-set wildignorecase
-" set wildcharm=<C-z>
-set wildmode=full
-
-" Ignores
-" -------
-" MacOS
-set wildignore+=.DS_Store
-" Python cache
-" First is needed for expanding wildcards, e.g., :edit **
-" Second is needed for netrw
-set wildignore+=**/__pycache__,__pycache__
-set wildignore+=**/.mypy_cache,.mypy_cache
-set wildignore+=**/.pytest_cache,.pytest_cache
-set wildignore+=**/.ropeproject,.ropeproject
-set wildignore+=*.pyc
-" Python venvs
-set wildignore+=**/.env,.env,**/env,env
-set wildignore+=**/.venv,.venv,**/env,env
-" Version control
-set wildignore+=**/.git,.git
-" IDEs
-set wildignore+=**/.vscode,.vscode
-set wildignore+=**/.idea,.idea
-
-set wildignore+=.tags,tags
-
-" }}}
-" Mouse {{{
-
-" Enable mouse for all modes
-" if has('mouse')
-"     set mouse=a
-" endif
-
-" Fix mouse pane resizing inside tmux.
-" See: https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux
-if &term =~ '^screen'
-    set ttymouse=xterm2
-endif
-
-" }}}
-" Backups {{{
-
-" Persist undo history 
-set undofile
-set backup
-set swapfile
-
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
-
-" Make above folders automatically if they don't already exist
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
-if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
-endif
-
-" }}}
-" Indentation {{{
-
 " Indent (>>) and dedent (<<) with 4 spaces.
 set shiftwidth=4
 " <Tab> and <BS> are worth 'shiftwidth' spaces.
 let &softtabstop = &shiftwidth
 " Disable conversion of 'tabstop' spaces to a \t character, they remain spaces.
 set expandtab
-
-" }}}
-" Wrapping {{{
-
-" Disable soft wrapping.
 set nowrap
-" Side-scroll 5 columns at a time for long lines
 set sidescroll=5
-
 " TODO: format options
 set formatoptions=qrn1j
-
-" }}}
-" Search {{{
-
 set incsearch
 set hlsearch
-
+silent! set ttymouse=xterm2
+set mouse=a
+" True color support
+" From: https://github.com/vim/vim/issues/993#issuecomment-255651605
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+set path=.,**
 " }}}
-
+" Wildmenu completion {{{
+set wildmenu
+set wildignorecase
+" set wildcharm=<C-z>
+set wildmode=full
+" I've had to repeat directories twice, please let me know if there's a better
+" solution... The first, e.g., **/__pycache__  is needed for expanding wildcards
+" in commands like :edit **. The second is needed for netrw.
+set wildignore+=.DS_Store
+set wildignore+=**/__pycache__,__pycache__
+set wildignore+=**/.mypy_cache,.mypy_cache
+set wildignore+=**/.pytest_cache,.pytest_cache
+set wildignore+=**/.ropeproject,.ropeproject
+set wildignore+=*.pyc
+set wildignore+=**/.env,.env,**/env,env
+set wildignore+=**/.venv,.venv,**/env,env
+set wildignore+=**/.git,.git
+set wildignore+=**/.vscode,.vscode
+set wildignore+=**/.idea,.idea
+set wildignore+=.tags,tags
 " }}}
-" Keys {{{
+" Backup {{{
+set undofile
+set backup
+set noswapfile
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+if !isdirectory(expand(&backupdir)) | call mkdir(expand(&backupdir), "p") | endif
+if !isdirectory(expand(&directory)) | call mkdir(expand(&directory), "p") | endif
+" }}}
+" Mappings {{{
 " nnoremap <leader>f :Files .<CR>
 " nnoremap <leader>b :Buffers<CR>
 " From: https://romainl.github.io/the-patient-vimmer/3.html
-let mapleader = "\<Space>"
-set path=.,**
+let mapleader      = ' '
+let maplocalleader = ' '
 nnoremap <leader>e :edit **/*
 nnoremap <leader>f :find *
 nnoremap <leader>b :buffer *
@@ -179,124 +197,90 @@ nnoremap <leader><leader> <c-^>
 
 nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
 
-" }}}
-" Plugins {{{
+" Save
+inoremap <C-s>     <C-O>:update<cr>
+nnoremap <C-s>     :update<cr>
+nnoremap <leader>w :update<cr>
 
-call plug#begin('~/.vim/plugged')
+" Quit
+inoremap <C-Q>     <esc>:q<cr>
+nnoremap <C-Q>     :q<cr>
+vnoremap <C-Q>     <esc>
+nnoremap <Leader>q :q<cr>
+nnoremap <Leader>Q :qa!<cr>
 
-" Basics {{{
+" Tags
+" g<C-]> shows a menu if >1 match
+nnoremap <C-]> g<C-]>
+nnoremap g[ :pop<cr>
 
-Plug 'tpope/vim-sensible'               " 'Defaults everyone can agree on'
-Plug 'tpope/vim-surround'               " s is a text-object for delimiters; ss linewise; ys to add surround
-Plug 'tpope/vim-commentary'             " gc is an operator to toggle comments; gcc linewise
-Plug 'tpope/vim-repeat'                 " make vim-commentary and vim-surround work with `.`
-Plug 'tpope/vim-vinegar'                " enhance the built-in netrw file explorer
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-rsi'
-Plug 'romainl/vim-cool'                 " only highlight search while typing
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'AndrewRadev/splitjoin.vim'
+" Make Y behave like other capitals
+nnoremap Y y$
 
-" }}}
-" Languages {{{
+" Last inserted text
+nnoremap g. :normal! `[v`]<cr><left>
 
-" Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'fs111/pydoc.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'saltstack/salt-vim'
+" Tabs
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
 
-" }}}
-" Features {{{
+" Circular windows navigation
+" nnoremap <tab>   <c-w>w
+" nnoremap <S-tab> <c-w>W
 
-Plug 'tpope/vim-fugitive'
-Plug 'jpalardy/vim-slime'               " sending text between terminals
-" TODO: Ultisnips?
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-Plug 'dense-analysis/ale'
-Plug 'dkarter/bullets.vim'
+" Markdown headings
+nnoremap <leader>1 m`yypVr=``
+nnoremap <leader>2 m`yypVr-``
+nnoremap <leader>3 m`^i### <esc>``4l
+nnoremap <leader>4 m`^i#### <esc>``5l
+nnoremap <leader>5 m`^i##### <esc>``6l
 
-" }}}
-" Colors {{{
-
-Plug 'cocopon/iceberg.vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'romainl/Apprentice'
-
-" }}}
-
-call plug#end()
-
-" Plugin Settings
-let g:pymode_lint_cwindow = 0
-let g:pymode_options_max_line_length = 100
-let g:pymode_python = 'python3'
-let g:pymode_breakpoint_bind = '<leader>d'
-" Disable pymode linting in favour of ALE
-let g:pymode_lint = 0
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-
-let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
-let g:slime_dont_ask_default = 1
-let g:slime_target = 'tmux'
-
-
-let g:splitjoin_trailing_comma = 1
-let g:splitjoin_python_brackets_on_separate_lines = 1
-let g:splitjoin_quiet = 1
+" Folds
+nnoremap <tab> za
+function! ToggleAllFolds()
+    if &foldlevel
+        set foldlevel=0
+    else
+        set foldlevel=999
+    endif
+endfunction
+command! ToggleAllFolds call ToggleAllFolds()
+nnoremap <S-tab> :ToggleAllFolds<cr>
 
 " }}}
 " Visual {{{
-
-" True color support
-" See: https://github.com/vim/vim/issues/993#issuecomment-255651605
-" Set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
-
-syntax on
 set background=dark
 colorscheme apprentice
-
 " Highlight git merge conflict markers using the ErrorMsg highlight group
 " TODO: Cause slow down?...
-" match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Highlight current line, bold current line number
 set cursorline
-highlight CursorLineNR cterm=bold gui=bold
-
-" Precede a long line with '<', end a long line with '>'
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
 let &showbreak="↪ "
 
-" Bold Todo instead of standout.
+" Custom syntax
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+highlight CursorLineNR cterm=bold gui=bold
 highlight Todo cterm=bold gui=bold
 
 " TODO: Testing...
 " highlight Include cterm=bold gui=bold
+" TODO: Should this be moved to python?
 highlight Statement cterm=bold gui=bold
 
-" Status line. From: https://romainl.github.io/the-patient-vimmer/1.html
+" From: https://romainl.github.io/the-patient-vimmer/1.html
 set statusline=%<\ %f\ %m%r%y%w%=\ L:\ \%l\/\%L\ C:\ \%c\ 
 
-" }}}
-" GUI {{{
-
 set guifont=Menlo:h12
-
 " Disable scrollbars
 set guioptions=
-
 " Disable cursor blinking
 set guicursor+=n-v-c:blinkon0
-
 " }}}
+" Mini plugins {{{
 " Grep {{{
-" Source: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+" From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 if executable('ag')
     set grepprg=ag\ --vimgrep\ --case-sensitive
 else
@@ -344,23 +328,20 @@ endfunction
 nnoremap <silent> <leader>g :set opfunc=GrepOperator<CR>g@
 vnoremap <silent> <leader>g :<C-U>call GrepOperator(visualmode(), 1)<CR>
 
-
 " Automatically open the quickfix/location list window on c/lgetexpr.
 augroup quickfix
     autocmd!
     autocmd QuickFixCmdPost cgetexpr cwindow
     autocmd QuickFixCmdPost lgetexpr lwindow
-augroup END
+augroup end
 
 " }}}
 " Git Blame {{{
-
 " From: https://gist.github.com/romainl/5b827f4aafa7ee29bdc70282ecc31640
 command! -range GB echo join(systemlist("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t')), "\n")
-
 " }}}
 " Rename file {{{
-" https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L284-L296
+" From: https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L284-L296
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -372,30 +353,21 @@ function! RenameFile()
 endfunction
 noremap <leader>rn :call RenameFile()<cr>
 " }}}
-" Misc {{{
-
+" Cat {{{
 " Cat selection to terminal so we can copy with mouse selection on remote
 " servers.
 function! CatSelection() range
     execute("!sed -n '" . a:firstline . "," . a:lastline . "p;" . (a:lastline + 1) . "q' %")
 endfunction
-
 nnoremap <leader>c :call CatSelection()<cr>
 vnoremap <leader>c :call CatSelection()<cr>
-
-" Word count
+" }}}
+" Word count {{{
 function! EchoWordCount()
     let word_count = system("wc -w " . @% . " | awk '{ print $1}'")[:-2]
     echo("Word count: " . word_count)
 endfunction
 
 command! -nargs=0 WC call EchoWordCount()
-
 " }}}
-
-" smooth searching
-" cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
-" cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
-" silent! source .vimlocal
-
-" vim: foldmethod=marker:foldlevel=0
+" }}}
