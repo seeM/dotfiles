@@ -1,120 +1,168 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Source: https://github.com/seem/dotfiles
+# References:
+# - https://github.com/junegunn/dotfiles
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# System default
+# --------------------------------------------------------------------
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+export PLATFORM=$(uname -s)
+[ -f /etc/bashrc ] && . /etc/bashrc
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 
-# append to the history file, don't overwrite it
+
+# Basics
+# --------------------------------------------------------------------
+
+# Append to history file, don't overwrite.
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
+# Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
+# Disable CTRL-s and CTRL-q.
+[[ $- =~ i ]] && stty -ixoff -ixon
+# Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+# Environment variables
+# --------------------------------------------------------------------
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
+# History (man bash for help)
+# Don't save duplicates, only save latest.
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "
+[ -z "$TMPDIR" ] && TMPDIR=/tmp
 
 export EDITOR=vim
 export VISUAL=vim
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+export GREP_OPTIONS="--color"
+
+# Aliases
+# --------------------------------------------------------------------
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias l='ls -alF'
+alias ll='ls -l'
+alias vi='vim'
+alias vim='vim'
+alias which='type -p'
+alias k5='kill -9 %%'
+
+if [ "$PLATFORM" = Darwin ]; then
+    o() {
+        open --reveal "${1:-.}"
+    }
+fi
+
+alias tmux='tmux -2'
+
+if [ "$PLATFORM" = Darwin ]; then
+    alias ls='ls -G'
+fi
+
+alias venv='source .venv/bin/activate'
+
+# Git
+alias g="git"
+alias ga="git add"
+alias gc="git commit"
+alias gs="git status"
+alias gd="git diff"
+alias gf="git fetch"
+alias gm="git merge"
+alias gr="git rebase"
+alias gp="git push"
+alias gl="git pull"
+alias gu="git unstage"
+alias gg="git graph"
+alias ggg="git graphgpg"
+alias gco="git checkout"
+alias gpr="hub pull-request"
+
+# Tags
+alias tag='ctags --recurse --exclude=.venv --exclude=venv --python-kinds=-i .'
+
+# Dotfiles
+alias vrc='vim ~/.vimrc'
+alias zrc='vim ~/.zshrc'
+alias trc='vim ~/.tmux.conf'
+
+
+# Prompt
+# --------------------------------------------------------------------
+
+# TODO: No idea what this does...
+if [ "$PLATFORM" = Linux ]; then
+  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
+  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"
+else
+  ### git-prompt
+  __git_ps1() { :;}
+  if [ -e ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
+  fi
+  # PS1='\[\e[34m\]\u\[\e[1;32m\]@\[\e[0;33m\]\h\[\e[35m\]:\[\e[m\]\w\[\e[1;30m\]$(__git_ps1)\[\e[1;31m\]> \[\e[0m\]'
+fi
+
+
+# FZF
+# --------------------------------------------------------------------
+
+export FZF_DEFAULT_OPTS='--color "preview-bg:237"'
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
+if command -v fd > /dev/null; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+fi
+command -v bat  > /dev/null && export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
+command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd'
+command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+# Journal
+# --------------------------------------------------------------------
+
+export JOURNAL_DIR=~/gdrive/journal
+
+# Open today's journal entry.
+function journal_today() {
+    date=$(date +'%Y-%m-%d')
+    file=$JOURNAL_DIR/$date.md
+    if ! test -f $file; then
+        printf "# $date\n\n" > $file
+    fi
+    vim + '+ normal $' $file
+}
+
+# Main journal entrypoint.
+function jrnl() {
+    if [[ $# -eq 0 ]]; then
+        journal_today
+    elif [[ "$1" == "ls" ]]; then
+        ranger "$JOURNAL_DIR"
+    # TODO: Add elif that checks if an entry exists for the arg and opens it.
+    #       Could even filter down by year / month in a vim buffer or similar...
+    fi
+}
+
+
+# Misc
+# --------------------------------------------------------------------
+[ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
+[ -r $HOME/google-cloud-sdk/path.bash.inc ] && source $HOME/google-cloud-sdk/path.bash.inc
+[ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
+[ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
+
