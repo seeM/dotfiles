@@ -2,6 +2,12 @@
 # References:
 # - https://github.com/junegunn/dotfiles
 
+# TODO: Move to install.sh
+# git-prompt
+if [ ! -e ~/.git-prompt.sh ]; then
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+fi
+
 # System default
 # --------------------------------------------------------------------
 
@@ -99,19 +105,28 @@ alias trc='vim ~/.tmux.conf'
 # Prompt
 # --------------------------------------------------------------------
 
-# TODO: No idea what this does...
-if [ "$PLATFORM" = Linux ]; then
-  PS1="\[\e[1;38m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;30m\]:"
-  PS1="$PS1\[\e[0;38m\]\w\[\e[1;35m\]> \[\e[0m\]"
-else
-  ### git-prompt
-  __git_ps1() { :;}
-  if [ -e ~/.git-prompt.sh ]; then
-    source ~/.git-prompt.sh
-  fi
-  # PS1='\[\e[34m\]\u\[\e[1;32m\]@\[\e[0;33m\]\h\[\e[35m\]:\[\e[m\]\w\[\e[1;30m\]$(__git_ps1)\[\e[1;31m\]> \[\e[0m\]'
+__git_ps1() { :;}
+[ -e ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+PS1=""
+if [[ -n $SSH_CLIENT ]]; then
+  PS1+="\e[32;1m"
+  # PS1+="\u@\h"
+  PS1+="\u@\h"
+  # PS1+="\e[0;1m"
+  # PS1+=":"
+  PS1+="\e[0m"
+  PS1+=":"
 fi
+PS1+="\e[34;1m"
+# PS1+="\w"
+PS1+="\W"
+PS1+="\e[30m"
+PS1+='$(__git_ps1)'
+PS1+="\e[31m ❯ "
+PS1+="\e[0m"
 
+# TODO: Checkout: https://github.com/sapegin/dotfiles/blob/dd063f9c30de7d2234e8accdb5272a5cc0a3388b/includes/bash_prompt.bash
+# TODO: Add num background jobs, see: https://www.reddit.com/r/zsh/comments/8x0nvj/common_a_simple_clean_and_minimal_prompt/
 
 # FZF
 # --------------------------------------------------------------------
@@ -163,3 +178,11 @@ function jrnl() {
 [ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
 
+# Completion on AWS instances
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
