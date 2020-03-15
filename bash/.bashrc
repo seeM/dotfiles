@@ -177,6 +177,7 @@ function jrnl() {
 [ -r $HOME/google-cloud-sdk/path.bash.inc ] && source $HOME/google-cloud-sdk/path.bash.inc
 [ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
+[ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 
 # Completion on AWS instances
 if ! shopt -oq posix; then
