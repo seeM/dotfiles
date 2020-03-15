@@ -110,23 +110,16 @@ __git_ps1() { :;}
 PS1=""
 if [[ -n $SSH_CLIENT ]]; then
   PS1+="\e[32;1m"
-  # PS1+="\u@\h"
   PS1+="\u@\h"
-  # PS1+="\e[0;1m"
-  # PS1+=":"
   PS1+="\e[0m"
   PS1+=":"
 fi
 PS1+="\e[34;1m"
-# PS1+="\w"
 PS1+="\W"
 PS1+="\e[30m"
 PS1+='$(__git_ps1)'
 PS1+="\e[31m ❯ "
 PS1+="\e[0m"
-
-# TODO: Checkout: https://github.com/sapegin/dotfiles/blob/dd063f9c30de7d2234e8accdb5272a5cc0a3388b/includes/bash_prompt.bash
-# TODO: Add num background jobs, see: https://www.reddit.com/r/zsh/comments/8x0nvj/common_a_simple_clean_and_minimal_prompt/
 
 # FZF
 # --------------------------------------------------------------------
