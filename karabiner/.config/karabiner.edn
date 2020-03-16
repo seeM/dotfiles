@@ -16,6 +16,6 @@
                  [:!Od [:escape :d]]
                  [:!Oh :!Odelete_or_backspace]]}
         {:des   "esc key on 60 key kb"
-         :rules [[:escape :grave_accent_and_tilde :wasdkb]
+         :rules [[:##escape :##grave_accent_and_tilde :wasdkb]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasdkb]
                  [:grave_accent_and_tilde :escape :wasdkb]]}]}
