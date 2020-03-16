@@ -83,7 +83,44 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'dense-analysis/ale'
 Plug 'dkarter/bullets.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+if executable('node')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:show_documentation()
+      if (index(['vim', 'help'], &filetype) >= 0)
+        execute 'h' expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    " nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
+      \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
+      \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
+    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+    let g:go_doc_keywordprg_enabled = 0
+
+    augroup coc-config
+      autocmd!
+      autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+      autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
+      autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+    augroup END
+endif
 " }}}
 " Colors {{{
 Plug 'cocopon/iceberg.vim'
@@ -373,40 +410,40 @@ command! -nargs=0 WC call EchoWordCount()
 " }}}
 " }}}
 " COC {{{
-if has_key(g:plugs, 'coc.nvim')
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
+" if has_key(g:plugs, 'coc.nvim')
+"   function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~# '\s'
+"   endfunction
 
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"   inoremap <silent><expr> <TAB>
+"         \ pumvisible() ? "\<C-n>" :
+"         \ <SID>check_back_space() ? "\<TAB>" :
+"         \ coc#refresh()
+"   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-  function! s:show_documentation()
-    if (index(['vim', 'help'], &filetype) >= 0)
-      execute 'h' expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
+"   function! s:show_documentation()
+"     if (index(['vim', 'help'], &filetype) >= 0)
+"       execute 'h' expand('<cword>')
+"     else
+"       call CocAction('doHover')
+"     endif
+"   endfunction
 
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
+"   nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-  let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
-    \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
-    \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
-  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"   let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
+"     \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
+"     \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
+"   command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-  let g:go_doc_keywordprg_enabled = 0
+"   let g:go_doc_keywordprg_enabled = 0
 
-  augroup coc-config
-    autocmd!
-    autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-    autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
-    autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-  augroup END
-endif
+"   augroup coc-config
+"     autocmd!
+"     autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+"     autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
+"     autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+"   augroup END
+" endif
 " }}}
