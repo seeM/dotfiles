@@ -3,17 +3,16 @@
 " TODO: Remove most plugins...
 " TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
 "       venv.
-" TODO: Why does surround plugin add spaces inside of square brackets in
-"       python?
 " TODO: Change grep command to only use inner word, and give a better letter.
+" TODO: Look into coc REPL integration or other. E.g., CocCommand(python.startREPL) looks solid.
 
-augroup line_return
-    autocmd!
-    autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     exe "normal g`\"" |
-        \ endif
-augroup end
+" augroup line_return
+"     autocmd!
+"     autocmd BufReadPost *
+"         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+"         \     exe "normal g`\"" |
+"         \ endif
+" augroup end
 
 " New stuff -- via steve losh: https://bitbucket.org/sjl/dotfiles/src/default/vim/vimrc
 
@@ -76,11 +75,16 @@ Plug 'saltstack/salt-vim'
 " Features {{{
 Plug 'tpope/vim-fugitive'
 Plug 'jpalardy/vim-slime'               " sending text between terminals
-    let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
-    let g:slime_dont_ask_default = 1
-    let g:slime_target = 'tmux'
+  let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
+  let g:slime_dont_ask_default = 1
+  let g:slime_target = 'tmux'
 " TODO: Ultisnips?
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug 'junegunn/fzf.vim'
+  nnoremap <C-p> :Files<CR>
+  nnoremap <leader>f :Files<CR>
+  nnoremap <leader>b :Buffers<CR>
+  nnoremap <leader>g :Rg<CR>
 Plug 'dense-analysis/ale'
 Plug 'dkarter/bullets.vim'
 
@@ -223,14 +227,14 @@ if !isdirectory(expand(&directory)) | call mkdir(expand(&directory), "p") | endi
 " From: https://romainl.github.io/the-patient-vimmer/3.html
 let mapleader      = ' '
 let maplocalleader = ' '
-nnoremap <leader>e :edit **/*
-nnoremap <leader>f :find *
-nnoremap <leader>b :buffer *
+" nnoremap <leader>e :edit **/*
+" nnoremap <leader>f :find *
+" nnoremap <leader>b :buffer *
 nnoremap gb :ls<CR>:b<Space>
-nnoremap <C-p> :FZF<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>d :bd<CR>
+" nnoremap <leader>d :bd<CR>
 nnoremap <leader>y "*y
+nnoremap <leader>p "*p
 nnoremap <leader><leader> <c-^>
 
 nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
@@ -256,7 +260,7 @@ nnoremap g[ :pop<cr>
 nnoremap Y y$
 
 " Last inserted text
-nnoremap g. :normal! `[v`]<cr><left>
+" nnoremap g. :normal! `[v`]<cr><left>
 
 " Tabs
 nnoremap ]t :tabn<cr>
