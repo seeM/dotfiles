@@ -1,0 +1,6 @@
+[user]
+    name = Wasim Lorgat
+    email = mwlorgat@gmail.com
+[merge]
+    tool = vimdiff
+
