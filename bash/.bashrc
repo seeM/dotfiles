@@ -105,6 +105,8 @@ alias trc='vim ~/.tmux.conf'
 # Prompt
 # --------------------------------------------------------------------
 
+# Super useful colors resource: https://misc.flogisoft.com/bash/tip_colors_and_formatting
+
 __git_ps1() { :;}
 [ -e ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 PS1=""
@@ -126,6 +128,8 @@ PS1+="\[\e[0m\]"
 
 # FZF
 # --------------------------------------------------------------------
+
+# TODO: Add **<Tab>
 
 export FZF_DEFAULT_OPTS='--color "preview-bg:237"'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
