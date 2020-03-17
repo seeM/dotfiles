@@ -111,8 +111,9 @@ __git_ps1() { :;}
 [ -e ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 PS1=""
 if [[ -n $SSH_CLIENT ]]; then
-  PS1+="\[\e[90;2m\]"
-  PS1+="\u@\h"
+  PS1+="\[\e[90m\]"
+  # PS1+="\u@\h"
+  PS1+="\h"
   PS1+="\[\e[0m\]"
   PS1+=" "
 fi
