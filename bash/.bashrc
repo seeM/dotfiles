@@ -49,6 +49,8 @@ export LC_ALL=en_US.UTF-8
 
 export GREP_OPTIONS="--color"
 
+export LSCOLORS=ExGxcxdxCxegedabagacad
+
 # Aliases
 # --------------------------------------------------------------------
 
