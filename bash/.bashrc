@@ -77,6 +77,8 @@ alias tmux='tmux -2'
 
 if [ "$PLATFORM" = Darwin ]; then
     alias ls='ls -G'
+else
+    alias ls='ls --color'
 fi
 
 alias venv='source .venv/bin/activate'
