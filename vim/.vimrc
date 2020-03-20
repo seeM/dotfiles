@@ -84,47 +84,57 @@ Plug 'junegunn/fzf.vim'
   nnoremap <C-p> :Files<CR>
   nnoremap <leader>f :Files<CR>
   nnoremap <leader>b :Buffers<CR>
-  nnoremap <leader>g :Rg<CR>
+  nnoremap <leader>gg :Rg<CR>
+  nnoremap <C-g> :Rg<CR>
+  nnoremap <leader>t :Tags<CR>
+  nnoremap <C-t> :Tags<CR>
 Plug 'dense-analysis/ale'
 Plug 'dkarter/bullets.vim'
+" Plug 'ervandew/supertab'
+Plug 'lifepillar/vim-mucomplete'
+  set completeopt=menuone,noselect,noinsert
+  set shortmess+=c   " Shut off completion messages
+  set belloff+=ctrlg " If Vim beeps during completion
+  " set completeopt+=noselect
+  " TODO: Or noinsert?
+  let g:mucomplete#enable_auto_at_startup = 1
+  " let g:mucomplete#completion_delay = 500
 
-if executable('node')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+" if executable('node')
+"   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"     function! s:check_back_space() abort
+"       let col = col('.') - 1
+"       return !col || getline('.')[col - 1]  =~# '\s'
+"     endfunction
 
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"     inoremap <silent><expr> <TAB>
+"           \ pumvisible() ? "\<C-n>" :
+"           \ <SID>check_back_space() ? "\<TAB>" :
+"           \ coc#refresh()
+"     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    function! s:show_documentation()
-      if (index(['vim', 'help'], &filetype) >= 0)
-        execute 'h' expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
+"     " function! s:show_documentation()
+"     "   if (index(['vim', 'help'], &filetype) >= 0)
+"     "     execute 'h' expand('<cword>')
+"     "   else
+"     "     call CocAction('doHover')
+"     "   endif
+"     " endfunction
 
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
+"     " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-    let g:coc_global_extensions = ['coc-github', 'coc-yaml', 'coc-solargraph',
-      \ 'coc-r-lsp', 'coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-html',
-      \ 'coc-prettier', 'coc-eslint', 'coc-tsserver', 'coc-emoji', 'coc-java']
-    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"     let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
+"     " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-    let g:go_doc_keywordprg_enabled = 0
+"     " let g:go_doc_keywordprg_enabled = 0
 
-    augroup coc-config
-      autocmd!
-      autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-      autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
-      autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-    augroup END
-endif
+"     augroup coc-config
+"       autocmd!
+"       autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+"       autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
+"       autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+"     augroup END
+" endif
 " }}}
 " Colors {{{
 Plug 'cocopon/iceberg.vim'
@@ -278,16 +288,16 @@ nnoremap <leader>4 m`^i#### <esc>``5l
 nnoremap <leader>5 m`^i##### <esc>``6l
 
 " Folds
-nnoremap <tab> za
-function! ToggleAllFolds()
-    if &foldlevel
-        set foldlevel=0
-    else
-        set foldlevel=999
-    endif
-endfunction
-command! ToggleAllFolds call ToggleAllFolds()
-nnoremap <S-tab> :ToggleAllFolds<cr>
+" nnoremap <tab> za
+" function! ToggleAllFolds()
+"     if &foldlevel
+"         set foldlevel=0
+"     else
+"         set foldlevel=999
+"     endif
+" endfunction
+" command! ToggleAllFolds call ToggleAllFolds()
+" nnoremap <S-tab> :ToggleAllFolds<cr>
 
 " }}}
 " Visual {{{
