@@ -32,3 +32,9 @@ $ brew cask install karabiner-elements
 $ brew install yqrashawn/goku/goku
 $ stow karabiner
 ```
+
+## Font
+
+Current: [SF Mono](https://developer.apple.com/fonts/)
+
+Past: [IBM Plex Mono](https://github.com/IBM/plex)
