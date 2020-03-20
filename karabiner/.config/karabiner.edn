@@ -1,14 +1,17 @@
 {:applications {:chrome ["^com\\.google\\.Chrome$"]
-                :firefox ["^org\\.mozilla\\.firefox$"]}
+                :firefox ["^org\\.mozilla\\.firefox$"]
+                :slack ["^com\\.tinyspeck\\.slackmacgap$"]
+                :enable-emacs ["^org\\.mozilla\\.firefox$",
+                               "^com\\.tinyspeck\\.slackmacgap$"]}
  :devices {:wasdkb [{:vendor_id 1241 :product_id 321}]}
 
  :main [{:des   "caps to ctrl"
          :rules [[:##caps_lock :left_control]]}
         {:des   "global emacs keys"
-         :rules [[:!T##b :left_arrow :firefox]
-                 [:!T##p :up_arrow :firefox]
-                 [:!T##n :down_arrow :firefox]
-                 [:!T##f :right_arrow :firefox]]}
+         :rules [[:!T##b :left_arrow :enable-emacs]
+                 [:!T##p :up_arrow :enable-emacs]
+                 [:!T##n :down_arrow :enable-emacs]
+                 [:!T##f :right_arrow :enable-emacs]]}
         ; {:des   "fn arrow keys"
         ;  :rules [[:!F##j :left_arrow]
         ;          [:!F##i :up_arrow]
