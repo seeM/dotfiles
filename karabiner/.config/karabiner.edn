@@ -1,12 +1,19 @@
-{:devices {:wasdkb [{:vendor_id 1241 :product_id 321}]}
+{:applications {:chrome ["^com\\.google\\.Chrome$"]
+                :firefox ["^org\\.mozilla\\.firefox$"]}
+ :devices {:wasdkb [{:vendor_id 1241 :product_id 321}]}
 
  :main [{:des   "caps to ctrl"
          :rules [[:##caps_lock :left_control]]}
-        {:des   "fn arrow keys"
-         :rules [[:!F##j :left_arrow]
-                 [:!F##i :up_arrow]
-                 [:!F##k :down_arrow]
-                 [:!F##l :right_arrow]]}
+        {:des   "global emacs keys"
+         :rules [[:!T##b :left_arrow :firefox]
+                 [:!T##p :up_arrow :firefox]
+                 [:!T##n :down_arrow :firefox]
+                 [:!T##f :right_arrow :firefox]]}
+        ; {:des   "fn arrow keys"
+        ;  :rules [[:!F##j :left_arrow]
+        ;          [:!F##i :up_arrow]
+        ;          [:!F##k :down_arrow]
+        ;          [:!F##l :right_arrow]]}
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
