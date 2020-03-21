@@ -91,50 +91,50 @@ Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'dkarter/bullets.vim'
 " Plug 'ervandew/supertab'
-Plug 'lifepillar/vim-mucomplete'
-  set completeopt=menuone,noselect,noinsert
-  set shortmess+=c   " Shut off completion messages
-  set belloff+=ctrlg " If Vim beeps during completion
-  " set completeopt+=noselect
-  " TODO: Or noinsert?
-  let g:mucomplete#enable_auto_at_startup = 1
-  " let g:mucomplete#completion_delay = 500
+" Plug 'lifepillar/vim-mucomplete'
+"   set completeopt=menuone,noselect,noinsert
+"   set shortmess+=c   " Shut off completion messages
+"   set belloff+=ctrlg " If Vim beeps during completion
+"   " set completeopt+=noselect
+"   " TODO: Or noinsert?
+"   let g:mucomplete#enable_auto_at_startup = 1
+"   " let g:mucomplete#completion_delay = 500
 
-" if executable('node')
-"   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"     function! s:check_back_space() abort
-"       let col = col('.') - 1
-"       return !col || getline('.')[col - 1]  =~# '\s'
-"     endfunction
+if executable('node')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
-"     inoremap <silent><expr> <TAB>
-"           \ pumvisible() ? "\<C-n>" :
-"           \ <SID>check_back_space() ? "\<TAB>" :
-"           \ coc#refresh()
-"     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"     " function! s:show_documentation()
-"     "   if (index(['vim', 'help'], &filetype) >= 0)
-"     "     execute 'h' expand('<cword>')
-"     "   else
-"     "     call CocAction('doHover')
-"     "   endif
-"     " endfunction
+    " function! s:show_documentation()
+    "   if (index(['vim', 'help'], &filetype) >= 0)
+    "     execute 'h' expand('<cword>')
+    "   else
+    "     call CocAction('doHover')
+    "   endif
+    " endfunction
 
-"     " nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-"     let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
-"     " command! -nargs=0 Prettier :CocCommand prettier.formatFile
+    let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
+    " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-"     " let g:go_doc_keywordprg_enabled = 0
+    " let g:go_doc_keywordprg_enabled = 0
 
-"     augroup coc-config
-"       autocmd!
-"       autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-"       autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
-"       autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-"     augroup END
-" endif
+    augroup coc-config
+      autocmd!
+      autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+      autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
+      autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+    augroup END
+endif
 " }}}
 " Colors {{{
 Plug 'cocopon/iceberg.vim'
@@ -252,14 +252,20 @@ nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
 " Save
 inoremap <C-s>     <C-O>:update<cr>
 nnoremap <C-s>     :update<cr>
-nnoremap <leader>w :update<cr>
+" nnoremap <leader>w :update<cr>
 
 " Quit
-inoremap <C-Q>     <esc>:q<cr>
-nnoremap <C-Q>     :q<cr>
-vnoremap <C-Q>     <esc>
-nnoremap <Leader>q :q<cr>
-nnoremap <Leader>Q :qa!<cr>
+inoremap <C-q>     <esc>:q<cr>
+nnoremap <C-q>     :q<cr>
+vnoremap <C-q>     <esc>
+" nnoremap <Leader>q :q<cr>
+" nnoremap <Leader>Q :qa!<cr>
+
+" Windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Tags
 " g<C-]> shows a menu if >1 match
@@ -298,6 +304,9 @@ nnoremap <leader>5 m`^i##### <esc>``6l
 " endfunction
 " command! ToggleAllFolds call ToggleAllFolds()
 " nnoremap <S-tab> :ToggleAllFolds<cr>
+
+" Source configs
+nnoremap <leader>sg :echo system('goku')<cr>
 
 " }}}
 " Visual {{{

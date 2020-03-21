@@ -104,6 +104,7 @@ alias gpr="hub pull-request"
 alias vrc='vim ~/.vimrc'
 alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
+alias krc='vim ~/.config/karabiner.edn'
 
 
 # Prompt

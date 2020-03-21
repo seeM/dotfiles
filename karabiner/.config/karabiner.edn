@@ -1,8 +1,19 @@
-{:tos {:same_wind_app {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}}
+{:profiles
+ {:Default {:default true
+            :sim 50
+            :delay 80
+            :alone 120
+            :held 70}}
 
- :applications {:emacs-disabled ["^net\\.sourceforge\\.iTerm$"]
+ :tos {:same_wind_app {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
+       :left_paren    {:key :9 :modi [:left_shift] :lazy true}
+       :right_paren   {:key :0 :modi [:left_shift] :lazy true}}
+
+ :froms {:left_shift_alone {:key :left_shift :alone true}}
+
+ :applications {:emacs-disabled ["^com\\.googlecode\\.iterm2$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
-                :iterm          ["^net\\.sourceforge\\.iTerm$"]}
+                :iterm          ["^com\\.googlecode\\.iterm2$"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
            :macbook-internal  [{:vendor_id 1452 :product_id 631}]}
@@ -28,23 +39,30 @@
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
-         :rules [[:!Ob :!Oleft_arrow]
-                 [:!Of :!Oright_arrow]
+         :rules [[:!Ob :!Oleft_arrow :!iterm]
+                 [:!Of :!Oright_arrow :!iterm]
                  [:!Od :!Odelete_forward :!iterm]
-                 [:!Od [:escape :d] :iterm]
-                 [:!Oh :!Odelete_or_backspace]]}
+                 [:!Oh :!Odelete_or_backspace :!iterm]
+                 [:!Ob [:escape :b] :iterm]
+                 [:!Of [:escape :f] :iterm]
+                 [:!Od [:escape :d] :iterm]]}
+                 ; [:!Oh [:escape :h] :iterm]]}
         {:des   "esc key on 60 key kb"
          :rules [[:##escape :##grave_accent_and_tilde :wasd]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasd]
                  [:grave_accent_and_tilde :escape :wasd]]}
         {:des   "launch mode"
          :rules [:launch-mode
-                 [:i [:open "/Applications/iTerm.app"]]
-                 [:f [:open "/Applications/Firefox.app"] :!firefox]
-                 [:f :same_wind_app :firefox]
-                 [:m [:open "/Applications/Spotify.app"]]
-                 [:s [:open "/Applications/Slack.app"]]
-                 [:v [:open "/Applications/MacDown.app"]]
-                 [:t [:open "/Applications/Things3.app"]]
-                 [:a [:open "/Applications/Alfred 4.app"]]]}
- :simlayer-threshold 210]}
+                [:i [:open "/Applications/iTerm.app"]]
+                [:f [:open "/Applications/Firefox.app"] :!firefox]
+                [:f :same_wind_app :firefox]
+                [:m [:open "/Applications/Spotify.app"]]
+                [:k [:open "/Applications/Slack.app"]]
+                [:v [:open "/Applications/MacDown.app"]]
+                [:t [:open "/Applications/Things3.app"]]
+                [:a [:open "/Applications/Alfred 4.app"]]]}
+        {:des   "shift parens"
+         :rules [[:left_shift :left_shift nil {:alone :left_paren}]
+                 [:right_shift :right_shift nil {:alone :right_paren}]]}
+ :simlayer-threshold 210
+ :alone 120]}
