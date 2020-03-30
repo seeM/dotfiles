@@ -1,6 +1,6 @@
 --recurse=yes
 
---python-kinds=i
+--python-kinds=-i
 
 --exclude=.venv
 --exclude=venv
