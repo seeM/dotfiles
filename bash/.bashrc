@@ -29,6 +29,13 @@ shopt -s checkwinsize
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
+}
+
+[ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
+
 
 # Environment variables
 # --------------------------------------------------------------------
@@ -84,21 +91,12 @@ fi
 alias venv='source .venv/bin/activate'
 
 # Git
-alias g="git"
-alias ga="git add"
-alias gc="git commit"
-alias gs="git status"
-alias gd="git diff"
-alias gf="git fetch"
-alias gm="git merge"
-alias gr="git rebase"
-alias gp="git push"
-alias gl="git pull"
-alias gu="git unstage"
-alias gg="git graph"
-alias ggg="git graphgpg"
-alias gco="git checkout"
-alias gpr="hub pull-request"
+for al in `git --list-cmds=alias`; do
+    alias g$al="git $al"
+
+    complete_func=_git_$(__git_aliased_command $al)
+    function_exists $complete_fnc && __git_complete g$al $complete_func
+done
 
 # Dotfiles
 alias vrc='vim ~/.vimrc'
@@ -178,7 +176,6 @@ function jrnl() {
 
 # Misc
 # --------------------------------------------------------------------
-[ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
 [ -r $HOME/google-cloud-sdk/path.bash.inc ] && source $HOME/google-cloud-sdk/path.bash.inc
 [ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
