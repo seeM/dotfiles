@@ -38,3 +38,21 @@ $ stow karabiner
 Current: [SF Mono](https://developer.apple.com/fonts/)
 
 Past: [IBM Plex Mono](https://github.com/IBM/plex)
+
+## Firefox
+
+**Plugins:**
+
+- Tridactyl
+- TreeStyleTab
+- OneTab
+- Instapaper
+- Copy Selection as Markdown
+- Some ad blocker
+
+Add the lines below to the user stylesheet to disable the native tab bars, since we're using tree style tabs. The user stylesheet should be somewhere like `~/Library/Application Support/Firefox/Profiles/zh6rzv3s.default/chrome/userChrome.css`.
+
+```css
+/* Hide native tabs */
+#TabsToolbar {visibility: collapse;}
+```
