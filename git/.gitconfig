@@ -24,7 +24,7 @@
     l = pull
     r = rebase
 
-    s = status -s
+    s = status
     co = checkout
     cob = checkout -b
     # list branches sorted by last modified
