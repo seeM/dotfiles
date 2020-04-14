@@ -13,8 +13,15 @@ fi
 
 export PLATFORM=$(uname -s)
 [ -f /etc/bashrc ] && . /etc/bashrc
-[ -f /etc/bash_completion ] && . /etc/bash_completion
 
+# Trying to make git completion with aliases work on AWS ubuntu instances...
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 # Basics
 # --------------------------------------------------------------------
@@ -91,7 +98,13 @@ fi
 alias venv='source .venv/bin/activate'
 
 # Git
-for al in `git --list-cmds=alias`; do
+# Force include git bash completions else we don't have access to __git_* commands
+# until after the first time we trigger auto complete, e.g., git <TAB><TAB>
+[ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
+
+# Newer git versions allow git --list-cmds=alias, but to be backward compatible...
+aliases=`git config --get-regexp alias | sed -E 's/alias.([a-z]+) .*$/\1/g'`
+for al in $aliases; do
     alias g$al="git $al"
 
     complete_func=_git_$(__git_aliased_command $al)
@@ -180,12 +193,3 @@ function jrnl() {
 [ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
-
-# Completion on AWS instances
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
