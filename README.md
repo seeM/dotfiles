@@ -3,7 +3,7 @@
 ```bash
 $ git clone --recurse-submodules git@github.com:seem/dotfiles ~/.dotfiles
 $ cd ~/.dotfiles
-$ stow vim tmux zsh    # for example
+$ stow ctags bash git tmux ipython vim
 ```
 
 ## vim
