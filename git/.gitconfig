@@ -31,5 +31,5 @@
     b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
     # list aliases
-    la = --list-cmds=alias
+    la = config --get-regexp alias
 
