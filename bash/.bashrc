@@ -61,12 +61,12 @@ export VISUAL=vim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export GREP_OPTIONS="--color"
-
 export LSCOLORS=ExGxcxdxCxegedabagacad
 
 # Aliases
 # --------------------------------------------------------------------
+
+alias grep='grep --color'
 
 alias ..='cd ..'
 alias ...='cd ../..'
