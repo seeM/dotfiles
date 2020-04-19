@@ -41,7 +41,7 @@
         {:des   "meta key"
          :rules [[:!Ob :!Oleft_arrow :!iterm]
                  [:!Of :!Oright_arrow :!iterm]
-                 [:!Od :!Odelete_forward :!iterm]
+                 ; [:!Od :!Odelete_forward :!iterm]
                  [:!Oh :!Odelete_or_backspace :!iterm]
                  [:!Ob [:escape :b] :iterm]
                  [:!Of [:escape :f] :iterm]
@@ -51,18 +51,42 @@
          :rules [[:##escape :##grave_accent_and_tilde :wasd]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasd]
                  [:grave_accent_and_tilde :escape :wasd]]}
-        {:des   "launch mode"
-         :rules [:launch-mode
-                [:i [:open "/Applications/iTerm.app"]]
-                [:f [:open "/Applications/Firefox.app"] :!firefox]
-                [:f :same_wind_app :firefox]
-                [:m [:open "/Applications/Spotify.app"]]
-                [:k [:open "/Applications/Slack.app"]]
-                [:v [:open "/Applications/MacDown.app"]]
-                [:t [:open "/Applications/Things3.app"]]
-                [:a [:open "/Applications/Alfred 4.app"]]]}
+        ; {:des   "launch mode"
+        ;  :rules [:launch-mode
+        ;         [:i [:open "/Applications/iTerm.app"]]
+        ;         [:f [:open "/Applications/Firefox.app"] :!firefox]
+        ;         [:f :same_wind_app :firefox]
+        ;         [:m [:open "/Applications/Spotify.app"]]
+        ;         [:k [:open "/Applications/Slack.app"]]
+        ;         [:v [:open "/Applications/MacDown.app"]]
+        ;         [:t [:open "/Applications/Things3.app"]]
+        ;         [:a [:open "/Applications/Alfred 4.app"]]]}
         {:des   "shift parens"
          :rules [[:left_shift :left_shift nil {:alone :left_paren}]
                  [:right_shift :right_shift nil {:alone :right_paren}]]}
- :simlayer-threshold 210
+        ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
+        ; {:des   "iterm tmux"
+        ;  :rules [:iterm
+        ;          ; Tabs
+        ;          [:!Ct [:!Tt :c]]
+        ;          [:!CSd [:!Tt :s]]
+        ;          [:!Cd [:!Tt :v]]
+        ;          [:!CSopen_bracket [:!Tt :p]]
+        ;          [:!CSclose_bracket [:!Tt :n]]
+        ;          [:!C1 [:!Tt :1]]
+        ;          [:!C2 [:!Tt :2]]
+        ;          [:!C3 [:!Tt :3]]
+        ;          [:!C4 [:!Tt :4]]
+        ;          [:!C5 [:!Tt :5]]
+        ;          [:!C6 [:!Tt :6]]
+        ;          [:!C7 [:!Tt :7]]
+        ;          [:!C8 [:!Tt :8]]
+        ;          [:!C9 [:!Tt :9]]
+        ;          [:!C0 [:!Tt :0]]
+        ;          ; Panes
+        ;          [:!Cl [:!Tt :l]]
+        ;          [:!Ch [:!Tt :h]]
+        ;          [:!Ck [:!Tt :k]]
+        ;          [:!Cj [:!Tt :j]]]}
+:simlayer-threshold 210
  :alone 120]}
