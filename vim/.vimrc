@@ -40,6 +40,9 @@ nnoremap <silent> <leader>z :call <sid>zoom()<cr>
 " endfunction
 " let &statusline = s:statusline_expr()
 
+let mapleader      = ' '
+let maplocalleader = ' '
+
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 " Basics {{{
@@ -70,7 +73,16 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_lint = 0
     let g:pymode_rope = 0
     let g:pymode_rope_completion = 0
+    " TODO: I do want these but they're breaking for some reason... maybe
+    " clashing with unimpaired?
+    let g:pymode_motion = 0
+    " Use vim-coiled-snake
+    let g:pymode_folding = 0
+
+    Plug 'alfredodeza/pytest.vim'
+    " Plug 'kalekundert/vim-coiled-snake'
 Plug 'saltstack/salt-vim'
+Plug 'jceb/vim-orgmode'
 " }}}
 " Features {{{
 Plug 'tpope/vim-fugitive'
@@ -82,13 +94,14 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
   nnoremap <C-p> :Files<CR>
-  nnoremap <leader>f :Files<CR>
+  " nnoremap <leader>f :Files<CR>
   nnoremap <leader>b :Buffers<CR>
   nnoremap <leader>gg :Rg<CR>
   nnoremap <C-g> :Rg<CR>
   nnoremap <leader>t :Tags<CR>
   nnoremap <C-t> :Tags<CR>
 Plug 'dense-analysis/ale'
+  let g:ale_lint_on_insert_leave = 0
 Plug 'dkarter/bullets.vim'
 " Plug 'ervandew/supertab'
 " Plug 'lifepillar/vim-mucomplete'
@@ -100,41 +113,41 @@ Plug 'dkarter/bullets.vim'
 "   let g:mucomplete#enable_auto_at_startup = 1
 "   " let g:mucomplete#completion_delay = 500
 
-if executable('node')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+" if executable('node')
+"   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"     function! s:check_back_space() abort
+"       let col = col('.') - 1
+"       return !col || getline('.')[col - 1]  =~# '\s'
+"     endfunction
 
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"     inoremap <silent><expr> <TAB>
+"           \ pumvisible() ? "\<C-n>" :
+"           \ <SID>check_back_space() ? "\<TAB>" :
+"           \ coc#refresh()
+"     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    " function! s:show_documentation()
-    "   if (index(['vim', 'help'], &filetype) >= 0)
-    "     execute 'h' expand('<cword>')
-    "   else
-    "     call CocAction('doHover')
-    "   endif
-    " endfunction
+"     " function! s:show_documentation()
+"     "   if (index(['vim', 'help'], &filetype) >= 0)
+"     "     execute 'h' expand('<cword>')
+"     "   else
+"     "     call CocAction('doHover')
+"     "   endif
+"     " endfunction
 
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
+"     " nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-    let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
-    " command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"     let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
+"     " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-    " let g:go_doc_keywordprg_enabled = 0
+"     " let g:go_doc_keywordprg_enabled = 0
 
-    augroup coc-config
-      autocmd!
-      autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-      autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
-      autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-    augroup END
-endif
+"     augroup coc-config
+"       autocmd!
+"       autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
+"       autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
+"       autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
+"     augroup END
+" endif
 " }}}
 " Colors {{{
 Plug 'cocopon/iceberg.vim'
@@ -235,8 +248,6 @@ if !isdirectory(expand(&directory)) | call mkdir(expand(&directory), "p") | endi
 " nnoremap <leader>f :Files .<CR>
 " nnoremap <leader>b :Buffers<CR>
 " From: https://romainl.github.io/the-patient-vimmer/3.html
-let mapleader      = ' '
-let maplocalleader = ' '
 " nnoremap <leader>e :edit **/*
 " nnoremap <leader>f :find *
 " nnoremap <leader>b :buffer *
@@ -312,14 +323,13 @@ nnoremap <leader>sg :echo system('goku')<cr>
 " Visual {{{
 set background=dark
 colorscheme apprentice
-" Highlight git merge conflict markers using the ErrorMsg highlight group
-" TODO: Cause slow down?...
+
 set cursorline
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
 let &showbreak="↪ "
 
-" Custom syntax
+" Highlight git merge conflict markers using the ErrorMsg highlight group
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 highlight CursorLineNR cterm=bold gui=bold
@@ -333,13 +343,23 @@ highlight Statement cterm=bold gui=bold
 " From: https://romainl.github.io/the-patient-vimmer/1.html
 set statusline=%<\ %f\ %m%r%y%w%=\ L:\ \%l\/\%L\ C:\ \%c\ 
 
-set guifont=Menlo:h12
+set guifont=SF\ Mono:h12
 " Disable scrollbars
 set guioptions=
 " Disable cursor blinking
 set guicursor+=n-v-c:blinkon0
 " }}}
 " Mini plugins {{{
+" Black {{{
+function! Black()
+    echo system(join(['black', expand('%:p')], ' '))
+    execute 'edit'
+endfunction
+
+command! Black Black()
+
+nnoremap <silent> <leader>f :<C-U>call Black()<CR>
+" }}}
 " Grep {{{
 " From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 if executable('ag')

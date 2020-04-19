@@ -1,4 +1,5 @@
 {
+    "python.linting.enabled": false,
     "python.linting.flake8Enabled": false,
     "python.linting.mypyEnabled": false,
     "python.jediEnabled": true
