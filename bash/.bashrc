@@ -117,6 +117,8 @@ alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
 alias krc='vim ~/.config/karabiner.edn'
 
+# Lisp
+alias ccl='rlwrap ccl64'
 
 # Prompt
 # --------------------------------------------------------------------
@@ -138,9 +140,15 @@ PS1+="\[\e[0m\]"
 PS1+="\[\e[90;1m\]"
 PS1+='$(__git_ps1)'
 PS1+="\[\e[0m\]"
-PS1+="\[\e[31m\]"
-PS1+=" ❯ "
+PS1+="\[\e[31;1m\]"
+# PS1+=" > "
 PS1+="\[\e[0m\]"
+PS1+="\n\$ "
+# PS1+="\[\e[31m\]"
+# PS1+=" ❯ "
+# PS1+="\[\e[0m\]"
+# PS1='\[\e]0;\u@\h: \w\a\]\[\033[1;92m\]\u@\h\[\033[m\]:\[\033[1;94m\]\w\[\033[m\]\n\$ '
+
 
 # FZF
 # --------------------------------------------------------------------
@@ -193,3 +201,4 @@ function jrnl() {
 [ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
+[ -r /usr/local/opt/ruby/bin/ruby ] && export PATH=/usr/local/opt/ruby/bin:$PATH
