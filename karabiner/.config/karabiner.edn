@@ -13,7 +13,8 @@
 
  :applications {:emacs-disabled ["^com\\.googlecode\\.iterm2$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
-                :iterm          ["^com\\.googlecode\\.iterm2$"]}
+                :iterm          ["^com\\.googlecode\\.iterm2$"]
+                :bear           ["^net\\.shinyfrog\\.bear$"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
            :macbook-internal  [{:vendor_id 1452 :product_id 631}]}
@@ -29,7 +30,12 @@
                  [:!T##b :left_arrow]
                  [:!T##p :up_arrow]
                  [:!T##n :down_arrow]
-                 [:!T##f :right_arrow]]}
+                 [:!T##f :right_arrow]
+                 [:!T##m :return_or_enter]
+                 [:!T##h :delete_or_backspace]]}
+        {:des   "disable non emacs"
+         :rules [[:##return_or_enter ""]
+                 [:##delete_or_backspace ""]]}
         {:des   "fn arrow keys"
          :rules [:macbook-internal
                  [:!F##j :left_arrow]
@@ -42,7 +48,7 @@
          :rules [[:!Ob :!Oleft_arrow :!iterm]
                  [:!Of :!Oright_arrow :!iterm]
                  ; [:!Od :!Odelete_forward :!iterm]
-                 [:!Oh :!Odelete_or_backspace :!iterm]
+                 [:!Oh :!Odelete_or_backspace]
                  [:!Ob [:escape :b] :iterm]
                  [:!Of [:escape :f] :iterm]
                  [:!Od [:escape :d] :iterm]]}
@@ -61,9 +67,11 @@
         ;         [:v [:open "/Applications/MacDown.app"]]
         ;         [:t [:open "/Applications/Things3.app"]]
         ;         [:a [:open "/Applications/Alfred 4.app"]]]}
-        {:des   "shift parens"
-         :rules [[:left_shift :left_shift nil {:alone :left_paren}]
-                 [:right_shift :right_shift nil {:alone :right_paren}]]}
+        ; {:des   "shift parens"
+        ;  :rules [[:left_shift :left_shift nil {:alone :left_paren}]
+        ;          [:right_shift :right_shift nil {:alone :right_paren}]]}
+        ; {:des   "bear"
+        ;  :rules [[:!Copen_bracket :!C :bear]]}
         ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
         ; {:des   "iterm tmux"
         ;  :rules [:iterm
