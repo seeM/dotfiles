@@ -33,9 +33,10 @@
                  [:!T##f :right_arrow]
                  [:!T##m :return_or_enter]
                  [:!T##h :delete_or_backspace]]}
-        {:des   "disable non emacs"
-         :rules [[:##return_or_enter ""]
-                 [:##delete_or_backspace ""]]}
+        ; {:des   "disable non emacs"
+         ; :rules [[:##return_or_enter ""]
+                 ; [:##delete_or_backspace ""]]}
+         ; :rules [[:##delete_or_backspace ""]]}
         {:des   "fn arrow keys"
          :rules [:macbook-internal
                  [:!F##j :left_arrow]
@@ -45,9 +46,9 @@
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
-         :rules [[:!Ob :!Oleft_arrow :!iterm]
-                 [:!Of :!Oright_arrow :!iterm]
-                 ; [:!Od :!Odelete_forward :!iterm]
+         :rules [[:!O#Sb :!Oleft_arrow :!iterm]
+                 [:!O#Sf :!Oright_arrow :!iterm]
+                 [:!Od :!Odelete_forward :!iterm]
                  [:!Oh :!Odelete_or_backspace]
                  [:!Ob [:escape :b] :iterm]
                  [:!Of [:escape :f] :iterm]
