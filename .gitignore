@@ -8,3 +8,5 @@ vim/.vim/plugged/
 vim/.vim/plugin/
 vim/.vim/tmp/
 .DS_Store
+emacs/.emacs.d/
+!emacs/.emacs.d/init.el
