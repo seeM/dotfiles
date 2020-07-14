@@ -11,7 +11,8 @@
 
  :froms {:left_shift_alone {:key :left_shift :alone true}}
 
- :applications {:emacs-disabled ["^com\\.googlecode\\.iterm2$"]
+ :applications {:emacs-disabled ["^com\\.googlecode\\.iterm2$"
+                                 "^org\\.gnu\\.Emacs$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
                 :bear           ["^net\\.shinyfrog\\.bear$"]}
