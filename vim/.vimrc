@@ -54,6 +54,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-projectionist'
 Plug 'romainl/vim-cool'                 " only highlight search while typing
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -67,7 +71,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_lint_cwindow = 0
-    let g:pymode_options_max_line_length = 100
+    let g:pymode_options_max_line_length = 88
     let g:pymode_python = 'python3'
     let g:pymode_breakpoint_bind = '<leader>d'
     let g:pymode_lint = 0
@@ -78,6 +82,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_motion = 0
     " Use vim-coiled-snake
     let g:pymode_folding = 0
+    let g:pymode_trim_whitespaces = 0
 
     Plug 'alfredodeza/pytest.vim'
     " Plug 'kalekundert/vim-coiled-snake'
@@ -103,6 +108,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
   let g:ale_lint_on_insert_leave = 0
 Plug 'dkarter/bullets.vim'
+" Plug 'vimwiki/vimwiki'
+" let g:vimwiki_list = [{'path': '~/Documents/bear/', 'syntax': 'markdown', 'ext': '.md'}]
 " Plug 'ervandew/supertab'
 " Plug 'lifepillar/vim-mucomplete'
 "   set completeopt=menuone,noselect,noinsert
@@ -154,6 +161,10 @@ Plug 'cocopon/iceberg.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'romainl/Apprentice'
 Plug 'romainl/flattened'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'romainl/vim-dichromatic'
 " }}}
 call plug#end()
 " }}}
@@ -319,10 +330,28 @@ nnoremap <leader>5 m`^i##### <esc>``6l
 " Source configs
 nnoremap <leader>sg :echo system('goku')<cr>
 
+nnoremap Q gqip
+
 " }}}
 " Visual {{{
-set background=dark
-colorscheme apprentice
+if has("gui_running")
+    set background=light
+    colorscheme PaperColor
+else
+    set background=dark
+    " colorscheme grb24bit
+    " colorscheme paramount
+    colorscheme apprentice
+    " set background=light
+    " colorscheme PaperColor
+endif
+
+" set guifont=SF\ Mono:h12
+set guifont=IBM\ Plex\ Mono:h13
+" Disable scrollbars
+set guioptions=
+" Disable cursor blinking
+set guicursor+=n-v-c:blinkon0
 
 set cursorline
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -342,12 +371,6 @@ highlight Statement cterm=bold gui=bold
 
 " From: https://romainl.github.io/the-patient-vimmer/1.html
 set statusline=%<\ %f\ %m%r%y%w%=\ L:\ \%l\/\%L\ C:\ \%c\ 
-
-set guifont=SF\ Mono:h12
-" Disable scrollbars
-set guioptions=
-" Disable cursor blinking
-set guicursor+=n-v-c:blinkon0
 " }}}
 " Mini plugins {{{
 " Black {{{
@@ -444,11 +467,11 @@ nnoremap <leader>c :call CatSelection()<cr>
 vnoremap <leader>c :call CatSelection()<cr>
 " }}}
 " Word count {{{
-function! EchoWordCount()
+function! WordCount()
     let word_count = system("wc -w " . @% . " | awk '{ print $1}'")[:-2]
     echo("Word count: " . word_count)
 endfunction
 
-command! -nargs=0 WC call EchoWordCount()
+command! -nargs=0 WordCount call WordCount()
 " }}}
 " }}}
