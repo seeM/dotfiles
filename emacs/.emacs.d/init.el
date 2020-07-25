@@ -45,46 +45,49 @@
 ;; Evil Mode
 (use-package evil
   :ensure t
-  ;; :bind ("-" . ido-dired)
   :init
   (setq evil-want-C-u-scroll t)
+  (setq evil-spit-window-below t)
+  (setq evil-vspit-window-right t)
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
+  ;; (evil-define-key 'normal 'dired-mode-map "-" (lambda ()
+  ;; 						 (interactive)
+  ;; 						 (find-alternate-file "..")))
   (evil-define-key 'normal 'global "-" 'dired-jump)
-  ;; TODO "-" in dired-mode jumps to parent directory
-  ;; (evil-define-key 'normal 'dired-mode-map "-" 'dired-jump)
-  (evil-define-key 'normal 'global (kbd "C-w s") (lambda ()
-						   (interactive)
-						   (evil-window-split)
-						   (evil-window-next nil)
-						   ))
-  (evil-define-key 'normal 'global (kbd "C-w v") (lambda ()
-						   (interactive)
-						   (evil-window-vsplit)
-						   (evil-window-next nil)
-						   ))
+
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init))
 
   (use-package evil-commentary
+    :after evil
     :ensure t
     :config
     (evil-commentary-mode t))
 
   (use-package evil-leader
+    :after evil
     :ensure t
     :config
     (global-evil-leader-mode t)
     (evil-leader/set-leader "<SPC>"))
 
   (use-package evil-surround
+    :after evil
     :ensure t
     :config (global-evil-surround-mode))
 
   (use-package evil-indent-textobject
+    :after evil
     :ensure t)
 
   (use-package evil-org
+    :after (evil org)
     :ensure t
-    :after org
     :config
     (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading return))
     (add-hook 'org-mode-hook 'evil-org-mode)
@@ -93,6 +96,7 @@
 
   ;; TODO: Keep this?
   (use-package powerline-evil
+    :after evil
     :ensure t
     :config
     (powerline-evil-vim-color-theme)))
@@ -199,7 +203,7 @@
     ("950a9a6ca940ea1db61f7d220b01cddb77aec348d3c2524349a8683317d1dbb6" "dcdd1471fde79899ae47152d090e3551b889edf4b46f00df36d653adc2bf550d" "41c478598f93d62f46ec0ef9fbf351a02012e8651e2a0786e0f85e6ac598f599" "cf7c7ea6ccd8e251a9dbafb54a7ef7e29dcd17c5b5fbd37ea7f315b6daa509b9" default)))
  '(package-selected-packages
    (quote
-    (evil-commentary csv-mode dired magit night-owl-theme modus-vivendi-theme markdown-preview-mode use-package projectile powerline-evil markdown-mode evil-surround evil-org evil-leader evil-indent-textobject cider))))
+    (evil-collection evil-commentary csv-mode dired magit night-owl-theme modus-vivendi-theme markdown-preview-mode use-package projectile powerline-evil markdown-mode evil-surround evil-org evil-leader evil-indent-textobject cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
