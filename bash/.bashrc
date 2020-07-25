@@ -112,13 +112,14 @@ for al in $aliases; do
 done
 
 # Dotfiles
+alias brc='vim ~/.bashrc'
 alias vrc='vim ~/.vimrc'
-alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
 alias krc='vim ~/.config/karabiner.edn'
 
 # Lisp
 alias ccl='rlwrap ccl64'
+
 
 # Prompt
 # --------------------------------------------------------------------
@@ -141,13 +142,8 @@ PS1+="\[\e[90;1m\]"
 PS1+='$(__git_ps1)'
 PS1+="\[\e[0m\]"
 PS1+="\[\e[31;1m\]"
-# PS1+=" > "
 PS1+="\[\e[0m\]"
 PS1+="\n\$ "
-# PS1+="\[\e[31m\]"
-# PS1+=" ❯ "
-# PS1+="\[\e[0m\]"
-# PS1='\[\e]0;\u@\h: \w\a\]\[\033[1;92m\]\u@\h\[\033[m\]:\[\033[1;94m\]\w\[\033[m\]\n\$ '
 
 
 # FZF

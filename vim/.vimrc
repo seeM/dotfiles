@@ -1,44 +1,7 @@
 " Author: Wasim Lorgat
 " Source: http://github.com/seem/dotfiles/vim/.vimrc
-" TODO: Remove most plugins...
-" TODO: Modify pymode pydoc to use python -m pydoc which is aware of current
-"       venv.
+" TODO: Modify pymode pydoc to use python -m pydoc which is aware of current venv.
 " TODO: Change grep command to only use inner word, and give a better letter.
-" TODO: Look into coc REPL integration or other. E.g., CocCommand(python.startREPL) looks solid.
-
-" augroup line_return
-"     autocmd!
-"     autocmd BufReadPost *
-"         \ if line("'\"") > 0 && line("'\"") <= line("$") |
-"         \     exe "normal g`\"" |
-"         \ endif
-" augroup end
-
-" New stuff -- via steve losh: https://bitbucket.org/sjl/dotfiles/src/default/vim/vimrc
-
-" Junegunn
-function! s:zoom()
-  if winnr('$') > 1
-    tab split
-  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
-                  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
-    tabclose
-  endif
-endfunction
-nnoremap <silent> <leader>z :call <sid>zoom()<cr>
-
-" function! s:statusline_expr()
-"   let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
-"   let ro  = "%{&readonly ? '[RO] ' : ''}"
-"   let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-"   let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-"   let sep = ' %= '
-"   let pos = ' %-12(%l : %c%V%) '
-"   let pct = ' %P'
-
-"   return '[%n] %F %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
-" endfunction
-" let &statusline = s:statusline_expr()
 
 let mapleader      = ' '
 let maplocalleader = ' '
@@ -59,15 +22,12 @@ Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-projectionist'
 Plug 'romainl/vim-cool'                 " only highlight search while typing
-" Plug 'christoomey/vim-tmux-navigator'
 Plug 'AndrewRadev/splitjoin.vim'
     let g:splitjoin_trailing_comma = 1
     let g:splitjoin_python_brackets_on_separate_lines = 1
     let g:splitjoin_quiet = 1
 " }}}
 " Languages {{{
-" Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'fs111/pydoc.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_lint_cwindow = 0
@@ -85,7 +45,6 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_trim_whitespaces = 0
 
     Plug 'alfredodeza/pytest.vim'
-    " Plug 'kalekundert/vim-coiled-snake'
 Plug 'saltstack/salt-vim'
 Plug 'jceb/vim-orgmode'
 " }}}
@@ -95,7 +54,6 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
   let g:slime_default_config = {"socket_name": "default", "target_pane": ":.2"}
   let g:slime_dont_ask_default = 1
   let g:slime_target = 'tmux'
-" TODO: Ultisnips?
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
   nnoremap <C-p> :Files<CR>
@@ -108,53 +66,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
   let g:ale_lint_on_insert_leave = 0
 Plug 'dkarter/bullets.vim'
-" Plug 'vimwiki/vimwiki'
-" let g:vimwiki_list = [{'path': '~/Documents/bear/', 'syntax': 'markdown', 'ext': '.md'}]
-" Plug 'ervandew/supertab'
-" Plug 'lifepillar/vim-mucomplete'
-"   set completeopt=menuone,noselect,noinsert
-"   set shortmess+=c   " Shut off completion messages
-"   set belloff+=ctrlg " If Vim beeps during completion
-"   " set completeopt+=noselect
-"   " TODO: Or noinsert?
-"   let g:mucomplete#enable_auto_at_startup = 1
-"   " let g:mucomplete#completion_delay = 500
-
-" if executable('node')
-"   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"     function! s:check_back_space() abort
-"       let col = col('.') - 1
-"       return !col || getline('.')[col - 1]  =~# '\s'
-"     endfunction
-
-"     inoremap <silent><expr> <TAB>
-"           \ pumvisible() ? "\<C-n>" :
-"           \ <SID>check_back_space() ? "\<TAB>" :
-"           \ coc#refresh()
-"     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-"     " function! s:show_documentation()
-"     "   if (index(['vim', 'help'], &filetype) >= 0)
-"     "     execute 'h' expand('<cword>')
-"     "   else
-"     "     call CocAction('doHover')
-"     "   endif
-"     " endfunction
-
-"     " nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"     let g:coc_global_extensions = ['coc-yaml', 'coc-python', 'coc-json', 'coc-prettier']
-"     " command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-"     " let g:go_doc_keywordprg_enabled = 0
-
-"     augroup coc-config
-"       autocmd!
-"       autocmd VimEnter * nmap <silent> gd <Plug>(coc-definition)
-"       autocmd VimEnter * nmap <silent> gi <Plug>(coc-implementation)
-"       autocmd VimEnter * nmap <silent> g? <Plug>(coc-references)
-"     augroup END
-" endif
 " }}}
 " Colors {{{
 Plug 'cocopon/iceberg.vim'
@@ -165,6 +76,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'romainl/vim-dichromatic'
+Plug 'tomasiser/vim-code-dark'
 " }}}
 call plug#end()
 " }}}
@@ -181,26 +93,11 @@ set backspace=indent,eol,start
 set showcmd
 set ruler
 set laststatus=2
-" set number relativenumber
 set numberwidth=5
-" TODO: Keep autowrite and autoread?
-" set autowrite
 " Reload files that are edited externally.
 set autoread
 au FocusGained,BufEnter * :silent! !
-" Auto save files on focus lost.
-" au FocusLost,WinLeave * :silent! noautocmd w
 set shiftround
-" set title
-" set linebreak
-" set colorcolumn=+1
-" set diffopt+=vertical
-" " TODO: longest?
-" set completeopt=longest,menuone
-" " TODO: Needed?
-" set nostartofline              " avoid going to start of line on certain commands
-" set signcolumn=yes
-" set path=.,**
 set tags+=.tags
 set conceallevel=3
 " Indent (>>) and dedent (<<) with 4 spaces.
@@ -211,7 +108,6 @@ let &softtabstop = &shiftwidth
 set expandtab
 set nowrap
 set sidescroll=5
-" TODO: format options
 set formatoptions=qrn1j
 set incsearch
 set hlsearch
@@ -256,15 +152,6 @@ if !isdirectory(expand(&backupdir)) | call mkdir(expand(&backupdir), "p") | endi
 if !isdirectory(expand(&directory)) | call mkdir(expand(&directory), "p") | endif
 " }}}
 " Mappings {{{
-" nnoremap <leader>f :Files .<CR>
-" nnoremap <leader>b :Buffers<CR>
-" From: https://romainl.github.io/the-patient-vimmer/3.html
-" nnoremap <leader>e :edit **/*
-" nnoremap <leader>f :find *
-" nnoremap <leader>b :buffer *
-nnoremap gb :ls<CR>:b<Space>
-nnoremap <leader>w :w<CR>
-" nnoremap <leader>d :bd<CR>
 nnoremap <leader>y "*y
 nnoremap <leader>p "*p
 nnoremap <leader><leader> <c-^>
@@ -273,21 +160,18 @@ nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
 
 " Save
 inoremap <C-s>     <C-O>:update<cr>
-nnoremap <C-s>     :update<cr>
-" nnoremap <leader>w :update<cr>
+noremap <C-s>     :update<cr>
 
 " Quit
 inoremap <C-q>     <esc>:q<cr>
 nnoremap <C-q>     :q<cr>
 vnoremap <C-q>     <esc>
-" nnoremap <Leader>q :q<cr>
-" nnoremap <Leader>Q :qa!<cr>
 
 " Windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Tags
 " g<C-]> shows a menu if >1 match
@@ -297,35 +181,12 @@ nnoremap g[ :pop<cr>
 " Make Y behave like other capitals
 nnoremap Y y$
 
-" Last inserted text
-" nnoremap g. :normal! `[v`]<cr><left>
-
-" Tabs
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-
-" Circular windows navigation
-" nnoremap <tab>   <c-w>w
-" nnoremap <S-tab> <c-w>W
-
 " Markdown headings
-nnoremap <leader>1 m`yypVr=``
-nnoremap <leader>2 m`yypVr-``
-nnoremap <leader>3 m`^i### <esc>``4l
-nnoremap <leader>4 m`^i#### <esc>``5l
-nnoremap <leader>5 m`^i##### <esc>``6l
-
-" Folds
-" nnoremap <tab> za
-" function! ToggleAllFolds()
-"     if &foldlevel
-"         set foldlevel=0
-"     else
-"         set foldlevel=999
-"     endif
-" endfunction
-" command! ToggleAllFolds call ToggleAllFolds()
-" nnoremap <S-tab> :ToggleAllFolds<cr>
+" nnoremap <leader>1 m`yypVr=``
+" nnoremap <leader>2 m`yypVr-``
+" nnoremap <leader>3 m`^i### <esc>``4l
+" nnoremap <leader>4 m`^i#### <esc>``5l
+" nnoremap <leader>5 m`^i##### <esc>``6l
 
 " Source configs
 nnoremap <leader>sg :echo system('goku')<cr>
@@ -334,20 +195,10 @@ nnoremap Q gqip
 
 " }}}
 " Visual {{{
-if has("gui_running")
-    set background=light
-    colorscheme PaperColor
-else
-    set background=dark
-    " colorscheme grb24bit
-    " colorscheme paramount
-    colorscheme apprentice
-    " set background=light
-    " colorscheme PaperColor
-endif
+set background=dark
+colorscheme apprentice
 
-" set guifont=SF\ Mono:h12
-set guifont=IBM\ Plex\ Mono:h13
+set guifont=IBM\ Plex\ Mono:h14
 " Disable scrollbars
 set guioptions=
 " Disable cursor blinking
@@ -363,9 +214,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 highlight CursorLineNR cterm=bold gui=bold
 highlight Todo cterm=bold gui=bold
-
-" TODO: Testing...
-" highlight Include cterm=bold gui=bold
 " TODO: Should this be moved to python?
 highlight Statement cterm=bold gui=bold
 
@@ -439,32 +287,6 @@ augroup quickfix
     autocmd QuickFixCmdPost lgetexpr lwindow
 augroup end
 
-" }}}
-" Git Blame {{{
-" From: https://gist.github.com/romainl/5b827f4aafa7ee29bdc70282ecc31640
-command! -range GB echo join(systemlist("git -C " . shellescape(expand('%:p:h')) . " blame -L <line1>,<line2> " . expand('%:t')), "\n")
-" }}}
-" Rename file {{{
-" From: https://github.com/garybernhardt/dotfiles/blob/7e0f353bca25b07d2ef9bcae2070406e3d4ac029/.vimrc#L284-L296
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-noremap <leader>rn :call RenameFile()<cr>
-" }}}
-" Cat {{{
-" Cat selection to terminal so we can copy with mouse selection on remote
-" servers.
-function! CatSelection() range
-    execute("!sed -n '" . a:firstline . "," . a:lastline . "p;" . (a:lastline + 1) . "q' %")
-endfunction
-nnoremap <leader>c :call CatSelection()<cr>
-vnoremap <leader>c :call CatSelection()<cr>
 " }}}
 " Word count {{{
 function! WordCount()

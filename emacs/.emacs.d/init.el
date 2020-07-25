@@ -1,6 +1,10 @@
-;; TODO: <C-u> doesn't seem to work as VIM binding
+;; TODO:
+;; - cmd-w to close window
+;; - cmd-o to swap window?
+;; - cmd-t for new window? tab?
+;; - https://www.youtube.com/watch?v=CTOhosGQ2f0
 ;; TODO: Use <Esc> instead of <C-g>? Not sure its worth unlearning that...
-;;       Or even <C-[> from VIM background
+;;       Or even <C-[> from VIM
 ;; TODO: Go through this: http://ryan.himmelwright.net/post/switched-to-joplin-notes/
 ;;       Looks like exactly my use-case...
 
@@ -41,10 +45,29 @@
 ;; Evil Mode
 (use-package evil
   :ensure t
+  ;; :bind ("-" . ido-dired)
   :init
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
+  (evil-define-key 'normal 'global "-" 'dired-jump)
+  ;; TODO "-" in dired-mode jumps to parent directory
+  ;; (evil-define-key 'normal 'dired-mode-map "-" 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "C-w s") (lambda ()
+						   (interactive)
+						   (evil-window-split)
+						   (evil-window-next nil)
+						   ))
+  (evil-define-key 'normal 'global (kbd "C-w v") (lambda ()
+						   (interactive)
+						   (evil-window-vsplit)
+						   (evil-window-next nil)
+						   ))
+
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode t))
 
   (use-package evil-leader
     :ensure t
@@ -78,7 +101,6 @@
 (use-package ido
   :ensure t
   :config
-
   (ido-mode 1)
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t))
@@ -116,6 +138,15 @@
   :config
   (load-theme 'vscode-dark-plus t))
 
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
+
+(require 'dired-x)
+
+(use-package csv-mode
+  :ensure t)
+
 ;; =========
 ;; = Other =
 ;; =========
@@ -142,6 +173,21 @@
 ;; Window movement
 (windmove-default-keybindings)
 
+;; Backups
+;; Source: https://stackoverflow.com/a/151946
+(setq backup-directory-alist `(("." . "~/.emacs_backups")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+
+;; Font
+(set-frame-font "IBM Plex Mono 14")
+
+;; Show trailing whitespace
+(setq-default show-trailing-whitespace t)
+
 ;; End
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -153,7 +199,7 @@
     ("950a9a6ca940ea1db61f7d220b01cddb77aec348d3c2524349a8683317d1dbb6" "dcdd1471fde79899ae47152d090e3551b889edf4b46f00df36d653adc2bf550d" "41c478598f93d62f46ec0ef9fbf351a02012e8651e2a0786e0f85e6ac598f599" "cf7c7ea6ccd8e251a9dbafb54a7ef7e29dcd17c5b5fbd37ea7f315b6daa509b9" default)))
  '(package-selected-packages
    (quote
-    (night-owl-theme modus-vivendi-theme markdown-preview-mode use-package projectile powerline-evil markdown-mode evil-surround evil-org evil-leader evil-indent-textobject cider))))
+    (evil-commentary csv-mode dired magit night-owl-theme modus-vivendi-theme markdown-preview-mode use-package projectile powerline-evil markdown-mode evil-surround evil-org evil-leader evil-indent-textobject cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

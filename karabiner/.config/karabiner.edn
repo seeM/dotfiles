@@ -11,7 +11,8 @@
 
  :froms {:left_shift_alone {:key :left_shift :alone true}}
 
- :applications {:emacs-disabled ["^com\\.googlecode\\.iterm2$"
+ :applications {:chrome         ["^com\\.google\\.Chrome$"]
+                :emacs-disabled ["^com\\.googlecode\\.iterm2$"
                                  "^org\\.gnu\\.Emacs$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
@@ -38,12 +39,16 @@
          ; :rules [[:##return_or_enter ""]
                  ; [:##delete_or_backspace ""]]}
          ; :rules [[:##delete_or_backspace ""]]}
-        {:des   "fn arrow keys"
+        {:des   "macbook fn keys"
          :rules [:macbook-internal
                  [:!F##j :left_arrow]
                  [:!F##i :up_arrow]
                  [:!F##k :down_arrow]
-                 [:!F##l :right_arrow]]}
+                 [:!F##l :right_arrow]
+                 [:!Fw :play_or_pause]
+                 [:!Fq :rewind]
+                 [:!Fe :fastforward]
+                 ]}
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
@@ -54,49 +59,18 @@
                  [:!Ob [:escape :b] :iterm]
                  [:!Of [:escape :f] :iterm]
                  [:!Od [:escape :d] :iterm]]}
-                 ; [:!Oh [:escape :h] :iterm]]}
         {:des   "esc key on 60 key kb"
          :rules [[:##escape :##grave_accent_and_tilde :wasd]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasd]
                  [:grave_accent_and_tilde :escape :wasd]]}
-        ; {:des   "launch mode"
-        ;  :rules [:launch-mode
-        ;         [:i [:open "/Applications/iTerm.app"]]
-        ;         [:f [:open "/Applications/Firefox.app"] :!firefox]
-        ;         [:f :same_wind_app :firefox]
-        ;         [:m [:open "/Applications/Spotify.app"]]
-        ;         [:k [:open "/Applications/Slack.app"]]
-        ;         [:v [:open "/Applications/MacDown.app"]]
-        ;         [:t [:open "/Applications/Things3.app"]]
-        ;         [:a [:open "/Applications/Alfred 4.app"]]]}
-        ; {:des   "shift parens"
-        ;  :rules [[:left_shift :left_shift nil {:alone :left_paren}]
-        ;          [:right_shift :right_shift nil {:alone :right_paren}]]}
-        ; {:des   "bear"
-        ;  :rules [[:!Copen_bracket :!C :bear]]}
-        ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
-        ; {:des   "iterm tmux"
-        ;  :rules [:iterm
-        ;          ; Tabs
-        ;          [:!Ct [:!Tt :c]]
-        ;          [:!CSd [:!Tt :s]]
-        ;          [:!Cd [:!Tt :v]]
-        ;          [:!CSopen_bracket [:!Tt :p]]
-        ;          [:!CSclose_bracket [:!Tt :n]]
-        ;          [:!C1 [:!Tt :1]]
-        ;          [:!C2 [:!Tt :2]]
-        ;          [:!C3 [:!Tt :3]]
-        ;          [:!C4 [:!Tt :4]]
-        ;          [:!C5 [:!Tt :5]]
-        ;          [:!C6 [:!Tt :6]]
-        ;          [:!C7 [:!Tt :7]]
-        ;          [:!C8 [:!Tt :8]]
-        ;          [:!C9 [:!Tt :9]]
-        ;          [:!C0 [:!Tt :0]]
-        ;          ; Panes
-        ;          [:!Cl [:!Tt :l]]
-        ;          [:!Ch [:!Tt :h]]
-        ;          [:!Ck [:!Tt :k]]
-        ;          [:!Cj [:!Tt :j]]]}
-:simlayer-threshold 210
- :alone 120]}
+        {:des   "launch mode"
+         :rules [:launch-mode
+                [:i [:open "/Applications/iTerm.app"]]
+                [:b [:open "/Applications/Google Chrome.app"] :!chrome]
+                [:b :same_wind_app :chrome]
+                [:m [:open "/Applications/Spotify.app"]]
+                [:k [:open "/Applications/Slack.app"]]
+                [:t [:open "/Applications/Things3.app"]]
+                [:a [:open "/Applications/Alfred 4.app"]]]}
+        :simlayer-threshold 210
+        :alone 120]}
