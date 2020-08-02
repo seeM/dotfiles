@@ -152,6 +152,22 @@
 (use-package csv-mode
   :ensure t)
 
+;; =======
+;; = Org =
+;; =======
+
+ ;; Use variable width font in org mode
+(defun my-buffer-face-mode-face-variable ()
+  "Set font to a variable width (proportional) fonts in current buffer"
+  (interactive)
+  (setq buffer-face-mode-face '(:family "ETBembo" :height 180 :width semi-condensed))
+  (buffer-face-mode))
+
+(add-hook 'text-mode-hook #'my-buffer-face-mode-face-variable)
+
+;; Use visual line mode
+(add-hook 'text-mode-hook #'visual-line-mode)
+
 ;; =========
 ;; = Other =
 ;; =========
@@ -195,16 +211,6 @@
 
 ;; Set window title to full file path
 (setq frame-title-format "%f")
-
- ;; Use variable width font faces in org mode
-(defun my-buffer-face-mode-face-variable ()
-  "Set font to a variable width (proportional) fonts in current buffer"
-  (interactive)
-  (setq buffer-face-mode-face '(:family "ETBembo" :height 180 :width semi-condensed))
-  (buffer-face-mode))
-
-(add-hook 'text-mode-hook #'my-buffer-face-mode-face-variable)
-(add-hook 'text-mode-hook #'visual-line-mode)
 
 ;; End
 (custom-set-variables
