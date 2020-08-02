@@ -63,14 +63,20 @@
          :rules [[:##escape :##grave_accent_and_tilde :wasd]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasd]
                  [:grave_accent_and_tilde :escape :wasd]]}
+        {:des "left cmd -> cmd+tab"
+         :rules [[:left_command :left_command nil {:alone :!Ctab}]]}
+        ; {:des "right cmd -> Alfred"
+        ;  :rules [[:right_command :right_command nil {:alone :!Ctab}]]}
         {:des   "launch mode"
          :rules [:launch-mode
-                [:i [:open "/Applications/iTerm.app"]]
-                [:b [:open "/Applications/Google Chrome.app"] :!chrome]
-                [:b :same_wind_app :chrome]
+                [:s [:open "/Applications/Emacs.app"]]
+                [:t [:open "/Applications/iTerm.app"]]
+                [:c [:open "/Applications/Google Chrome.app"] :!chrome]
+                [:c :same_wind_app :chrome]
                 [:m [:open "/Applications/Spotify.app"]]
                 [:k [:open "/Applications/Slack.app"]]
-                [:t [:open "/Applications/Things3.app"]]
-                [:a [:open "/Applications/Alfred 4.app"]]]}
+                [:n [:open "/Applications/Things3.app"]]
+                [:a [:open "/Applications/Alfred 4.app"]]
+                [:b [:open "/Applications/Bear.app"]]]}
         :simlayer-threshold 210
         :alone 120]}

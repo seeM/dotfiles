@@ -50,6 +50,7 @@
   (setq evil-spit-window-below t)
   (setq evil-vspit-window-right t)
   (setq evil-want-keybinding nil)
+  (setq evil-respect-visual-line-mode t)
   :config
   (evil-mode 1)
   ;; (evil-define-key 'normal 'dired-mode-map "-" (lambda ()
@@ -191,6 +192,19 @@
 
 ;; Show trailing whitespace
 (setq-default show-trailing-whitespace t)
+
+;; Set window title to full file path
+(setq frame-title-format "%f")
+
+ ;; Use variable width font faces in org mode
+(defun my-buffer-face-mode-face-variable ()
+  "Set font to a variable width (proportional) fonts in current buffer"
+  (interactive)
+  (setq buffer-face-mode-face '(:family "ETBembo" :height 180 :width semi-condensed))
+  (buffer-face-mode))
+
+(add-hook 'text-mode-hook #'my-buffer-face-mode-face-variable)
+(add-hook 'text-mode-hook #'visual-line-mode)
 
 ;; End
 (custom-set-variables

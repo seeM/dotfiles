@@ -43,6 +43,10 @@ function_exists() {
 
 [ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
 
+# Set window title to PWD and last command
+# Based on: https://arbtt.nomeata.de/doc/users_guide/effective-use.html
+trap 'echo -ne "\033]2;$(pwd); $(history 1 | sed "s/^[ ]*[0-9]*[ ]*[0-9\/]*[ ]*[0-9\:]*[ ]*//g")\007"' DEBUG
+
 
 # Environment variables
 # --------------------------------------------------------------------

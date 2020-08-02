@@ -47,6 +47,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     Plug 'alfredodeza/pytest.vim'
 Plug 'saltstack/salt-vim'
 Plug 'jceb/vim-orgmode'
+Plug 'PProvost/vim-ps1'
 " }}}
 " Features {{{
 Plug 'tpope/vim-fugitive'
