@@ -35,10 +35,6 @@
                  [:!T##f :right_arrow]
                  [:!T##m :return_or_enter]
                  [:!T##h :delete_or_backspace]]}
-        ; {:des   "disable non emacs"
-         ; :rules [[:##return_or_enter ""]
-                 ; [:##delete_or_backspace ""]]}
-         ; :rules [[:##delete_or_backspace ""]]}
         {:des   "macbook fn keys"
          :rules [:macbook-internal
                  [:!F##j :left_arrow]
@@ -52,21 +48,17 @@
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
-         :rules [[:!O#Sb :!Oleft_arrow :!iterm]
-                 [:!O#Sf :!Oright_arrow :!iterm]
-                 [:!Od :!Odelete_forward :!iterm]
-                 [:!Oh :!Odelete_or_backspace]
-                 [:!Ob [:escape :b] :iterm]
-                 [:!Of [:escape :f] :iterm]
-                 [:!Od [:escape :d] :iterm]]}
+         :rules [[:!O#Sb :!Oleft_arrow]
+                 [:!O#Sf :!Oright_arrow]
+                 [:!Od :!Odelete_forward]
+                 [:!Oh :!Odelete_or_backspace]]}
         {:des   "esc key on 60 key kb"
          :rules [[:##escape :##grave_accent_and_tilde :wasd]
                  [:!S##escape :!Sgrave_accent_and_tilde :wasd]
                  [:grave_accent_and_tilde :escape :wasd]]}
-        {:des "left cmd -> cmd+tab"
-         :rules [[:left_command :left_command nil {:alone :!Ctab}]]}
-        ; {:des "right cmd -> Alfred"
-        ;  :rules [[:right_command :right_command nil {:alone :!Ctab}]]}
+        {:des "cmd -> cmd+tab"
+         :rules [[:left_command :left_command nil {:alone :!Ctab}]
+                 [:right_command :right_command nil {:alone :!Ctab}]]}
         {:des   "launch mode"
          :rules [:launch-mode
                 [:s [:open "/Applications/Emacs.app"]]
