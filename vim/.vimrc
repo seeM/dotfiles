@@ -3,8 +3,8 @@
 " TODO: Modify pymode pydoc to use python -m pydoc which is aware of current venv.
 " TODO: Change grep command to only use inner word, and give a better letter.
 
-let mapleader      = ' '
-let maplocalleader = ' '
+let mapleader      = ','
+let maplocalleader = ','
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -57,13 +57,10 @@ Plug 'jpalardy/vim-slime'               " sending text between terminals
   let g:slime_target = 'tmux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
-  nnoremap <C-p> :Files<CR>
-  " nnoremap <leader>f :Files<CR>
+  nnoremap <leader>f :Files<CR>
   nnoremap <leader>b :Buffers<CR>
-  nnoremap <leader>gg :Rg<CR>
-  nnoremap <C-g> :Rg<CR>
+  nnoremap <leader>g :Rg<CR>
   nnoremap <leader>t :Tags<CR>
-  nnoremap <C-t> :Tags<CR>
 Plug 'dense-analysis/ale'
   let g:ale_lint_on_insert_leave = 0
 Plug 'dkarter/bullets.vim'
@@ -120,6 +117,8 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 set path=.,**
+" Wrap with one space after a '.'
+set nojoinspaces
 " }}}
 " Wildmenu completion {{{
 set wildmenu
@@ -157,11 +156,18 @@ nnoremap <leader>y "*y
 nnoremap <leader>p "*p
 nnoremap <leader><leader> <c-^>
 
+nnoremap gj :ALENextWrap<cr>
+nnoremap gk :ALEPreviousWrap<cr>
+nnoremap g1 :ALEFirst<cr>
+
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+
 nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
 
 " Save
-inoremap <C-s>     <C-O>:update<cr>
-noremap <C-s>     :update<cr>
+inoremap <C-s>     <C-O>:w<cr>
+noremap <C-s>     :w<cr>
 
 " Quit
 inoremap <C-q>     <esc>:q<cr>
@@ -169,10 +175,33 @@ nnoremap <C-q>     :q<cr>
 vnoremap <C-q>     <esc>
 
 " Windows
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Multipurpose tab {{{
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col
+        return "\<tab>"
+    endif
+
+    let char = getline('.')[col - 1]
+    if char =~ '\k'
+        " There's an identifier before the cursor, so complete the identifier.
+        return "\<c-p>"
+    else
+        return "\<tab>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
+" }}}
+
+" Reference current file's path in commands {{{
+cnoremap <expr> %% expand('%:h').'/'
+" }}}
 
 " Tags
 " g<C-]> shows a menu if >1 match
@@ -181,6 +210,10 @@ nnoremap g[ :pop<cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$
+
+" Make j and k work in wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " Markdown headings
 " nnoremap <leader>1 m`yypVr=``
@@ -197,7 +230,7 @@ nnoremap Q gqip
 " }}}
 " Visual {{{
 set background=dark
-colorscheme apprentice
+colorscheme grb24bit
 
 set guifont=IBM\ Plex\ Mono:h14
 " Disable scrollbars
@@ -230,7 +263,7 @@ endfunction
 
 command! Black Black()
 
-nnoremap <silent> <leader>f :<C-U>call Black()<CR>
+nnoremap <silent> <leader>= :<C-U>call Black()<CR>
 " }}}
 " Grep {{{
 " From: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
@@ -278,8 +311,8 @@ function! GrepOperator(type, ...)
     let @@ = reg_save
 endfunction
 
-nnoremap <silent> <leader>g :set opfunc=GrepOperator<CR>g@
-vnoremap <silent> <leader>g :<C-U>call GrepOperator(visualmode(), 1)<CR>
+" nnoremap <silent> <leader>g :set opfunc=GrepOperator<CR>g@
+" vnoremap <silent> <leader>g :<C-U>call GrepOperator(visualmode(), 1)<CR>
 
 " Automatically open the quickfix/location list window on c/lgetexpr.
 augroup quickfix
@@ -297,4 +330,15 @@ endfunction
 
 command! -nargs=0 WordCount call WordCount()
 " }}}
+" Open changed files
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
 " }}}
