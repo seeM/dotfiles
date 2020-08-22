@@ -70,5 +70,37 @@
                 [:n [:open "/Applications/Things3.app"]]
                 [:a [:open "/Applications/Alfred 4.app"]]
                 [:b [:open "/Applications/Bear.app"]]]}
+        ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
+        ; {:des   "iterm tmux"
+        ;  :rules [:iterm
+        ;          ; Tabs
+        ;          [:!Ct [:!Tt :c]]
+        ;          [:!CSd [:!Tt :s]]
+        ;          [:!Cd [:!Tt :v]]
+        ;          [:!CSopen_bracket [:!Tt :p]]
+        ;          [:!CSclose_bracket [:!Tt :n]]
+        ;          [:!Cp [:!Tt :p]]
+        ;          [:!Cn [:!Tt :n]]
+        ;          [:!C1 [:!Tt :1]]
+        ;          [:!C2 [:!Tt :2]]
+        ;          [:!C3 [:!Tt :3]]
+        ;          [:!C4 [:!Tt :4]]
+        ;          [:!C5 [:!Tt :5]]
+        ;          [:!C6 [:!Tt :6]]
+        ;          [:!C7 [:!Tt :7]]
+        ;          [:!C8 [:!Tt :8]]
+        ;          [:!C9 [:!Tt :9]]
+        ;          [:!C0 [:!Tt :0]]
+        ;          ; Panes
+        ;          [:!Cl [:!Tt :l]]
+        ;          [:!Ch [:!Tt :h]]
+        ;          [:!Ck [:!Tt :k]]
+        ;          [:!Cj [:!Tt :j]]]}
+        {:des   "f keys"
+         :rules [[:f1 [:open "/Applications/Google Chrome.app"] :!chrome]
+                 [:f1 :same_wind_app :chrome]
+                 [:f2 [:open "/Applications/Slack.app"]]
+                 [:f3 [:open "/Applications/iTerm.app"]]]}
+
         :simlayer-threshold 210
         :alone 120]}
