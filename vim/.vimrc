@@ -61,6 +61,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <leader>b :Buffers<CR>
   nnoremap <leader>g :Rg<CR>
   nnoremap <leader>t :Tags<CR>
+  nnoremap <leader>c :Commands<CR>
 Plug 'dense-analysis/ale'
   let g:ale_lint_on_insert_leave = 0
 Plug 'dkarter/bullets.vim'

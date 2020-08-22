@@ -153,8 +153,6 @@ PS1+="\n\$ "
 # FZF
 # --------------------------------------------------------------------
 
-# TODO: Add **<Tab>
-
 export FZF_DEFAULT_OPTS='--color "preview-bg:237"'
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
 if command -v fd > /dev/null; then
