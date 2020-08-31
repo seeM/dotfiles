@@ -3,3 +3,5 @@
 --python-kinds=-i
 
 --exclude=.git
+
+--options=~/.config/ctags/ctags-patterns-for-javascript/ctagsrc

@@ -1,3 +1,6 @@
 [submodule "zsh/.zplug"]
 	path = zsh/.zplug
 	url = git@github.com:zplug/zplug
+[submodule "ctags/.config/ctags/ctags-patterns-for-javascript"]
+	path = ctags/.config/ctags/ctags-patterns-for-javascript
+	url = https://github.com/romainl/ctags-patterns-for-javascript.git
