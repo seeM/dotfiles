@@ -200,3 +200,6 @@ function jrnl() {
 [ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 [ -r /usr/local/opt/ruby/bin/ruby ] && export PATH=/usr/local/opt/ruby/bin:$PATH
+
+pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
+pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }

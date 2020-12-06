@@ -4,4 +4,5 @@
 
 --exclude=.git
 
---options=~/.config/ctags/ctags-patterns-for-javascript/ctagsrc
+# TODO: Neither of $HOME and ~ seem to work...
+--options=/Users/seem/.config/ctags/ctags-patterns-for-javascript/ctagsrc
