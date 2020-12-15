@@ -67,6 +67,9 @@ export LC_ALL=en_US.UTF-8
 
 export LSCOLORS=ExGxcxdxCxegedabagacad
 
+# Don't warn about zsh being the new default on MacOS
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Aliases
 # --------------------------------------------------------------------
 
