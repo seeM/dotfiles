@@ -7,6 +7,7 @@ set tabstop=3
 " colorscheme PaperColor
 set colorcolumn=80
 let g:markdown_folding = 1
+set foldlevel=99
 " Gives us nice folding but breaks ctrl-i...
 nnoremap <buffer> <tab> za
 nnoremap <buffer> <expr> <s-tab> &foldlevel ? 'zM' :'zR'

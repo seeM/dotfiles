@@ -1,8 +1,8 @@
 {:profiles
  {:Default {:default true
-            :sim 50
+            :sim 10
             :delay 80
-            :alone 120
+            :alone 80
             :held 70}}
 
  :tos {:same_wind_app {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
@@ -19,7 +19,8 @@
                 :bear           ["^net\\.shinyfrog\\.bear$"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
-           :macbook-internal  [{:vendor_id 1452 :product_id 631}]}
+           :macbook-internal  [{:vendor_id 1452 :product_id 631}]
+           :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}]}
 
  :templates {:open "open \"%s\""}
 
@@ -35,41 +36,46 @@
                  [:!T##f :right_arrow]
                  [:!T##m :return_or_enter]
                  [:!T##h :delete_or_backspace]]}
-        {:des   "macbook fn keys"
-         :rules [:macbook-internal
-                 [:!F##j :left_arrow]
+        {:des   "fn arrow key shortcuts"
+         :rules [[:!F##j :left_arrow]
                  [:!F##i :up_arrow]
                  [:!F##k :down_arrow]
-                 [:!F##l :right_arrow]
-                 [:!Fw :play_or_pause]
+                 [:!F##l :right_arrow]]}
+        {:des   "fn media key shortcuts"
+         :rules [[:!Fw :play_or_pause]
                  [:!Fq :rewind]
-                 [:!Fe :fastforward]
-                 ]}
+                 [:!Fe :fastforward]]}
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
         {:des   "meta key"
-         :rules [[:!O#Sb :!Oleft_arrow]
+         :rules [:!emacs-disabled
+                 [:!O#Sb :!Oleft_arrow]
                  [:!O#Sf :!Oright_arrow]
                  [:!Od :!Odelete_forward]
                  [:!Oh :!Odelete_or_backspace]]}
         {:des   "esc key on 60 key kb"
-         :rules [[:##escape :##grave_accent_and_tilde :wasd]
-                 [:!S##escape :!Sgrave_accent_and_tilde :wasd]
-                 [:grave_accent_and_tilde :escape :wasd]]}
-        {:des "cmd -> cmd+tab"
+         :rules [:wasd
+                 [:##escape :##grave_accent_and_tilde]
+                 [:!S##escape :!Sgrave_accent_and_tilde]
+                 [:grave_accent_and_tilde :escape]]}
+        {:des   "magic us keyboard"
+         :rules [:magic
+                 [:##non_us_backslash :##grave_accent_and_tilde]
+                 [:##grave_accent_and_tilde :##non_us_backslash]]}
+        {:des   "cmd -> cmd+tab"
          :rules [[:left_command :left_command nil {:alone :!Ctab}]
                  [:right_command :right_command nil {:alone :!Ctab}]]}
-        {:des   "launch mode"
-         :rules [:launch-mode
-                [:s [:open "/Applications/Emacs.app"]]
-                [:t [:open "/Applications/iTerm.app"]]
-                [:c [:open "/Applications/Google Chrome.app"] :!chrome]
-                [:c :same_wind_app :chrome]
-                [:m [:open "/Applications/Spotify.app"]]
-                [:k [:open "/Applications/Slack.app"]]
-                [:n [:open "/Applications/Things3.app"]]
-                [:a [:open "/Applications/Alfred 4.app"]]
-                [:b [:open "/Applications/Bear.app"]]]}
+        ; {:des   "launch mode"
+        ;  :rules [:launch-mode
+        ;         [:s [:open "/Applications/Emacs.app"]]
+        ;         [:t [:open "/Applications/iTerm.app"]]
+        ;         [:c [:open "/Applications/Google Chrome.app"] :!chrome]
+        ;         [:c :same_wind_app :chrome]
+        ;         [:m [:open "/Applications/Spotify.app"]]
+        ;         [:k [:open "/Applications/Slack.app"]]
+        ;         [:n [:open "/Applications/Things3.app"]]
+        ;         [:a [:open "/Applications/Alfred 4.app"]]
+        ;         [:b [:open "/Applications/Bear.app"]]]}
         ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
         ; {:des   "iterm tmux"
         ;  :rules [:iterm

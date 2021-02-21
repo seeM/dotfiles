@@ -48,6 +48,13 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'saltstack/salt-vim'
 Plug 'jceb/vim-orgmode'
 Plug 'PProvost/vim-ps1'
+" Clojure
+Plug 'guns/vim-sexp'
+    Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-fireplace'
+Plug 'kien/rainbow_parentheses.vim'
+" Terraform
+Plug 'hashivim/vim-terraform'
 " }}}
 " Features {{{
 Plug 'tpope/vim-fugitive'
@@ -161,7 +168,7 @@ nnoremap gj :ALENextWrap<cr>
 nnoremap gk :ALEPreviousWrap<cr>
 nnoremap g1 :ALEFirst<cr>
 
-nnoremap <leader>w :w<cr>
+nnoremap <leader>s :w<cr>
 nnoremap <leader>q :q<cr>
 
 nnoremap <silent> L :set number!<CR>:set relativenumber!<CR>
@@ -224,7 +231,7 @@ nnoremap k gk
 " nnoremap <leader>5 m`^i##### <esc>``6l
 
 " Source configs
-nnoremap <leader>sg :echo system('goku')<cr>
+" nnoremap <leader>sg :echo system('goku')<cr>
 
 nnoremap Q gqip
 
@@ -343,3 +350,7 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 " }}}
+
+" Disable markdown syntax
+autocmd BufRead,BufNewFile {*.markdown,*.mdown,*.mkdn,*.md,*.mkd,*.mdwn,*.mdtxt,*.mdtext,*.text} set filetype=markdown
+autocmd FileType markdown setlocal syntax=off spell
