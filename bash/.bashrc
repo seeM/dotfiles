@@ -43,10 +43,6 @@ function_exists() {
 
 [ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
 
-# Set window title to PWD and last command
-# Based on: https://arbtt.nomeata.de/doc/users_guide/effective-use.html
-trap 'echo -ne "\033]2;$(pwd); $(history 1 | sed "s/^[ ]*[0-9]*[ ]*[0-9\/]*[ ]*[0-9\:]*[ ]*//g")\007"' DEBUG
-
 
 # Environment variables
 # --------------------------------------------------------------------
@@ -59,8 +55,8 @@ export HISTFILESIZE=
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -83,8 +79,8 @@ alias ......='cd ../../../../..'
 
 alias l='ls -alF'
 alias ll='ls -l'
-alias vi='vim'
-alias vim='vim'
+alias vi='nvim'
+alias vim='nvim'
 alias which='type -p'
 alias k5='kill -9 %%'
 
@@ -169,40 +165,7 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 
-# Journal
-# --------------------------------------------------------------------
-
-export JOURNAL_DIR=~/gdrive/journal
-
-# Open today's journal entry.
-function journal_today() {
-    date=$(date +'%Y-%m-%d')
-    file=$JOURNAL_DIR/$date.md
-    if ! test -f $file; then
-        printf "# $date\n\n" > $file
-    fi
-    vim + '+ normal $' $file
-}
-
-# Main journal entrypoint.
-function jrnl() {
-    if [[ $# -eq 0 ]]; then
-        journal_today
-    elif [[ "$1" == "ls" ]]; then
-        ranger "$JOURNAL_DIR"
-    # TODO: Add elif that checks if an entry exists for the arg and opens it.
-    #       Could even filter down by year / month in a vim buffer or similar...
-    fi
-}
-
-
 # Misc
 # --------------------------------------------------------------------
-[ -r $HOME/google-cloud-sdk/path.bash.inc ] && source $HOME/google-cloud-sdk/path.bash.inc
-[ -r $HOME/google-cloud-sdk/completion.bash.inc ] && source $HOME/google-cloud-sdk/completion.bash.inc
-[ -r /usr/local/opt/sqlite/bin/sqlite3 ] && export PATH=/usr/local/opt/sqlite/bin:$PATH
-[ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
-[ -r /usr/local/opt/ruby/bin/ruby ] && export PATH=/usr/local/opt/ruby/bin:$PATH
-
 pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
 pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }
