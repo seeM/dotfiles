@@ -239,7 +239,7 @@ nnoremap Q gqip
 " }}}
 " Visual {{{
 set background=dark
-colorscheme grb24bit
+colorscheme apprentice
 
 set guifont=IBM\ Plex\ Mono:h14
 " Disable scrollbars
