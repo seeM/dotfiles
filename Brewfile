@@ -4,14 +4,14 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "yqrashawn/goku"
 
-# TODO: Not sure if these are required
-# brew "bash-completion"
-# brew "openssl@1.1"
-# brew "readline"
-# brew "xz"
-# brew "poppler"
-# brew "zlib"
+# Python build dependencies
+brew "openssl@1.1"
+brew "readline"
+brew "sqlite3"
+brew "xz"
+brew "zlib"
 
+brew "bash-completion"
 brew "fzf"
 brew "git"
 brew "neovim"

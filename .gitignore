@@ -10,3 +10,4 @@ vim/.vim/tmp/
 .DS_Store
 emacs/.emacs.d/
 !emacs/.emacs.d/init.el
+Brewfile.lock.json
