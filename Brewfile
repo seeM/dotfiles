@@ -24,5 +24,3 @@ brew "stow"
 brew "tmux"
 brew "zplug"
 brew "yqrashawn/goku/goku"
-
-cask "inkscape"
