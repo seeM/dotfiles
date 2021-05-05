@@ -2,12 +2,6 @@
 # References:
 # - https://github.com/junegunn/dotfiles
 
-# TODO: Move to install.sh
-# git-prompt
-if [ ! -e ~/.git-prompt.sh ]; then
-  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
-fi
-
 # System default
 # --------------------------------------------------------------------
 
@@ -65,6 +59,8 @@ export LSCOLORS=ExGxcxdxCxegedabagacad
 
 # Don't warn about zsh being the new default on MacOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Aliases
 # --------------------------------------------------------------------

@@ -1,0 +1,6 @@
+brew "clang"
+brew "c-blosc"
+brew "gdal"
+brew "hdf5"
+brew "openblas"
+brew "postgresql"
