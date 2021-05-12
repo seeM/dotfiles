@@ -1,3 +1,4 @@
+brew "awscli"
 brew "clang"
 brew "c-blosc"
 brew "gdal"

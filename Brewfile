@@ -12,6 +12,7 @@ brew "xz"
 brew "zlib"
 
 brew "bash-completion"
+brew "ctags"
 brew "fzf"
 brew "git"
 brew "gh"
