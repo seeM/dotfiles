@@ -43,6 +43,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     " Use vim-coiled-snake
     let g:pymode_folding = 0
     let g:pymode_trim_whitespaces = 0
+    let g:pymode_run_bind = ''
 
     Plug 'alfredodeza/pytest.vim'
 Plug 'saltstack/salt-vim'
@@ -290,14 +291,14 @@ endfunction
 command! -nargs=+ -complete=tag_listfiles -bar Grep  cgetexpr Grep(<q-args>)
 command! -nargs=+ -complete=tag_listfiles -bar LGrep lgetexpr Grep(<q-args>)
 
-" function! GrepInnerWord()
-"     let reg_save = @@
-"     execute 'normal! "zyiw'
-"     execute 'cgetexpr Grep(' . shellescape(@@) . ')'
-"     let @@ = reg_save
-" endfunction
+function! GrepInnerWord()
+    let reg_save = @@
+    execute 'normal! "zyiw'
+    execute 'cgetexpr Grep(' . shellescape(@@) . ')'
+    let @@ = reg_save
+endfunction
 
-" nnoremap <leader>giw :call GrepInnerWord()<cr>
+nnoremap <leader>r :call GrepInnerWord()<cr>
 
 " TODO: Currently Grep function doesn't make sense to be called with most motions,
 "       only really inner word. Should it still be an operator?
