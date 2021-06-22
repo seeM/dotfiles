@@ -38,8 +38,12 @@ a.append(repo)
 subprocess.run(a, check=True)
 subprocess.run(["pyenv", "local", repo], check=True)
 
+# TODO: Why doesn't it recognise the .python-version file?
+env = os.environ.copy()
+env["PYENV_VERSION"] = repo
+
 # Upgrade pip
-subprocess.run(["pyenv", "exec", "pip", "install", "--upgrade", "pip"])
+subprocess.run(["pyenv", "exec", "pip", "install", "--upgrade", "pip"], env=env)
 
 # Install lib in editable mode or app via requirements
 files = os.listdir()
@@ -49,9 +53,9 @@ if "setup.py" in files or "pyproject.toml" in files:
 else:
     requirements_file = next(f for f in files if "requirements" in f and f.endswith("txt"))
     a.extend(["-r", requirements_file])
-subprocess.run(a, stderr=subprocess.PIPE)
+subprocess.run(a, env=env)
 
 # Install dev tools
 dev_requirements = ["pynvim", "ipython", "ipdb", "flake8", "mypy", "black"]
-subprocess.run(["pyenv", "exec", "pip", "install", *dev_requirements], check=True)
+subprocess.run(["pyenv", "exec", "pip", "install", *dev_requirements], check=True, env=env)
 subprocess.run(["ctags"], check=True)
