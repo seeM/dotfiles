@@ -2,7 +2,7 @@
  {:Default {:default true
             :sim 10
             :delay 80
-            :alone 80
+            :alone 200
             :held 70}}
 
  :tos {:same_wind_app {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}

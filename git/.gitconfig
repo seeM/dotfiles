@@ -35,4 +35,11 @@
     # TODO: Fix this...
     la = "config --get-regexp alias | sed -e 's/alias//'"
 [init]
-	defaultBranch = main
+    defaultBranch = main
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only

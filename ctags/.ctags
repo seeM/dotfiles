@@ -3,6 +3,3 @@
 --python-kinds=-i
 
 --exclude=.git
-
-# TODO: Neither of $HOME and ~ seem to work...
---options=/Users/seem/.config/ctags/ctags-patterns-for-javascript/ctagsrc

@@ -44,6 +44,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
     let g:pymode_folding = 0
     let g:pymode_trim_whitespaces = 0
     let g:pymode_run_bind = ''
+    let g:python3_host_prog = '/usr/bin/python'
 
     Plug 'alfredodeza/pytest.vim'
 Plug 'saltstack/salt-vim'

@@ -73,10 +73,6 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-alias l='ls -alF'
-alias ll='ls -l'
-alias vi='nvim'
-alias vim='nvim'
 alias which='type -p'
 alias k5='kill -9 %%'
 
@@ -88,11 +84,12 @@ fi
 
 alias tmux='tmux -2'
 
-if [ "$PLATFORM" = Darwin ]; then
-    alias ls='ls -G'
-else
-    alias ls='ls --color'
-fi
+alias batlog='bat --paging=never -l log'
+alias cat=bat
+alias ls=exa
+alias man=batman
+alias vi=nvim
+alias vim=nvim
 
 alias venv='source .venv/bin/activate'
 
@@ -165,3 +162,4 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 # --------------------------------------------------------------------
 pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
 pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }
+. "$HOME/.cargo/env"
