@@ -16,7 +16,8 @@
                                  "^org\\.gnu\\.Emacs$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
-                :bear           ["^net\\.shinyfrog\\.bear$"]}
+                :bear           ["^net\\.shinyfrog\\.bear$"]
+                :dbeaver        ["^org\\.jkiss\\.dbeaver\\.core\\.product$"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
            :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}]
@@ -64,6 +65,13 @@
                  [:##grave_accent_and_tilde :##non_us_backslash]]}
         {:des   "cmd -> cmd+tab"
          :rules [[:left_command :left_command nil {:alone :!Ctab}]
-                 [:right_command :right_command nil {:alone :!Ctab}]]}]
+                 [:right_command :right_command nil {:alone :!Ctab}]]}
+        {:des   "emacs keys in dbeaver"
+         :rules [:dbeaver
+                 [:!T##a :!Cleft_arrow]
+                 [:!T##e :!Cright_arrow]
+                 [:!T##k [:!CSright_arrow :!Cx]]
+                 [:!T##y :!Cv]
+                 ]}]
  :simlayer-threshold 210
  :alone 120}
