@@ -11,6 +11,7 @@ brew "sqlite3"
 brew "xz"
 brew "zlib"
 
+brew "alacritty"
 brew "bash-completion"
 brew "bat"
 brew "eth-p/software/bat-extras"

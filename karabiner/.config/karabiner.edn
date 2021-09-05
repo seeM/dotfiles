@@ -13,9 +13,11 @@
 
  :applications {:chrome         ["^com\\.google\\.Chrome$"]
                 :emacs-disabled ["^com\\.googlecode\\.iterm2$"
+                                 "^io\\.alacritty$"
                                  "^org\\.gnu\\.Emacs$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
+                :alacritty      ["^io\\.alacritty$"]
                 :bear           ["^net\\.shinyfrog\\.bear$"]
                 :dbeaver        ["^org\\.jkiss\\.dbeaver\\.core\\.product$"]}
 
@@ -74,7 +76,7 @@
                  [:!T##y :!Cv]]}
         ; TODO: Make this a toggle-able mode. Maybe move back to Ctrl-b as tmux prefix
         {:des   "iterm tmux"
-         :rules [:iterm
+         :rules [:iterm :alacritty
                  ; Tabs
                  [:!Ct [:!Tt :c]]
                  [:!CSd [:!Tt :s]]
