@@ -138,55 +138,6 @@ return require('packer').startup(function()
           capabilities = capabilities,
         }
       end
-
-      -- TODO: Remove if/when comfy with null-ls
-      -- local languages = {
-      --   python = {
-      --     {
-      --       formatCommand = 'black --quiet -',
-      --       formatStdin = true,
-      --     },
-      --     {
-      --       formatCommand = 'isort --quiet -',
-      --       formatStdin = true,
-      --     },
-      --     {
-      --       lintCommand = 'flake8 --stdin-display-name ${INPUT} -',
-      --       lintStdin = true,
-      --       lintFormats = { '%f:%l:%c %m' },
-      --       lintIgnoreExitCode = true,
-      --     },
-      --     {
-      --       lintCommand = 'mypy --show-column-numbers',
-      --       lintFormats = {
-      --         '%f:%l:%c: %trror: %m',
-      --         '%f:%l:%c: %tarning: %m',
-      --         '%f:%l:%c: %tote: %m',
-      --       },
-      --     },
-      --   },
-      --   sh = {
-      --     lintCommand = 'shellcheck -f gcc -x',
-      --     lintSource = 'shellcheck',
-      --     lintFormats = {
-      --       '%f:%l:%c: %trror: %m',
-      --       '%f:%l:%c: %tarning: %m',
-      --       '%f:%l:%c: %tote: %m',
-      --     },
-      --   },
-      -- }
-      -- nvim_lsp.efm.setup {
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   init_options = { documentFormatting = true },
-      --   filetypes = vim.tbl_keys(languages),
-      --   settings = {
-      --     -- rootMarkers = { '.git/' },
-      --     languages = languages,
-      --     log_level = 1,
-      --     log_file = vim.fn.expand('~/efm.log'),
-      --   },
-      -- }
     end,
   }
   use {
