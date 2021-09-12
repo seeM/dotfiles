@@ -28,7 +28,23 @@ return require('packer').startup(function()
 
   use {
     'nvim-telescope/telescope.nvim',  -- Fuzzy finder
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      vim.api.nvim_set_keymap('n', '<leader>ff', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require'telescope.builtin'.buffers()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require'telescope.builtin'.live_grep()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>ft', "<cmd>lua require'telescope.builtin'.tags()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fs', "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>lua require'telescope.builtin'.lsp_references()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fd', "<cmd>lua require'telescope.builtin'.lsp_definitions()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>f/', "<cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>fh', "<cmd>lua require'telescope.builtin'.help_tags()<cr>", { noremap = true, silent = true })
+
+      vim.api.nvim_set_keymap('n', '<leader>gs', "<cmd>lua require'telescope.builtin'.git_status()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>gl', "<cmd>lua require'telescope.builtin'.git_commits()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>gc', "<cmd>lua require'telescope.builtin'.git_bcommits()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>lua require'telescope.builtin'.git_branches()<cr>", { noremap = true, silent = true })
+    end,
   }
 
   -- Don't actually use much but would like to

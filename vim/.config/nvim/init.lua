@@ -126,20 +126,6 @@ vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true,
 -- TODO: Need this?
 -- vim.cmd [[au FocusGained,BufEnter * :silent! !]]
 
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>Telescope tags<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>Telescope lsp_workspace_symbols<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fr', '<cmd>Telescope lsp_references<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fd', '<cmd>Telescope lsp_definitions<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f/', '<cmd>Telescope current_buffer_fuzzy_find<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gl', '<cmd>Telescope git_commits<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gc', '<cmd>Telescope git_bcommits<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>Telescope git_branches<cr>', { noremap = true, silent = true })
 
 -- Custom commands
 -------------------------------------------------------------------------------
