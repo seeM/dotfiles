@@ -27,6 +27,32 @@ return require('packer').startup(function()
   }
 
   use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
+    config = function()
+      local null_ls = require('null-ls')
+      null_ls.config({
+        debounce = 100,
+        sources = {
+          -- Shell
+          null_ls.builtins.diagnostics.shellcheck,
+          -- Lua
+          null_ls.builtins.formatting.stylelua,
+          -- Python
+          null_ls.builtins.diagnostics.flake8,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.diagnostics.flake8,
+        },
+      })
+      require('lspconfig')['null-ls'].setup {
+        on_attach = custom_on_attach,
+        capabilities = capabilities,
+      }
+    end
+  }
+
+  use {
     'nvim-telescope/telescope.nvim',  -- Fuzzy finder
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function()
@@ -69,7 +95,7 @@ return require('packer').startup(function()
       local nvim_lsp = require('lspconfig')
       -- Use an on_attach function to only map the following keys
       -- after the language server attaches to the current buffer
-      local on_attach = function(client, bufnr)
+      custom_on_attach = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
         local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -77,7 +103,7 @@ return require('packer').startup(function()
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
         -- Mappings.
-        local opts = { noremap=true, silent=true }
+        local opts = { noremap = true, silent = true }
 
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -85,18 +111,18 @@ return require('packer').startup(function()
         buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
         buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-        buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-        buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-        buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-        buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-        buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-        buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+        buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        buf_set_keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+        buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
         buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
         buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-        buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-        buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
       end
 
       -- nvim-cmp supports additional completion capabilities
@@ -108,10 +134,59 @@ return require('packer').startup(function()
       local servers = { 'pyright' }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
-          on_attach = on_attach,
+          on_attach = custom_on_attach,
           capabilities = capabilities,
         }
       end
+
+      -- TODO: Remove if/when comfy with null-ls
+      -- local languages = {
+      --   python = {
+      --     {
+      --       formatCommand = 'black --quiet -',
+      --       formatStdin = true,
+      --     },
+      --     {
+      --       formatCommand = 'isort --quiet -',
+      --       formatStdin = true,
+      --     },
+      --     {
+      --       lintCommand = 'flake8 --stdin-display-name ${INPUT} -',
+      --       lintStdin = true,
+      --       lintFormats = { '%f:%l:%c %m' },
+      --       lintIgnoreExitCode = true,
+      --     },
+      --     {
+      --       lintCommand = 'mypy --show-column-numbers',
+      --       lintFormats = {
+      --         '%f:%l:%c: %trror: %m',
+      --         '%f:%l:%c: %tarning: %m',
+      --         '%f:%l:%c: %tote: %m',
+      --       },
+      --     },
+      --   },
+      --   sh = {
+      --     lintCommand = 'shellcheck -f gcc -x',
+      --     lintSource = 'shellcheck',
+      --     lintFormats = {
+      --       '%f:%l:%c: %trror: %m',
+      --       '%f:%l:%c: %tarning: %m',
+      --       '%f:%l:%c: %tote: %m',
+      --     },
+      --   },
+      -- }
+      -- nvim_lsp.efm.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   init_options = { documentFormatting = true },
+      --   filetypes = vim.tbl_keys(languages),
+      --   settings = {
+      --     -- rootMarkers = { '.git/' },
+      --     languages = languages,
+      --     log_level = 1,
+      --     log_file = vim.fn.expand('~/efm.log'),
+      --   },
+      -- }
     end,
   }
   use {
