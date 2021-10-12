@@ -1,3 +1,4 @@
+
 # Source: https://github.com/seem/dotfiles
 # References:
 # - https://github.com/junegunn/dotfiles
@@ -109,12 +110,17 @@ done
 
 # Dotfiles
 alias brc='vim ~/.bashrc'
-alias vrc='vim ~/.vimrc'
+alias vrc='vim ~/.config/nvim'
 alias trc='vim ~/.tmux.conf'
 alias krc='vim ~/.config/karabiner.edn'
 
 # Lisp
 alias ccl='rlwrap ccl64'
+
+# alias ro='repos open $(repos list | fzf)'
+alias ro='python ~/code/alfred-repos/cli.py open $(python ~/code/alfred-repos/cli.py list | fzf)'
+alias rv='open $(repo-links code)'
+alias rc='open $(repo-links ci)'
 
 
 # Prompt
@@ -163,3 +169,7 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
 pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }
 . "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
