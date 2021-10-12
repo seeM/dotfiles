@@ -17,6 +17,17 @@ return require('packer').startup(function()
 
   use 'romainl/vim-cool'          -- Only highlight while searching
 
+  use 'hynek/vim-python-pep8-indent'
+
+  use {
+    'jpalardy/vim-slime',
+    config = function()
+      vim.g.slime_target = 'tmux'
+      vim.g.slime_default_config = { socket_name = 'default', target_pane = '{right}' }
+      vim.g.slime_python_ipython = 1
+    end,
+  }
+
   use {
     'AndrewRadev/splitjoin.vim',  -- Syntax-aware line split/join 
     config = function()
@@ -34,6 +45,8 @@ return require('packer').startup(function()
       null_ls.config({
         debounce = 100,
         sources = {
+          -- JavaScript
+          null_ls.builtins.formatting.eslint,
           -- Shell
           null_ls.builtins.diagnostics.shellcheck,
           -- Lua
@@ -131,7 +144,7 @@ return require('packer').startup(function()
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
-      local servers = { 'pyright' }
+      local servers = { 'pyright', 'terraformls', 'tsserver' }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
           on_attach = custom_on_attach,
@@ -153,20 +166,16 @@ return require('packer').startup(function()
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
           ['<Tab>'] = function(fallback)
-            if vim.fn.pumvisible() == 1 then
-              vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+            if cmp.visible() then
+              cmp.select_next_item()
             else
               fallback()
             end
           end,
           ['<S-Tab>'] = function(fallback)
-            if vim.fn.pumvisible() == 1 then
-              vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+            if cmp.visible() then
+              cmp.select_prev_item()
             else
               fallback()
             end
