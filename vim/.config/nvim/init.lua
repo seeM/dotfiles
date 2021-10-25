@@ -62,6 +62,9 @@ vim.o.undodir = vim.fn.expand('$HOME') .. '/.vim/tmp/undo//'
 vim.o.backupdir = vim.fn.expand('$HOME') .. '/.vim/tmp/backup//'
 vim.o.directory = vim.fn.expand('$HOME') .. '/.vim/tmp/swap//'
 
+vim.g.python3_host_prog = 'python'
+
+
 -- Colorscheme
 -------------------------------------------------------------------------------
 

@@ -88,12 +88,12 @@ return require('packer').startup(function()
 
   -- Don't actually use much but would like to
 
-  use 'tpope/vim-dispatch'        -- Manage builds
-  use 'tpope/vim-jdaddy'          -- JSON mappings
-  use 'tpope/vim-projectionist'   -- Project configuration
-  use 'tpope/vim-rhubarb'         -- GitHub for fugitive
+  -- use 'tpope/vim-dispatch'        -- Manage builds
+  -- use 'tpope/vim-jdaddy'          -- JSON mappings
+  -- use 'tpope/vim-projectionist'   -- Project configuration
+  -- use 'tpope/vim-rhubarb'         -- GitHub for fugitive
 
-  use 'easymotion/vim-easymotion'
+  -- use 'easymotion/vim-easymotion'
 
   -- Colorschemes
 
