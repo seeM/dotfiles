@@ -43,3 +43,9 @@
     show = delta
 [interactive]
     diffFilter = delta --color-only
+[delta]
+    line-numbers = true
+    minus-emph-style = syntax "#800000"
+    minus-style = syntax "#4d0000"
+    plus-emph-style = syntax "#005c99"
+    plus-style = syntax "#002e4d"
