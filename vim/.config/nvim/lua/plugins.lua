@@ -76,7 +76,10 @@ return require('packer').startup(function()
 
   use {
     'nvim-telescope/telescope.nvim',  -- Fuzzy finder
-    requires = { {'nvim-lua/plenary.nvim'} },
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      {'nvim/telescope/telescope-fzf-native.nvim'},
+    },
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'telescope.builtin'.buffers()<cr>", { noremap = true, silent = true })
@@ -92,7 +95,25 @@ return require('packer').startup(function()
       vim.api.nvim_set_keymap('n', '<leader>gl', "<cmd>lua require'telescope.builtin'.git_commits()<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>gc', "<cmd>lua require'telescope.builtin'.git_bcommits()<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>lua require'telescope.builtin'.git_branches()<cr>", { noremap = true, silent = true })
+
+      require('telescope').setup {
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorted = true,
+            case_mode = 'smart_case',
+          }
+        }
+      }
+
+      require('telescope').load_extension('fzf')
     end,
+  }
+
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
   }
 
   -- Don't actually use much but would like to
