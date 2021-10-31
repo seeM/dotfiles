@@ -23,7 +23,7 @@
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
            :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}]
-           :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}]}
+           :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}, {:vendor_id 1452 :product_id 638}]}
 
  :templates {:open "open \"%s\""}
 

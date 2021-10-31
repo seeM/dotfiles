@@ -11,3 +11,4 @@ vim/.vim/tmp/
 emacs/.emacs.d/
 !emacs/.emacs.d/init.el
 Brewfile.lock.json
+karabiner/.config/karabiner/
