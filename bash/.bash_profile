@@ -9,7 +9,6 @@ if which pyenv-virtualenv-init > /dev/null; then
 fi
 
 [[ -s ~/.bashrc ]] && source ~/.bashrc
-. "$HOME/.cargo/env"
 
 export PATH="$PATH:/Users/seem/.local/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -20,4 +19,4 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 export PATH="$PATH:/Users/seem/code/alfred-repos/"
 
-source ~/.work_profile
+[ -f ~/.work_profile ] && source ~/.work_profile

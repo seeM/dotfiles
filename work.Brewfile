@@ -1,4 +1,3 @@
-brew "aws-iam-authenticator"
 brew "awscli"
 brew "clang"
 brew "c-blosc"

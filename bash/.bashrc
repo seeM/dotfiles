@@ -6,13 +6,13 @@
 # --------------------------------------------------------------------
 
 export PLATFORM=$(uname -s)
-[ -f /etc/bashrc ] && . /etc/bashrc
+[ -s /etc/bashrc ] && . /etc/bashrc
 
 # Trying to make git completion with aliases work on AWS ubuntu instances...
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [ -s /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
+  elif [ -s /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
 fi
@@ -35,7 +35,7 @@ function_exists() {
     return $?
 }
 
-[ -r /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
+[ -s /usr/local/etc/profile.d/bash_completion.sh ] && source /usr/local/etc/profile.d/bash_completion.sh
 
 
 # Environment variables
@@ -97,7 +97,7 @@ alias venv='source .venv/bin/activate'
 # Git
 # Force include git bash completions else we don't have access to __git_* commands
 # until after the first time we trigger auto complete, e.g., git <TAB><TAB>
-[ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
+[ -s /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 # Newer git versions allow git --list-cmds=alias, but to be backward compatible...
 aliases=`git config --get-regexp alias | sed -E 's/alias.([a-z]+) .*$/\1/g'`
@@ -129,7 +129,7 @@ alias rc='open $(repo-links ci)'
 # Super useful colors resource: https://misc.flogisoft.com/bash/tip_colors_and_formatting
 
 __git_ps1() { :;}
-[ -e ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+[ -s /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
 PS1=""
 if [[ -n $SSH_CLIENT ]]; then
   PS1+="\[\e[32;1m\]"
@@ -161,15 +161,15 @@ fi
 command -v bat  > /dev/null && export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
 command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd'
 command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -s ~/.fzf.bash ] && source ~/.fzf.bash
 
 
 # Misc
 # --------------------------------------------------------------------
 pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
 pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }
-. "$HOME/.cargo/env"
+[ -s ~/.cargo/env ] && source ~/.cargo/env
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"

@@ -7,6 +7,7 @@ vim/.vim/autoload/
 vim/.vim/plugged/
 vim/.vim/plugin/
 vim/.vim/tmp/
+vim/.config/nvim/plugin/
 .DS_Store
 emacs/.emacs.d/
 !emacs/.emacs.d/init.el
