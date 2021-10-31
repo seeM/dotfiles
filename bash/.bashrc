@@ -1,4 +1,3 @@
-
 # Source: https://github.com/seem/dotfiles
 # References:
 # - https://github.com/junegunn/dotfiles
@@ -88,6 +87,7 @@ alias tmux='tmux -2'
 alias batlog='bat --paging=never -l log'
 alias cat=bat
 alias ls=exa
+alias ll='ls -la'
 alias man=batman
 alias vi=nvim
 alias vim=nvim

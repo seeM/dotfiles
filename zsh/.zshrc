@@ -1,3 +1,16 @@
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the start of this file.
+[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
+#### END FIG ENV VARIABLES ####
+# Source: https://github.com/seem/dotfiles
+
+# System default
+# --------------------------------------------------------------------
+
+
+
+
 # TODO: Remove all plugins...
 # TODO: Custom prompt...
 # TODO: Join back into a single file...
@@ -50,3 +63,8 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # export FZF_DEFAULT_COMMAND='ag -l --hidden'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the end of this file.
+[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
+#### END FIG ENV VARIABLES ####
