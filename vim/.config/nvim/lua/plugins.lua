@@ -46,6 +46,12 @@ return require('packer').startup(function()
     end,
   }
 
+  use {
+    'ervandew/supertab',
+    config = function()
+    end,
+  }
+
   -- use {
   --   'jose-elias-alvarez/null-ls.nvim',
   --   requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
@@ -83,18 +89,9 @@ return require('packer').startup(function()
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'telescope.builtin'.buffers()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>tg', "<cmd>lua require'telescope.builtin'.live_grep()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>tt', "<cmd>lua require'telescope.builtin'.tags()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>ts', "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>tr', "<cmd>lua require'telescope.builtin'.lsp_references()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>td', "<cmd>lua require'telescope.builtin'.lsp_definitions()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>t/', "<cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>th', "<cmd>lua require'telescope.builtin'.help_tags()<cr>", { noremap = true, silent = true })
-
-      vim.api.nvim_set_keymap('n', '<leader>gs', "<cmd>lua require'telescope.builtin'.git_status()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>gl', "<cmd>lua require'telescope.builtin'.git_commits()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>gc', "<cmd>lua require'telescope.builtin'.git_bcommits()<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>lua require'telescope.builtin'.git_branches()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua require'telescope.builtin'.live_grep()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>t', "<cmd>lua require'telescope.builtin'.tags()<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require'telescope.builtin'.help_tags()<cr>", { noremap = true, silent = true })
 
       require('telescope').setup {
         extensions = {
@@ -233,10 +230,27 @@ return require('packer').startup(function()
   -- }
   -- Completion sources
   use 'hrsh7th/cmp-buffer'
-  -- use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lsp'
 
   -- Languages
 
   use 'hashivim/vim-terraform'
+
+  -- use {
+  --   'ms-jpq/coq_nvim',
+  --   branch = 'coq',
+  -- }
+
+  use {
+    'dense-analysis/ale',
+    config = function()
+      vim.g.ale_fixers = { python = { 'autoimport', 'isort', 'black' } }
+
+      vim.api.nvim_set_keymap('n', 'g1', "<cmd>ALEFirst<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', 'gj', "<cmd>ALENextWrap<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', 'gk', "<cmd>ALEPreviousWrap<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>x', "<cmd>ALEFix<cr>", { noremap = true, silent = true })
+    end,
+  }
 
 end)
