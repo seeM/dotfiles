@@ -71,7 +71,8 @@ vim.g.python3_host_prog = 'python'
 vim.o.termguicolors = true
 vim.cmd [[colorscheme apprentice]]
 vim.o.cursorline = true
-vim.o.listchars = [[tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·]]
+vim.o.listchars = [[tab:» ,extends:›,precedes:‹,nbsp:·,trail:·]]
+vim.o.tabstop = 4
 vim.o.list = true
 vim.o.showbreak = '↪ '
 

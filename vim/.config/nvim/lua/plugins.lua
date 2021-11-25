@@ -244,7 +244,14 @@ return require('packer').startup(function()
   use {
     'dense-analysis/ale',
     config = function()
-      vim.g.ale_fixers = { python = { 'autoimport', 'isort', 'black' } }
+      vim.g.ale_fixers = {
+        python = { 'autoimport', 'isort', 'black' },
+        sql = {
+          function()
+            return { command = 'cat %t | sqlfluff fix -' }
+          end
+        },
+      }
 
       vim.api.nvim_set_keymap('n', 'g1', "<cmd>ALEFirst<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', 'gj', "<cmd>ALENextWrap<cr>", { noremap = true, silent = true })
