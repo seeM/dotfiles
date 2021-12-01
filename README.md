@@ -41,6 +41,12 @@ _(Inspired by [Nikita Voloboev](https://github.com/nikitavoloboev/my-mac-os))_
 
 ### [Alfred](https://www.alfredapp.com/) - Launcher
 
+#### Disable Ctrl to _Show Actions_
+
+Alfred Preferences → Features → File Search → Actions → Show Actions (uncheck ctrl).
+
+#### [Alfred Emoji](https://github.com/jsumners/alfred-emoji)
+
 ### [Bear](https://bear.app/) - Writing
 
 ### [Firefox](https://www.mozilla.org/en-US/firefox/new/) - Browser

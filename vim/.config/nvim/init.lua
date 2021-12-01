@@ -57,10 +57,15 @@ vim.o.formatoptions = 'qrn1j'
 
 vim.o.undofile = true
 vim.o.backup = true
+vim.o.swapfile = false
 -- TODO: Update these with nvim dir
 vim.o.undodir = vim.fn.expand('$HOME') .. '/.vim/tmp/undo//'
 vim.o.backupdir = vim.fn.expand('$HOME') .. '/.vim/tmp/backup//'
 vim.o.directory = vim.fn.expand('$HOME') .. '/.vim/tmp/swap//'
+
+-- Automatically reload files that are edited externally
+vim.o.autoread = true
+vim.cmd [[au FocusGained,BufEnter * :silent! !]]
 
 vim.g.python3_host_prog = 'python'
 
@@ -69,7 +74,7 @@ vim.g.python3_host_prog = 'python'
 -------------------------------------------------------------------------------
 
 vim.o.termguicolors = true
-vim.cmd [[colorscheme apprentice]]
+vim.cmd [[colorscheme iceberg]]
 vim.o.cursorline = true
 vim.o.listchars = [[tab:» ,extends:›,precedes:‹,nbsp:·,trail:·]]
 vim.o.tabstop = 4

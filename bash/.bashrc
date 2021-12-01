@@ -31,7 +31,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 function_exists() {
-    declare -f -F $1 > /dev/null
+    declare -f -F "$1" > /dev/null
     return $?
 }
 
@@ -92,21 +92,72 @@ alias man=batman
 alias vi=nvim
 alias vim=nvim
 
-alias venv='source .venv/bin/activate'
+get_venv_name() {
+  basename "$PWD"
+}
+
+venv() {
+  if [ ! -f .python-version ]; then
+    pyenv virtualenv "$(get_venv_name)"
+    pyenv local "$(get_venv_name)"
+  fi
+}
+
+venv_delete() {
+  if [ -f .python-version ]; then
+    pyenv virtualenv-delete -f "$(get_venv_name)"
+    rm .python-version
+  fi
+}
 
 # Git
 # Force include git bash completions else we don't have access to __git_* commands
 # until after the first time we trigger auto complete, e.g., git <TAB><TAB>
 [ -s /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
-# Newer git versions allow git --list-cmds=alias, but to be backward compatible...
-aliases=`git config --get-regexp alias | sed -E 's/alias.([a-z]+) .*$/\1/g'`
-for al in $aliases; do
-    alias g$al="git $al"
 
-    complete_func=_git_$(__git_aliased_command $al)
-    function_exists $complete_fnc && __git_complete g$al $complete_func
-done
+git_origin_or_fork() {
+  if git remote 2>/dev/null | grep -iq seem; then
+    echo "seem"
+  else
+    echo "origin"
+  fi
+}
+
+alias g=git
+alias glg='git log --pretty=format:"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]" --decorate --date=short'
+
+alias ga='git add'
+alias gap='git add -p'
+alias gc='git commit --verbose'
+alias gcm='git commit -m'
+alias gm='git commit --amend --verbose'
+
+alias gd='git diff'
+alias gdc='git diff --cached'
+
+alias gcb='git rev-parse --abbrev-ref HEAD'
+alias gp="git push \$(git_origin_or_fork) \$(gcb)"
+alias gl="git pull \$(git_origin_or_fork) \$(gcb)"
+
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+
+alias gfo='git fetch origin master'
+alias gro='git rebase origin/master'
+alias gfogro='gfo && gro'
+alias gupd='gfogro && gpf'
+
+alias gb='git branch'
+alias gs='git status --short --branch'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+# list branches sorted by last modified
+# TODO: Temp disable because it's not working
+# b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+alias squash='git rebase -i $(git merge-base HEAD master)'
 
 # Dotfiles
 alias brc='vim ~/.bashrc'
@@ -121,6 +172,9 @@ alias ccl='rlwrap ccl64'
 alias ro='python ~/code/alfred-repos/cli.py open $(python ~/code/alfred-repos/cli.py list | fzf)'
 alias rv='open $(repo-links code)'
 alias rc='open $(repo-links ci)'
+
+# alias eo='
+alias v='vim .'
 
 
 # Prompt
@@ -166,8 +220,8 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 
 # Misc
 # --------------------------------------------------------------------
-pyvim() { vim $(python -c "import ${1} as o; print(o.__file__)"); }
-pyshow() { pygmentize $(python -c "import ${1} as o; print(o.__file__)"); }
+pyvim() { vim "$(python -c "import ${1} as o; print(o.__file__)")"; }
+pyshow() { pygmentize "$(python -c "import ${1} as o; print(o.__file__)")"; }
 [ -s ~/.cargo/env ] && source ~/.cargo/env
 
 export NVM_DIR="$HOME/.nvm"
