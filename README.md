@@ -155,3 +155,8 @@ Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` p
 1. Open _Trackpad_ settings.
 2. Set _Click_ to _Light_.
 3. Set _Tracking speed_ to fastest.
+
+### Language & Region
+
+1. Open _Language & Region_ > _Advanced_ settings.
+2. Set all cases of _Decimal_ to `.`.
