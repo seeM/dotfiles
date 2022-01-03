@@ -78,7 +78,6 @@ return require('packer').startup(function()
           require("null-ls").builtins.diagnostics.flake8,
           require("null-ls").builtins.formatting.black,
           require("null-ls").builtins.formatting.isort,
-          require("null-ls").builtins.diagnostics.flake8,
         },
         on_attach = custom_on_attach,
       })
@@ -164,8 +163,8 @@ return require('packer').startup(function()
         buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
         buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
         buf_set_keymap('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-        buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-        buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+        buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
         buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
       end
@@ -297,30 +296,30 @@ return require('packer').startup(function()
     -- cmd = 'MarkdownPreview',
   }
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    config = function()
-      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-      parser_config.org = {
-        install_info = {
-          url = 'https://github.com/milisims/tree-sitter-org',
-          revision = 'f110024d539e676f25b72b7c80b0fd43c34264ef',
-          files = {'src/parser.c', 'src/scanner.cc'},
-        },
-        filetype = 'org',
-      }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   config = function()
+  --     local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+  --     parser_config.org = {
+  --       install_info = {
+  --         url = 'https://github.com/milisims/tree-sitter-org',
+  --         revision = 'f110024d539e676f25b72b7c80b0fd43c34264ef',
+  --         files = {'src/parser.c', 'src/scanner.cc'},
+  --       },
+  --       filetype = 'org',
+  --     }
 
-      require'nvim-treesitter.configs'.setup {
-        -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
-        highlight = {
-          enable = true,
-          disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-          additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
-        },
-        ensure_installed = {'org'}, -- Or run :TSUpdate org
-      }
-    end,
-  }
+  --     require'nvim-treesitter.configs'.setup {
+  --       -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
+  --       highlight = {
+  --         enable = true,
+  --         disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+  --         additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
+  --       },
+  --       ensure_installed = {'org'}, -- Or run :TSUpdate org
+  --     }
+  --   end,
+  -- }
   use {'nvim-orgmode/orgmode', config = function()
     require('orgmode').setup({
       org_agenda_files = {'/Users/seem/Google Drive/My Drive/notes/org/*'},
