@@ -6,13 +6,22 @@ return require('packer').startup(function()
 
   use 'tpope/vim-commentary'      -- Comment verbs
   use 'tpope/vim-endwise'         -- wisely add "end"
+  use 'rstacruz/vim-closer'       -- endwise for brackets
   use 'tpope/vim-eunuch'          -- UNIX shell commands
   use 'tpope/vim-repeat'          -- . command for plugins
   use 'tpope/vim-rsi'             -- Emacs keys in command mode
   use 'tpope/vim-surround'        -- Objects and verbs for "surroundings"
   use 'tpope/vim-vinegar'         -- Enhance netrw (built-in file browser)
   use 'tpope/vim-unimpaired'      -- Convenient mappings on [* and ]*
-  use 'tpope/vim-fugitive'        -- Git interface
+  use {
+    'tpope/vim-fugitive',        -- Git interface
+    config = function()
+      -- v for vcs
+      vim.api.nvim_set_keymap('n', '<leader>v', "<cmd>Git<cr><c-w>o", { noremap = true, silent = true })
+      -- TODO: Probably better to use an autocmd for the <c-w>o part?
+      -- vim.cmd[[autocmd BufNewFile,BufRead */.git/index :normal <c-w>o]]
+    end,
+  }
   use 'tpope/vim-sleuth'          -- Infer shiftwidth and expandtab
 
   use 'romainl/vim-cool'          -- Only highlight while searching
@@ -52,33 +61,29 @@ return require('packer').startup(function()
     end,
   }
 
-  -- use {
-  --   'jose-elias-alvarez/null-ls.nvim',
-  --   requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
-  --   config = function()
-  --     local null_ls = require('null-ls')
-  --     null_ls.config({
-  --       debounce = 100,
-  --       sources = {
-  --         -- JavaScript
-  --         null_ls.builtins.formatting.eslint,
-  --         -- Shell
-  --         null_ls.builtins.diagnostics.shellcheck,
-  --         -- Lua
-  --         null_ls.builtins.formatting.stylelua,
-  --         -- Python
-  --         null_ls.builtins.diagnostics.flake8,
-  --         null_ls.builtins.formatting.black,
-  --         null_ls.builtins.formatting.isort,
-  --         null_ls.builtins.diagnostics.flake8,
-  --       },
-  --     })
-  --     require('lspconfig')['null-ls'].setup {
-  --       on_attach = custom_on_attach,
-  --       capabilities = capabilities,
-  --     }
-  --   end
-  -- }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
+    config = function()
+      require('null-ls').setup({
+        debounce = 100,
+        sources = {
+          -- JavaScript
+          require("null-ls").builtins.formatting.eslint,
+          -- Shell
+          require("null-ls").builtins.diagnostics.shellcheck,
+          -- Lua
+          require("null-ls").builtins.formatting.stylua,
+          -- Python
+          require("null-ls").builtins.diagnostics.flake8,
+          require("null-ls").builtins.formatting.black,
+          require("null-ls").builtins.formatting.isort,
+          require("null-ls").builtins.diagnostics.flake8,
+        },
+        on_attach = custom_on_attach,
+      })
+    end
+  }
 
   use {
     'nvim-telescope/telescope.nvim',  -- Fuzzy finder
@@ -129,58 +134,58 @@ return require('packer').startup(function()
 
   -- Language server
 
-  -- use {
-  --   'neovim/nvim-lspconfig',      -- Simplify lsp configuration
-  --   config = function()
-  --     local nvim_lsp = require('lspconfig')
-  --     -- Use an on_attach function to only map the following keys
-  --     -- after the language server attaches to the current buffer
-  --     custom_on_attach = function(client, bufnr)
-  --       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  --       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  use {
+    'neovim/nvim-lspconfig',      -- Simplify lsp configuration
+    config = function()
+      local nvim_lsp = require('lspconfig')
+      -- Use an on_attach function to only map the following keys
+      -- after the language server attaches to the current buffer
+      custom_on_attach = function(client, bufnr)
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  --       -- Enable completion triggered by <c-x><c-o>
-  --       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+        -- Enable completion triggered by <c-x><c-o>
+        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  --       -- Mappings.
-  --       local opts = { noremap = true, silent = true }
+        -- Mappings.
+        local opts = { noremap = true, silent = true }
 
-  --       -- See `:help vim.lsp.*` for documentation on any of the below functions
-  --       buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  --       buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  --       buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  --       buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --       buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  --       buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  --       buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  --       buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  --       buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  --       buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  --     end
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+        buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+        buf_set_keymap('n', '<leader>lwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+        buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        buf_set_keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+        buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+        buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+        buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      end
 
-  --     -- nvim-cmp supports additional completion capabilities
-  --     local capabilities = vim.lsp.protocol.make_client_capabilities()
-  --     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+      -- nvim-cmp supports additional completion capabilities
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-  --     -- Use a loop to conveniently call 'setup' on multiple servers and
-  --     -- map buffer local keybindings when the language server attaches
-  --     -- local servers = { 'pyright', 'terraformls', 'tsserver' }
-  --     local servers = { 'terraformls', 'tsserver' }
-  --     for _, lsp in ipairs(servers) do
-  --       nvim_lsp[lsp].setup {
-  --         on_attach = custom_on_attach,
-  --         capabilities = capabilities,
-  --       }
-  --     end
-  --   end,
-  -- }
+      -- Use a loop to conveniently call 'setup' on multiple servers and
+      -- map buffer local keybindings when the language server attaches
+      -- local servers = { 'pyright', 'terraformls', 'tsserver' }
+      local servers = { 'terraformls', 'tsserver' }
+      for _, lsp in ipairs(servers) do
+        nvim_lsp[lsp].setup {
+          on_attach = custom_on_attach,
+          capabilities = capabilities,
+        }
+      end
+    end,
+  }
   use {
     'hrsh7th/nvim-cmp',           -- Autocomplete
     config = function()
@@ -236,28 +241,93 @@ return require('packer').startup(function()
 
   use 'hashivim/vim-terraform'
 
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        highlight = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
+        indent = {
+          enable = true
+        },
+      }
+    end
+  }
+
   -- use {
   --   'ms-jpq/coq_nvim',
   --   branch = 'coq',
   -- }
 
+  -- use {
+  --   'dense-analysis/ale',
+  --   config = function()
+  --     vim.g.ale_fixers = {
+  --       python = { 'autoimport', 'isort', 'black' },
+  --       sql = {
+  --         function()
+  --           return { command = 'cat %t | sqlfluff fix -' }
+  --         end
+  --       },
+  --     }
+
+  --     vim.api.nvim_set_keymap('n', 'g1', "<cmd>ALEFirst<cr>", { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'gj', "<cmd>ALENextWrap<cr>", { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'gk', "<cmd>ALEPreviousWrap<cr>", { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', '<leader>x', "<cmd>ALEFix<cr>", { noremap = true, silent = true })
+  --   end,
+  -- }
+
   use {
-    'dense-analysis/ale',
+    'iamcco/markdown-preview.nvim',
     config = function()
-      vim.g.ale_fixers = {
-        python = { 'autoimport', 'isort', 'black' },
-        sql = {
-          function()
-            return { command = 'cat %t | sqlfluff fix -' }
-          end
+    end,
+    run = 'cd app && yarn install',
+    -- cmd = 'MarkdownPreview',
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.org = {
+        install_info = {
+          url = 'https://github.com/milisims/tree-sitter-org',
+          revision = 'f110024d539e676f25b72b7c80b0fd43c34264ef',
+          files = {'src/parser.c', 'src/scanner.cc'},
         },
+        filetype = 'org',
       }
 
-      vim.api.nvim_set_keymap('n', 'g1', "<cmd>ALEFirst<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', 'gj', "<cmd>ALENextWrap<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', 'gk', "<cmd>ALEPreviousWrap<cr>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<leader>x', "<cmd>ALEFix<cr>", { noremap = true, silent = true })
+      require'nvim-treesitter.configs'.setup {
+        -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
+        highlight = {
+          enable = true,
+          disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+          additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
+        },
+        ensure_installed = {'org'}, -- Or run :TSUpdate org
+      }
     end,
+  }
+  use {'nvim-orgmode/orgmode', config = function()
+    require('orgmode').setup({
+      org_agenda_files = {'/Users/seem/Google Drive/My Drive/notes/org/*'},
+      -- org_default_notes_file = '~/Dropbox/org/refile.org',
+      -- org_ellipsis = '...\r',
+    })
+    end
   }
 
 end)
