@@ -65,6 +65,8 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Aliases
 # --------------------------------------------------------------------
 
+alias notes='cd ~/Google\ Drive/My\ Drive/notes'
+
 alias grep='grep --color'
 
 alias ..='cd ..'

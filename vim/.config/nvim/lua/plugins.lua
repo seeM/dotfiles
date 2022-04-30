@@ -28,6 +28,8 @@ return require('packer').startup(function()
 
   use 'hynek/vim-python-pep8-indent'
 
+  use 'saltstack/salt-vim.git'
+
   use {
     'jpalardy/vim-slime',
     config = function()
@@ -175,8 +177,8 @@ return require('packer').startup(function()
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
-      -- local servers = { 'pyright', 'terraformls', 'tsserver' }
-      local servers = { 'terraformls', 'tsserver' }
+      local servers = { 'pyright', 'sqlls', 'terraformls', 'tsserver' }
+      -- local servers = { 'terraformls', 'tsserver' }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
           on_attach = custom_on_attach,
@@ -215,7 +217,7 @@ return require('packer').startup(function()
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'buffer' },
+          -- { name = 'buffer' },
         },
       })
     end,

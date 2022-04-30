@@ -14,8 +14,11 @@ export PATH="$PATH:/Users/seem/.local/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin/":$PATH
 
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/usr/local/opt/openssl@3/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/usr/local/opt/openssl@3/include"
+export JAVA_HOME=/usr/local/opt/openjdk@11
+export PATH="$JAVA_HOME/bin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/usr/local/opt/openssl@3/lib -L/usr/local/opt/lapack/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/usr/local/opt/openssl@3/include -I/usr/local/opt/lapack/include"
 
 export PATH="$PATH:/Users/seem/code/alfred-repos/"
 
