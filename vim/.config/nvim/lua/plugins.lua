@@ -1,4 +1,12 @@
-return require('packer').startup(function()
+local packer = nil
+local function init()
+  if packer == nil then
+    packer = require('packer')
+    packer.init({ disable_commands = true })
+  end
+
+  local use = packer.use
+  packer.reset()
 
   use 'wbthomason/packer.nvim'
 
@@ -27,8 +35,6 @@ return require('packer').startup(function()
   use 'romainl/vim-cool'          -- Only highlight while searching
 
   use 'hynek/vim-python-pep8-indent'
-
-  use 'saltstack/salt-vim.git'
 
   use {
     'jpalardy/vim-slime',
@@ -249,7 +255,10 @@ return require('packer').startup(function()
       require('nvim-treesitter.configs').setup {
         highlight = {
           enable = true,
+          disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+          additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
         },
+        ensure_installed = {'org'}, -- Or run :TSUpdate org
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -298,37 +307,23 @@ return require('packer').startup(function()
     -- cmd = 'MarkdownPreview',
   }
 
-  -- use {
-  --   'nvim-treesitter/nvim-treesitter',
-  --   config = function()
-  --     local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-  --     parser_config.org = {
-  --       install_info = {
-  --         url = 'https://github.com/milisims/tree-sitter-org',
-  --         revision = 'f110024d539e676f25b72b7c80b0fd43c34264ef',
-  --         files = {'src/parser.c', 'src/scanner.cc'},
-  --       },
-  --       filetype = 'org',
-  --     }
-
-  --     require'nvim-treesitter.configs'.setup {
-  --       -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
-  --       highlight = {
-  --         enable = true,
-  --         disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-  --         additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
-  --       },
-  --       ensure_installed = {'org'}, -- Or run :TSUpdate org
-  --     }
-  --   end,
-  -- }
   use {'nvim-orgmode/orgmode', config = function()
+    require('orgmode').setup_ts_grammar()
     require('orgmode').setup({
-      org_agenda_files = {'/Users/seem/Google Drive/My Drive/notes/org/*'},
+      org_agenda_files = {'~/gdrive/notes/org/*'},
       -- org_default_notes_file = '~/Dropbox/org/refile.org',
       -- org_ellipsis = '...\r',
     })
     end
   }
 
-end)
+end
+
+local plugins = setmetatable({}, {
+  __index = function(_, key)
+    init()
+    return packer[key]
+  end,
+})
+
+return plugins

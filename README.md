@@ -15,15 +15,10 @@
     ```bash
     brew bundle install
     ```
-5. Install [vim-plug](https://github.com/junegunn/vim-plug):
+5. Install vim plugins using [packer](https://github.com/wbthomason/packer.nvim):
 
     ```bash
-    $ stow ctags bash git karabiner tmux ipython vim
-    ```
-6. Install vim plugins:
-
-    ```bash
-    $ vim -c 'PlugUpdate | PlugInstall'
+    $ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
     ```
 7. Manually install remaining [MacOS apps](#macos-apps).
 
