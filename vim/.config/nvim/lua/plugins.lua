@@ -99,13 +99,14 @@ local function init()
       {'nvim/telescope/telescope-fzf-native.nvim'},
     },
     config = function()
-      vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }, previewer = false })<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'telescope.builtin'.buffers()<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>g', "<cmd>lua require'telescope.builtin'.live_grep()<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>t', "<cmd>lua require'telescope.builtin'.tags()<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require'telescope.builtin'.help_tags()<cr>", { noremap = true, silent = true })
 
-      require('telescope').setup {
+      local telescope = require('telescope')
+      telescope.setup {
         extensions = {
           fzf = {
             fuzzy = true,
@@ -115,8 +116,7 @@ local function init()
           }
         }
       }
-
-      require('telescope').load_extension('fzf')
+      telescope.load_extension('fzf')
     end,
   }
 
