@@ -32,9 +32,9 @@ if ipython is not None:
     ipython.run_line_magic('autoreload', '2')
 del ipython
 
-import logging
-logger = logging.getLogger()
-logging.basicConfig(
-    level="INFO",
-    format="%(asctime)s - %(levelname)-7s - %(module)-8s - %(message)s",
-)
+# import logging
+# logger = logging.getLogger()
+# logging.basicConfig(
+#     level="INFO",
+#     format="%(asctime)s - %(levelname)-7s - %(module)-8s - %(message)s",
+# )
