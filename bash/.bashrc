@@ -94,6 +94,12 @@ alias man=batman
 alias vi=nvim
 alias vim=nvim
 
+alias nc="nbprocess_clean --fname 'nbs/*.ipynb'"
+alias nf=nbprocess_fix
+alias nt=nbprocess_test
+
+alias co='cd ~/code/$(ls ~/code | fzf)'
+
 get_venv_name() {
   basename "$PWD"
 }
