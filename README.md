@@ -161,7 +161,7 @@ See my [`Brewfile`](./Brewfile) for the full list of terminal applications I use
 
 ### Window management with Rectangle
 
-95% of the time I have a single application maximised with Rectangle–_not_ virtual desktops, I'll explain in a sec. I switch between applications using <kbd>cmd-tab</kbd> (or <kbd>cmd-\`</kbd> for different windows of the same application), Alfred (my preferred launcher, via <kbd>cmd-space</kbd>), or the dock when using my mouse. The other 15% of the time I have two windows open side-by-side. I resize the Dock to be quite small and set it to only show on hover so that I only see the application I'm using and the thin mac bar on the top (that can't be hidden last I checked).
+95% of the time I have a single application maximised with [Rectangle](https://github.com/rxhanson/Rectangle)–_not_ virtual desktops, I'll explain in a sec. I switch between applications using <kbd>cmd-tab</kbd> (or <kbd>cmd-\`</kbd> for different windows of the same application), Alfred (my preferred launcher, via <kbd>cmd-space</kbd>), or the dock when using my mouse. The other 15% of the time I have two windows open side-by-side. I resize the Dock to be quite small and set it to only show on hover so that I only see the application I'm using and the thin mac bar on the top (that can't be hidden last I checked).
 
 I never use more than one virtual desktop. I find it inflexible and clunky in terms of both keyboard shortcuts and the animations that you can't seem to disable–for example, when fullscreening a window, or switching between fullscreened windows.
 
