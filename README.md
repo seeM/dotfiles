@@ -1,5 +1,13 @@
 # dotfiles
 
+## Contents
+
+- [Installation](#installation)
+- [MacOS apps](#macos-apps)
+- [MacOS settings](#macos-settings)
+- [Terminal apps](#terminal-apps)
+- [How I use macOS](#how-i-use-macos)
+
 ## Installation
 
 1. Manually configure [macOS settings](#macos-settings).
@@ -22,69 +30,52 @@
     ```
 7. Manually install remaining [MacOS apps](#macos-apps).
 
-## Font
-
-Current: [SF Mono](https://developer.apple.com/fonts/)
-
-Past: [IBM Plex Mono](https://github.com/IBM/plex)
-
 ## MacOS apps
-
-_(Inspired by [Nikita Voloboev](https://github.com/nikitavoloboev/my-mac-os))_
 
 ### [1Password](https://1password.com/) - Password manager
 
+### [Alacritty](https://github.com/alacritty/alacritty) - Terminal emulator
+
+I used to use iTerm, but Alacritty feels more lightweight and better suited to how I use the terminal (with tmux).
+
 ### [Alfred](https://www.alfredapp.com/) - Launcher
 
-#### Disable Ctrl to _Show Actions_
+Alfred's main advantage over the standard launcher is custom workflows.
 
-Alfred Preferences → Features → File Search → Actions → Show Actions (uncheck ctrl).
+#### Disable <kbd>ctrl</kbd> to _Show Actions_
 
-#### [Alfred Emoji](https://github.com/jsumners/alfred-emoji)
+Since I rebind <kbd>ctrl-p/n</kbd> to up/down using Karabiner, this option breaks browsing the search list.
 
-### [Bear](https://bear.app/) - Writing
+Alfred Preferences → Features → Universal Actions → General → Show Actions (uncheck ctrl).
 
-### [Firefox](https://www.mozilla.org/en-US/firefox/new/) - Browser
+#### [`alfred-github-workflow`](https://github.com/gharlan/alfred-github-workflow)
 
-**Plugins:**
-
-- Tridactyl
-- TreeStyleTab
-- Copy Selection as Markdown
-- Some ad blocker
-
-Add the lines below to the user stylesheet to disable the native tab bars, since we're using tree style tabs. The user stylesheet should be somewhere like `~/Library/Application Support/Firefox/Profiles/zh6rzv3s.default/chrome/userChrome.css`.
-
-```css
-/* Hide native tabs */
-#TabsToolbar {visibility: collapse;}
-```
+#### [`alfred-emoji`](https://github.com/jsumners/alfred-emoji)
 
 ### [Flux](https://justgetflux.com/) - Blue light controller
-
-### [Keyboard Maestro](https://www.keyboardmaestro.com/main/) - Automation
 
 ### [GIMP-2.10](https://www.gimp.org/) - Image manipulation
 
 ### [Google Chrome](https://www.google.co.za/chrome/) - Browser
 
-TODO: Plugins
+**Extensions:**
 
-### [Homebrew](https://brew.sh/) - Package manager
+- 1Password
+- Vimium (only occasionally use it)
+- Twemex (Twitter sidebar)
+- Some ad blocker
 
 ### [IINA](https://iina.io/) - Video player
 
-### [Inkscape](https://inkscape.org/) - Vector graphics editor
+### [Inkscape](https://inkscape.org/) - Vector graphics
 
-```brew install inkscape```
-
-### [iTerm](https://iterm2.com/) - Terminal emulator
+Lots of confusing installation instructions out there, but `brew install inkspace` seems to work fine.
 
 ### [Karabiner](https://pqrs.org/osx/karabiner/) - Keyboard remapping
 
-The `~/.config/karabiner.edn` file is written in the Karabiner domain specific language [Goku](https://github.com/yqrashawn/GokuRakuJoudo).
+[`karabiner.edn`](./karabiner/.config/karabiner.edn) is written in the Karabiner domain specific language [Goku](#goku).
 
-Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` package.
+Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` package, and run `goku`.
 
 ### [LibreOffice](https://www.libreoffice.org/) - Office suite
 
@@ -93,8 +84,6 @@ Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` p
 ### [Rectangle](https://rectangleapp.com/) - Window manager
 
 ### [Spotify](https://www.spotify.com/us/) - Music
-
-### [Things](https://culturedcode.com/things/) - Task manager
 
 ### [Transmission](https://www.transmissionbt.com/) - BitTorrent client
 
@@ -155,3 +144,75 @@ Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` p
 
 1. Open _Language & Region_ > _Advanced_ settings.
 2. Set all cases of _Decimal_ to `.`.
+
+## Terminal apps
+
+See my [`Brewfile`](./Brewfile) for the full list of terminal applications I use. The most important ones are listed here.
+
+### [Goku](https://github.com/yqrashawn/GokuRakuJoudo) - Simple Karabiner configuration
+
+### [Homebrew](https://brew.sh/) - Package manager
+
+### [Tmux](https://github.com/tmux/tmux) - Terminal window manager
+
+### [NeoVIM](https://neovim.io/) - Text editor
+
+## How I use macOS
+
+### Window management with Rectangle
+
+95% of the time I have a single application maximised with Rectangle–_not_ virtual desktops, I'll explain in a sec. I switch between applications using <kbd>cmd-tab</kbd> (or <kbd>cmd-\`</kbd> for different windows of the same application), Alfred (my preferred launcher, via <kbd>cmd-space</kbd>), or the dock when using my mouse. The other 15% of the time I have two windows open side-by-side. I resize the Dock to be quite small and set it to only show on hover so that I only see the application I'm using and the thin mac bar on the top (that can't be hidden last I checked).
+
+I never use more than one virtual desktop. I find it inflexible and clunky in terms of both keyboard shortcuts and the animations that you can't seem to disable–for example, when fullscreening a window, or switching between fullscreened windows.
+
+I instead use Rectangle to maximise windows in a single virtual desktop. You're supposed to be able to hold <kbd>option</kbd> and click on the green fullscreen button on the top-left of windows to do this, but I've found that it doesn't work properly for some applications. So I use [Rectangle](https://github.com/rxhanson/Rectangle) instead, which also has customiseable keyboard shortcuts. I only use these shortcuts:
+
+- <kbd>control-option-enter</kbd>: Maximise
+- <kbd>control-option-left</kbd>: Left Half
+- <kbd>control-option-right</kbd>: Right Half
+
+I find it convenient to use the same keys to move windows across screens (there's an option for this: _Preferences_ → _Move to adjacent display on repeated left or right commands_). I much less frequently use these too:
+
+- <kbd>control-option-up</kbd>: Top Half
+- <kbd>control-option-down</kbd>: Bottom Half
+
+Rectangle also has a _Snap windows by dragging_ option, like Windows, which I like too.
+
+### Mac oddities
+
+Here are some behaviours I found very unexpected coming from Windows:
+
+1. Some windows don't show up in <kbd>cmd-tab</kbd>, usually application settings. When that happens I use the "three finger drap up" gesture or <kbd>ctrl-up</kbd> to show all windows on my virtual desktop.
+2. In mac, closing all windows of an application doesn't necessarily close the application. It still appears when you <kbd>cmd-tab</kbd> and in the dock. Use <kbd>cmd-q</kbd> to fully close an application. Caveat: for some reason you can't close the Finder application.
+3. Finder's copy vs cut and paste is _very_ unintuitive. You first "select" a file with <kbd>cmd-c</kbd>, then use <kbd>cmd-v</kbd> to copy-paste, or <kbd>cmd-option-v</kbd> to cut-paste.
+
+### Mac keyboard shortcuts
+
+Mac applications often use the same standard keyboard shortcuts. Mac sometimes assumes that you know these, so doesn't make them clear. Here are the shortcuts I use:
+
+- <kbd>cmd-<number></kbd>: Switch to a given tab. <kbd>cmd-9</kbd> switches to the *last* tab
+- <kbd>cmd-{/}</kbd>: Left/right tab
+- <kbd>cmd-t</kbd>: New tab
+- <kbd>cmd-w</kbd>: Close a window in an application (or close a tab, depending on the application)
+- <kbd>cmd-n</kbd>: New window (I rarely use multiple windows)
+- <kbd>cmd-o</kbd>: Open file
+- <kbd>cmd-s</kbd>: Save
+- <kbd>cmd-q</kbd>: Close an application (and all of its windows)
+- <kbd>touch id</kbd>: You can press the Touch ID button to lock your screen
+
+I've setup tmux and Karabiner so that many of these work in the terminal too! I also have the following in my terminal:
+
+- <kbd>cmd-h/j/k/l</kbd>: Left/down/up/right pane
+- <kbd>cmd-h/j/k/l</kbd>: Left/down/up/right pane
+- <kbd>cmd-d</kbd>: Split pane right (think "duplicate")
+- <kbd>cmd-D</kbd>: Split pane down (think "duplicate")
+
+### Alfred - Launching & switching applications
+
+I use [Alfred](#alfred) instead of the defualt launcher. I don't use too many of its features or custom workflows anymore. It's also been a long time since I used the default launcher so I'm not even sure how much they differ anymore.
+
+I mostly use Alfred by pressing <kbd>cmd-space</kbd> typing in a few characters to fuzzily search for the application I want to launch or switch to, and hitting <kbd>return</kbd>. After a while, you remember short letter combinations (usually two letters) needed for each application. For example, <kbd>cmd-space</kbd> <kbd>`ch`</kbd> <kbd>enter</kbd> switches to Chrome. Similarly, `al` for Alacritty (terminal), `ob` for Obsidian (notes), `di` for Discord, and so on.
+
+It also has a built-in calculator which I find very convenient. You can type basic math directly into the search prompt and hit <kbd>enter</kbd> to paste the result into your clipboard.
+
+The only custom workflow I use these days is for emojis, since not every application has a nice emoji auto-completer. I used to use a custom workflow that I wrote to open GitHub repos in my browser without needing any access to GitHub itself (via the git remote URL). I don't know why I stopped–it's very convenient!
