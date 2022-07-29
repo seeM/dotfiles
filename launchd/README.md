@@ -1,23 +1,25 @@
-# launchd
+# `launchd`
+
+Configuring `launchd` See Apple's [_Daemons and Services Programming Guide_](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) for more info.
 
 ## Jupyter Notebook
 
-Run Jupyter Notebook as a service on macOS. If you'd like to repurpose this for your own use, **remember to replace the user name everywhere that `/Users/seem` appears**. Some properties worth noting:
+Run Jupyter Notebook as a service on macOS. If you'd like to repurpose this for your own use, **remember to replace with your user name everywhere that `/Users/seem` appears in `local.jupyter.notebook`**. Some properties worth noting:
 
 - It's assumed that you're using [`pyenv`](https://github.com/pyenv/pyenv)
-- `KeepAlive=true`: Jupyter Notebook will be restarted if it exits for any reason
+- `KeepAlive` is on; Jupyter Notebook will automatically restart after exiting
 - `WorkingDirectory` is set to home
-- `stdout` and `stderr` are logged to `~/.jupyter/.jupyter.{stdout,stderr}`
+- `stdout` and `stderr` are logged to `~/.jupyter/jupyter.{stdout,stderr}`
 
 ### Setup
 
-Copy the plist file to `LaunchAgents`:
+Copy the plist file to `LaunchAgents` (this is where `launchd` expects per-user processes to be defined):
 
 ```sh
 cp local.jupyter.notebook.plist /Users/$USER/Library/LaunchAgents/
 ```
 
-Start the service:
+Start the process:
 
 ```sh
 launchctl bootstrap gui/$(id -u $USER) /Users/$USER/Library/LaunchAgents/local.jupyter.notebook.plist
