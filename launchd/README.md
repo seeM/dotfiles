@@ -30,3 +30,13 @@ Print info to check that it's running (or to check the exit code if it failed):
 ```sh
 launchctl print gui/$(id -u $USER)/local.jupyter.notebook.plist
 ```
+
+## `reload.sh`
+
+A convenience script to reload a plist file, for example:
+
+```sh
+./reload.sh local.jupyter.notebook
+```
+
+_**Note:** it assumes that the name and label of your plist file are the same._
