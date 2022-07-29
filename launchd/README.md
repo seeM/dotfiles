@@ -1,6 +1,6 @@
 # launchd
 
-## local.jupyter.notebook
+## Jupyter Notebook
 
 Run Jupyter Notebook as a service on macOS. If you'd like to repurpose this for your own use, **remember to replace the user name everywhere that `/Users/seem` appears**. Some properties worth noting:
 
