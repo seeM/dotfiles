@@ -1,6 +1,6 @@
 # `launchd`
 
-Configuring `launchd` See Apple's [_Daemons and Services Programming Guide_](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) for more info.
+Configuring background processes with `launchd`. See Apple's [_Daemons and Services Programming Guide_](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) for more info.
 
 ## Jupyter Notebook
 
