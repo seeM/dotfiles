@@ -40,7 +40,9 @@
                  [:!T##m :return_or_enter]
                  [:!T##h :delete_or_backspace]]}
         {:des   "fn arrow key shortcuts"
-         :rules [[:!F##j :left_arrow]
+         :rules [[:!FSj :!Fleft_arrow]
+                 [:!FSl :!Fright_arrow]
+                 [:!F##j :left_arrow]
                  [:!F##i :up_arrow]
                  [:!F##k :down_arrow]
                  [:!F##l :right_arrow]]}

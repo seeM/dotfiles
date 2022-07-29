@@ -14,3 +14,7 @@ emacs/.emacs.d/
 Brewfile.lock.json
 karabiner/.config/karabiner/
 ipython/.ipython/profile_default/history.sqlite
+*.stderr
+*.stdout
+*.jupyterlab-workspace
+migrated

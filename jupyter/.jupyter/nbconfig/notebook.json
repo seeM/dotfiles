@@ -1,0 +1,39 @@
+{
+  "load_extensions": {
+    "ipytree/extension": true,
+    "jupyter-captum-insights/extension": true,
+    "nbdime/index": true,
+    "nbtools/nbtools": true,
+    "jupyter-js-widgets/extension": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "collapsible_headings/main": true,
+    "toc2/main": true
+  },
+  "Notebook": {
+    "Header": false,
+    "Toolbar": true
+  },
+  "toc2": {
+    "toc_cell": false,
+    "toc_window_display": true
+  },
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": false
+    }
+  },
+  "keys": {
+    "command": {
+      "bind": {
+        "cmd-enter": "jupyter-notebook:run-all-cells-below",
+        "cmd-shift-enter": "jupyter-notebook:restart-kernel-and-run-all-cells"
+      }
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "autoCloseBrackets": false
+    }
+  }
+}

@@ -94,10 +94,10 @@ alias man=batman
 alias vi=nvim
 alias vim=nvim
 
-alias nc=nbprocess_clean
-alias nf=nbprocess_fix
-alias nt=nbprocess_test
-alias ne=nbprocess_export
+alias nc=nbdev_clean
+alias nf=nbdev_fix
+alias nt=nbdev_test
+alias ne=nbdev_export
 
 alias co='cd ~/code/$(ls ~/code | fzf)'
 
@@ -150,7 +150,6 @@ alias gp="git push \$(git_origin_or_fork) \$(gcb)"
 alias gpf="gp -f"
 alias gl="git pull \$(git_origin_or_fork) \$(gcb)"
 alias glu="git pull upstream \$(gcb)"
-alias gsync='glu && gp'
 
 alias gr='git rebase'
 alias gra='git rebase --abort'
@@ -168,6 +167,9 @@ alias gcob='git checkout -b'
 # list branches sorted by last modified
 # TODO: Temp disable because it's not working
 # b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+alias pr="gh pr create -f -b 'cc @hamelsmu @jph00'"
+alias sync='gh repo sync seem/$(basename $(pwd)) && gl'
 
 alias squash='git rebase -i $(git merge-base HEAD master)'
 
