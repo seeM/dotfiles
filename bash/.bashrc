@@ -94,10 +94,13 @@ alias man=batman
 alias vi=nvim
 alias vim=nvim
 
-alias nc=nbdev_clean
-alias nf=nbdev_fix
-alias nt=nbdev_test
 alias ne=nbdev_export
+alias nt=nbdev_test
+alias nc=nbdev_clean
+alias np=nbdev_prepare
+alias nd=nbdev_docs
+alias nr=nbdev_preview
+alias nf=nbdev_fix
 
 alias co='cd ~/code/$(ls ~/code | fzf)'
 
