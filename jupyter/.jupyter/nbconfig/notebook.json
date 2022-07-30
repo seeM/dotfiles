@@ -12,7 +12,7 @@
   },
   "Notebook": {
     "Header": false,
-    "Toolbar": true
+    "Toolbar": false
   },
   "toc2": {
     "toc_cell": false,
