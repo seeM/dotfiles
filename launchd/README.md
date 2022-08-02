@@ -13,10 +13,10 @@ Run Jupyter Notebook as a service on macOS. If you'd like to repurpose this for 
 
 ### Setup
 
-Copy the plist file to `LaunchAgents` (this is where `launchd` expects per-user processes to be defined):
+Link the plist file to `LaunchAgents` (this is where `launchd` expects per-user processes to be defined):
 
 ```sh
-cp local.jupyter.notebook.plist /Users/$USER/Library/LaunchAgents/
+ln -s $(pwd)/local.jupyter.notebook.plist /Users/$USER/Library/LaunchAgents/
 ```
 
 Start the process:
