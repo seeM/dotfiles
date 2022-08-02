@@ -3,5 +3,8 @@
     "nbserver_extensions": {
       "jupyter_nbextensions_configurator": true
     }
+  },
+  "ContentsManager": {
+    "pre_save_hook": "nbdev.clean.clean_jupyter"
   }
 }
