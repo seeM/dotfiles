@@ -102,6 +102,8 @@ alias nd=nbdev_docs
 alias nr=nbdev_preview
 alias nf=nbdev_fix
 
+alias pi="pip install -e '.[dev]'"
+
 alias co='cd ~/code/$(ls ~/code | fzf)'
 
 get_venv_name() {
