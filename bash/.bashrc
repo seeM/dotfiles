@@ -65,7 +65,11 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Aliases
 # --------------------------------------------------------------------
 
+alias ql='qlmanage -p'
+alias ocr='shortcuts run ocr'
+
 alias notes='cd ~/Google\ Drive/My\ Drive/notes'
+alias nbdev_switch='~/dotfiles/bin/nbdev_switch.js'
 
 alias grep='grep --color'
 
@@ -174,7 +178,9 @@ alias gcob='git checkout -b'
 # b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
 alias pr="gh pr create -f -b 'cc @hamelsmu @jph00'"
-alias sync='gh repo sync seem/$(basename $(pwd)) && gl'
+alias bug="pr -l 'bug'"
+alias enhancement="pr -l 'enhancement'"
+alias sync='gh repo sync seem/$(basename $(pwd)) && git pull && git fetch upstream'
 
 alias squash='git rebase -i $(git merge-base HEAD master)'
 
@@ -212,11 +218,8 @@ if [[ -n $SSH_CLIENT ]]; then
 fi
 PS1+="\[\e[34;1m\]"
 PS1+="\w"
-PS1+="\[\e[0m\]"
 PS1+="\[\e[90;1m\]"
 PS1+='$(__git_ps1)'
-PS1+="\[\e[0m\]"
-PS1+="\[\e[31;1m\]"
 PS1+="\[\e[0m\]"
 PS1+="\n\$ "
 

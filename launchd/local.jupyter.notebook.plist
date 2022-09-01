@@ -11,6 +11,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Users/seem/.pyenv/shims/jupyter-notebook</string>
+        <string>--debug</string>
     </array>
     <key>StandardErrorPath</key>
     <string>/Users/seem/.jupyter/jupyter.stderr</string>
