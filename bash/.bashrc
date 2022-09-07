@@ -70,6 +70,7 @@ alias ocr='shortcuts run ocr'
 
 alias notes='cd ~/Google\ Drive/My\ Drive/notes'
 alias nbdev_switch='~/dotfiles/bin/nbdev_switch.js'
+alias ns=nbdev_switch
 
 alias grep='grep --color'
 

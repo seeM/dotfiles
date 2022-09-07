@@ -12,8 +12,8 @@
     "nbextensions_configurator": true
   },
   "Notebook": {
-    "Header": true,
-    "Toolbar": true
+    "Header": false,
+    "Toolbar": false
   },
   "toc2": {
     "toc_cell": false,
@@ -28,10 +28,12 @@
   "keys": {
     "command": {
       "bind": {
-        "cmd-k": "jupyter-notebook:run-all-cells-above",
-        "cmd-j": "jupyter-notebook:run-all-cells-below",
-        "cmd-enter": "jupyter-notebook:restart-kernel-and-run-all-cells",
-        "shift-t,shift-m": "jupyter-notebook:toggle-menubar"
+        "cmd-left": "jupyter-notebook:run-all-cells-above",
+        "cmd-right": "jupyter-notebook:run-all-cells-below",
+        "cmd-enter": "jupyter-notebook:run-all-cells",
+        "cmd-shift-enter": "jupyter-notebook:restart-kernel-and-run-all-cells",
+        "t,m": "jupyter-notebook:toggle-menubar",
+        "t,t": "toc2:toggle-toc"
       }
     }
   },

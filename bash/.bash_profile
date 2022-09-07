@@ -22,4 +22,4 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 
 export PATH="$PATH:/Users/seem/code/alfred-repos/"
 
-[ -f ~/.work_profile.sh ] && source ~/.work_profile.sh
+[ -f "$HOME/.work_profile" ] && source "$HOME/.work_profile"
