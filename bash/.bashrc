@@ -106,6 +106,7 @@ alias np=nbdev_prepare
 alias nd=nbdev_docs
 alias nr=nbdev_preview
 alias nf=nbdev_fix
+alias ni='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target /'
 
 alias pi="pip install -e '.[dev]'"
 
@@ -178,12 +179,44 @@ alias gcob='git checkout -b'
 # TODO: Temp disable because it's not working
 # b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
-alias pr="gh pr create -f -b 'cc @hamelsmu @jph00'"
-alias bug="pr -l 'bug'"
-alias enhancement="pr -l 'enhancement'"
-alias sync='gh repo sync seem/$(basename $(pwd)) && git pull && git fetch upstream'
+git_current_branch() {
+  git branch --show-current
+}
 
+git_default_branch() {
+  basename "$(git symbolic-ref refs/remotes/origin/HEAD)"
+}
+
+synch() {
+  default=$(git_default_branch)
+  if [ "$(git_current_branch)" != "$default" ]; then
+    echo 'Not on master'
+    return 1
+  fi
+  if ! git remote | grep -qe upstream; then
+    echo 'No upstream remote'
+    return 1
+  fi
+  git fetch upstream "$default" &&
+  git reset --hard "upstream/$default" &&
+  git push --force origin "$default"
+}
+
+git_clean() {
+  git branch --merged | grep -E -v "(^\*|master|main|dev)" | xargs git branch -d
+}
+
+alias pr="gh pr create --head --fill --body 'cc @hamelsmu @jph00'"
+alias bug="pr --label 'bug'"
+alias enhancement="pr --label 'enhancement'"
 alias squash='git rebase -i $(git merge-base HEAD master)'
+
+close() {
+  current=$(git_current_branch)
+  git checkout "$(git_default_branch)" &&
+  synch &&
+  git branch --delete "$current"
+}
 
 # Dotfiles
 alias brc='vim ~/.bashrc'
