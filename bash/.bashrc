@@ -187,7 +187,7 @@ git_default_branch() {
   basename "$(git symbolic-ref refs/remotes/origin/HEAD)"
 }
 
-synch() {
+synk() {
   default=$(git_default_branch)
   if [ "$(git_current_branch)" != "$default" ]; then
     echo 'Not on master'
@@ -214,7 +214,7 @@ alias squash='git rebase -i $(git merge-base HEAD master)'
 close() {
   current=$(git_current_branch)
   git checkout "$(git_default_branch)" &&
-  synch &&
+  synk &&
   git branch --delete "$current"
 }
 
