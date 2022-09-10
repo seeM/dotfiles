@@ -206,7 +206,7 @@ git_clean() {
   git branch --merged | grep -E -v "(^\*|master|main|dev)" | xargs git branch -d
 }
 
-alias pr="gh pr create --head --fill --body 'cc @hamelsmu @jph00'"
+alias pr='gh pr create --head seem:$(git_current_branch) --fill'
 alias bug="pr --label 'bug'"
 alias enhancement="pr --label 'enhancement'"
 alias squash='git rebase -i $(git merge-base HEAD master)'
