@@ -202,6 +202,11 @@ synk() {
   git push --force origin "$default"
 }
 
+repo() {
+  gh repo create "$1" --clone --description "$2" --homepage "seem.github.io/$1" --public --disable-wiki &&
+  cd "$1" || return
+}
+
 git_clean() {
   git branch --merged | grep -E -v "(^\*|master|main|dev)" | xargs git branch -d
 }
