@@ -212,3 +212,7 @@ vim.cmd [[command! PackerUpdate packadd packer.nvim | lua require('plugins').upd
 vim.cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
 vim.cmd [[command! PackerClean packadd packer.nvim | lua require('plugins').clean()]]
 vim.cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
+
+-- Open .jupyterlab-settings as json
+
+vim.cmd[[autocmd BufNewFile,BufRead *.jupyterlab-settings set syntax=json]]
