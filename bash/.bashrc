@@ -106,7 +106,7 @@ alias np=nbdev_prepare
 alias nd=nbdev_docs
 alias nr=nbdev_preview
 alias nf=nbdev_fix
-alias ni='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target /'
+alias ni='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target / && rm quarto*.pkg'
 
 alias pi="pip install -e '.[dev]'"
 
