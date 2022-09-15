@@ -1,0 +1,68 @@
+{
+    // Language Server
+    // @krassowski/jupyterlab-lsp:plugin
+    // Language Server Protocol settings.
+    // **********************************
+
+    // Language Server
+    // Language-server specific configuration, keyed by implementation, e.g: 
+    // 
+    // pylsp: {
+    //   serverSettings: {
+    //     pylsp: {
+    //       plugins: {
+    //         pydocstyle: {
+    //           enabled: true
+    //         },
+    //         pyflakes: {
+    //           enabled: false
+    //         },
+    //         flake8: {
+    //           enabled: true
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // 
+    // Alternatively, using VSCode's naming convention:
+    // 
+    // pylsp: {
+    //   serverSettings: {
+    //     "pylsp.plugins.pydocstyle.enabled": true,
+    //     "pylsp.plugins.pyflakes.enabled": false,
+    //     "pylsp.plugins.flake8.enabled": true
+    //   }
+    // }
+    "language_servers": {
+        "pyright": {
+            "serverSettings": {
+                "python.analysis.useLibraryCodeForTypes": true
+            }
+        },
+        "pylsp": {
+            "serverSettings": {
+                "pylsp.plugins.pycodestyle.enabled": false,
+                "pylsp.plugins.pyflakes.enabled": false
+            }
+        }
+    },
+
+    // Log all LSP communication with the LSP servers
+    // Whether all messages sent to and received from LSP servers should be logged into the console. To see these messages, set loggingLevel to debug or log. Note: Only messages handled by the new API will be shown.
+    "logAllCommunication": false,
+
+    // Logging console type
+    // The console to use for debugging problems with this extension. Allowed values are: browser, floating.
+    "loggingConsole": "browser",
+
+    // Logging console verbosity level
+    // The verbosity of the console for debugging problems with this extension. Allowed values are: debug, log, warn, error.
+    "loggingLevel": "warn",
+
+    // Ask servers to send trace notifications
+    // Whether to ask server to send logs with execution trace (for debugging). To see these messages, set loggingLevel to debug or log. Accepted values are: "off", "messages", "verbose". Servers are allowed to ignore this request.
+    "setTrace": null,
+
+    "continuousHinting": true
+}
