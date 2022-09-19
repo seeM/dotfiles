@@ -188,6 +188,7 @@ git_default_branch() {
 }
 
 synk() {
+  # TODO: allow to run from another branch without affecting branch or unstaged changes
   default=$(git_default_branch)
   if [ "$(git_current_branch)" != "$default" ]; then
     echo 'Not on master'
@@ -195,6 +196,11 @@ synk() {
   fi
   if ! git remote | grep -qe upstream; then
     echo 'No upstream remote'
+    return 1
+  fi
+  if ! git diff --quiet; then
+    # TODO: auto stash and unstash changes?
+    echo 'Unstaged changes'
     return 1
   fi
   git fetch upstream "$default" &&
