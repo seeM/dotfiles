@@ -37,10 +37,10 @@
 [init]
     defaultBranch = main
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+    diff = "pre=$(which delta); ${pre:-cat} | less --tabs=4 -RFX"
+    log = "pre=$(which delta); ${pre:-cat} | less --tabs=4 -RFX"
+    reflog = "pre=$(which delta); ${pre:-cat} | less --tabs=4 -RFX"
+    show = "pre=$(which delta); ${pre:-cat} | less --tabs=4 -RFX"
 [interactive]
     diffFilter = delta --color-only
 [delta]
