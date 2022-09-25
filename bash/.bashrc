@@ -249,6 +249,7 @@ alias rc='open $(repo-links ci)'
 # alias eo='
 alias v='vim .'
 
+alias ssh_jupyter='gcloud compute ssh jupyter@seem'
 
 # Prompt
 # --------------------------------------------------------------------
