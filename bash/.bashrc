@@ -91,13 +91,12 @@ fi
 
 alias tmux='tmux -2'
 
+command -v bat > /dev/null 2>&1 && alias ls=bat
+command -v exa > /dev/null 2>&1 && alias ls=exa
+command -v batman > /dev/null 2>&1 && alias man=batman
+command -v nvim > /dev/null 2>&1 && alias vi=nvim && alias vim=nvim
 alias batlog='bat --paging=never -l log'
-alias cat=bat
-alias ls=exa
 alias ll='ls -la'
-alias man=batman
-alias vi=nvim
-alias vim=nvim
 
 alias ne=nbdev_export
 alias nt=nbdev_test
@@ -106,7 +105,11 @@ alias np=nbdev_prepare
 alias nd=nbdev_docs
 alias nr=nbdev_preview
 alias nf=nbdev_fix
-alias ni='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target / && rm quarto*.pkg'
+alias nu=nbdev_update
+
+alias qi='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target / && rm quarto*.pkg'
+alias qr='quarto preview'
+alias qp='quarto publish'
 
 alias pi="pip install -e '.[dev]'"
 
