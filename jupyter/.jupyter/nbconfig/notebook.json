@@ -1,23 +1,21 @@
 {
   "load_extensions": {
-    "ipytree/extension": false,
-    "jupyter-captum-insights/extension": false,
-    "nbdime/index": false,
-    "nbtools/nbtools": false,
-    "jupyter-js-widgets/extension": false,
     "nbextensions_configurator/config_menu/main": true,
-    "contrib_nbextensions_help_item/main": false,
+    "nbextensions_configurator": true,
     "collapsible_headings/main": true,
+    "hide_input/main": true,
     "toc2/main": true,
-    "nbextensions_configurator": true
+    "spellchecker/main": true
+  },
+  "rise": {
+    "enable_chalkboard": false,
+    "show_buttons_on_startup": true
   },
   "Notebook": {
     "Header": false,
     "Toolbar": false
   },
   "toc2": {
-    "toc_cell": false,
-    "toc_window_display": true,
     "number_sections": false
   },
   "Cell": {
@@ -28,13 +26,23 @@
   "keys": {
     "command": {
       "bind": {
+        "q,a": "jupyter-notebook:run-all-cells-above",
         "cmd-left": "jupyter-notebook:run-all-cells-above",
+        "q,b": "jupyter-notebook:run-all-cells-below",
         "cmd-right": "jupyter-notebook:run-all-cells-below",
+        "q,q": "jupyter-notebook:run-all-cells",
         "cmd-enter": "jupyter-notebook:run-all-cells",
         "cmd-shift-enter": "jupyter-notebook:restart-kernel-and-run-all-cells",
+        "q,x": "jupyter-notebook:confirm-shutdown-kernel",
+        "t,i": "hide_input:toggle-cell-input-display",
+        "alt-shift-i": "hide_input:toggle-cell-input-display",
         "t,m": "jupyter-notebook:toggle-menubar",
-        "t,t": "toc2:toggle-toc"
-      }
+        "t,t": "toc2:toggle-toc",
+        "f2": "jupyter-notebook:rename-notebook"
+      },
+      "unbind": [
+        "q"
+      ]
     }
   },
   "CodeCell": {
