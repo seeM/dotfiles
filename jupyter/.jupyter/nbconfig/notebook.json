@@ -33,7 +33,7 @@
         "q,q": "jupyter-notebook:run-all-cells",
         "cmd-enter": "jupyter-notebook:run-all-cells",
         "cmd-shift-enter": "jupyter-notebook:restart-kernel-and-run-all-cells",
-        "q,x": "jupyter-notebook:confirm-shutdown-kernel",
+        "q,x": "jupyter-notebook:close-and-halt",
         "t,i": "hide_input:toggle-cell-input-display",
         "alt-shift-i": "hide_input:toggle-cell-input-display",
         "t,m": "jupyter-notebook:toggle-menubar",
