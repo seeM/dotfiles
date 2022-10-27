@@ -183,7 +183,7 @@ local function init()
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
-      local servers = { 'pyright', 'sqlls', 'terraformls', 'tsserver' }
+      local servers = { 'sqlls', 'terraformls', 'tsserver' }
       -- local servers = { 'terraformls', 'tsserver' }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
@@ -191,6 +191,17 @@ local function init()
           capabilities = capabilities,
         }
       end
+      nvim_lsp.pyright.setup {
+        on_attach = custom_on_attach,
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = "off"
+            }
+          }
+        }
+      }
     end,
   }
   use {
