@@ -38,7 +38,8 @@
         "alt-shift-i": "hide_input:toggle-cell-input-display",
         "t,m": "jupyter-notebook:toggle-menubar",
         "t,t": "toc2:toggle-toc",
-        "f2": "jupyter-notebook:rename-notebook"
+        "f2": "jupyter-notebook:rename-notebook",
+        "q,r": "jupyter-notebook:rename-notebook"
       },
       "unbind": [
         "q"
