@@ -107,6 +107,13 @@ alias nr=nbdev_preview
 alias nf=nbdev_fix
 alias nu=nbdev_update
 
+alias dcd='docker compose down'
+alias dcb='docker compose build'
+alias dcu='docker compose up'
+alias dcr='docker compose run'
+alias dcp='docker compose ps'
+alias dce='docker compose exec'
+
 alias qi='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target / && rm quarto*.pkg'
 alias qr='quarto preview'
 alias qp='quarto publish'
@@ -249,7 +256,48 @@ alias rc='open $(repo-links ci)'
 # alias eo='
 alias v='vim .'
 
-alias ssh_jupyter='gcloud compute ssh jupyter@seem'
+# gc_user=jupyter
+# gc_host=seem
+# alias gc_start='gcloud compute instances start $gc_host'
+# alias gc_stop="gcloud compute instances stop $gc_host"
+# alias gc_ssh="gcloud compute ssh $gc_user@$gc_host"
+# alias gc_lab="open https://$(gcloud notebooks instances describe seem --location us-west1-b --format="value(metadata.proxy-url)")/lab"
+
+alias gradient_nbs='gradient notebooks list'
+
+gradient_nb_id() {
+  if [ -z "$1" ]; then
+    echo 'ERROR: Missing positional argument NOTEBOOK'
+    return 1
+  fi
+  gradient notebooks list | perl -F'/\s?\|\s?/' -E 'say $F[2] if $F[1] =~ '$1
+}
+
+gradient_nb() {
+  if [ -z "$1" ]; then
+    echo 'ERROR: Missing positional argument NOTEBOOK'
+    return 1
+  fi
+  gradient notebooks details --id "$(gradient_nb_id "$1")"
+}
+
+gradient_nb_start() {
+  typ=${2:-Free-P5000}
+  gradient notebooks start --id "$(gradient_nb_id "$1")" --machineType "$typ" --shutdownTimeout 1
+}
+
+gradient_nb_stop() {
+  gradient notebooks stop --id "$(gradient_nb_id "$1")"
+}
+
+gradient_nb_url() {
+  gradient_nb "$1" | perl -F'/\s?\|\s?/' -E 'say $F[2] if $F[1] =~ FQDN'
+}
+
+gradient_nb_lab() {
+  open "$(gradient_nb_url "$1")"/tree
+}
+
 
 # Prompt
 # --------------------------------------------------------------------
