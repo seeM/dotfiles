@@ -21,6 +21,7 @@ local function init()
   use 'tpope/vim-surround'        -- Objects and verbs for "surroundings"
   use 'tpope/vim-vinegar'         -- Enhance netrw (built-in file browser)
   use 'tpope/vim-unimpaired'      -- Convenient mappings on [* and ]*
+  use 'tpope/vim-ragtag'          -- HTML tag completion
   use {
     'tpope/vim-fugitive',        -- Git interface
     config = function()
@@ -178,8 +179,7 @@ local function init()
       end
 
       -- nvim-cmp supports additional completion capabilities
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
@@ -259,32 +259,32 @@ local function init()
 
   use 'hashivim/vim-terraform'
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        highlight = {
-          enable = true,
-          disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-          additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
-        },
-        ensure_installed = {'org'}, -- Or run :TSUpdate org
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
-        indent = {
-          enable = true
-        },
-      }
-    end
-  }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   run = ':TSUpdate',
+  --   config = function()
+  --     require('nvim-treesitter.configs').setup {
+  --       highlight = {
+  --         enable = true,
+  --         disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+  --         additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
+  --       },
+  --       ensure_installed = {'org'}, -- Or run :TSUpdate org
+  --       incremental_selection = {
+  --         enable = true,
+  --         keymaps = {
+  --           init_selection = "gnn",
+  --           node_incremental = "grn",
+  --           scope_incremental = "grc",
+  --           node_decremental = "grm",
+  --         },
+  --       },
+  --       indent = {
+  --         enable = true
+  --       },
+  --     }
+  --   end
+  -- }
 
   -- use {
   --   'ms-jpq/coq_nvim',
@@ -316,16 +316,6 @@ local function init()
     end,
     run = 'cd app && yarn install',
     -- cmd = 'MarkdownPreview',
-  }
-
-  use {'nvim-orgmode/orgmode', config = function()
-    require('orgmode').setup_ts_grammar()
-    require('orgmode').setup({
-      org_agenda_files = {'~/gdrive/notes/org/*'},
-      -- org_default_notes_file = '~/Dropbox/org/refile.org',
-      -- org_ellipsis = '...\r',
-    })
-    end
   }
 
 end
