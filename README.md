@@ -29,6 +29,14 @@
     $ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
     ```
 7. Manually install remaining [MacOS apps](#macos-apps).
+8. Link VSCode settings (replace `Code\ -\ Insiders` with `Code` if necessary):
+
+    ```bash
+    rm ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+    rm ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
+    ln -s $(pwd)/vscode/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
+    ln -s $(pwd)/vscode/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+    ```
 
 ## MacOS apps
 

@@ -54,5 +54,20 @@
         //     "before": ["<leader>", "f"],
         //     "commands": ["workbench.action.quickOpen"]
         // },
-    ]
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-e>": false,
+        "<C-k>": false,
+        "<C-y>": false,
+        "<C-d>": true,
+        "<C-s>": false,
+        "<C-z>": false
+    },
+
+    "workbench.editor.enablePreview": false,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.codeLens.enabled": false,
 }
