@@ -77,6 +77,8 @@ Lots of confusing installation instructions out there, but `brew install inkspac
 
 Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` package, and run `goku`.
 
+### [Keyboard Maestro](https://www.keyboardmaestro.com/) – Mac automation
+
 ### [LibreOffice](https://www.libreoffice.org/) - Office suite
 
 ### [Obsidian](https://obsidian.md/) - Writing
