@@ -1,68 +1,154 @@
+// Place your key bindings in this file to override the defaults
 [
   {
-    "key": "ctrl+shift+q",
+    "key": "shift+m",
+    "command": "notebook.cell.joinBelow",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "shift+m",
+    "command": "notebook.cell.joinSelected",
+    "when": "notebookEditorFocused && !inputFocus && listMultiSelection"
+  },
+  {
+    "key": "shift+j",
+    "command": "list.expandSelectionDown",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+  },
+  {
+    "key": "shift+k",
+    "command": "list.expandSelectionUp",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+  },
+  {
+    "key": "g g",
+    "command": "notebook.focusTop",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "shift+g",
+    "command": "notebook.focusBottom",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  // TODO: This doesn't work correctly. Given a selection, pressing j or k deselects but then causes list.expandSelection{Up,Down} to no longer include the currently selected cell
+  // {
+  //   "key": "j",
+  //   "command": "runCommands",
+  //   "args": {
+  //     "commands": ["list.clear", "list.focusDown"]
+  //   },
+  //   "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused"
+  // },
+  // {
+  //   "key": "k",
+  //   "command": "runCommands",
+  //   "args": {
+  //     "commands": ["list.clear", "list.focusUp"]
+  //   },
+  //   "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused"
+  // },
+  {
+    "key": "h",
+    "command": "notebook.fold",
+    "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+  },
+  {
+    "key": "l",
+    "command": "notebook.unfold",
+    "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
+  },
+  {
+    "key": "0 0",
+    "command": "jupyter.restartkernel",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "i i",
+    "command": "jupyter.interruptkernel",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "q q",
+    "command": "jupyter.restartkernelandrunallcells",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "q a",
+    "command": "notebook.cell.executeCellsAbove",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "q b",
+    "command": "notebook.cell.executeCellAndBelow",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "list.focusPageDown",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "list.focusPageUp",
+    "when": "notebookEditorFocused && !inputFocus"
+  },
+  {
+    "key": "cmd+1",
+    "command": "-workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "cmd+2",
+    "command": "-workbench.action.focusSecondEditorGroup"
+  },
+  {
+    "key": "cmd+3",
+    "command": "-workbench.action.focusThirdEditorGroup"
+  },
+  {
+    "key": "cmd+4",
+    "command": "-workbench.action.focusFourthEditorGroup"
+  },
+  {
+    "key": "cmd+5",
+    "command": "-workbench.action.focusFifthEditorGroup"
+  },
+  {
+    "key": "cmd+6",
+    "command": "-workbench.action.focusSixthEditorGroup"
+  },
+  {
+    "key": "cmd+7",
+    "command": "-workbench.action.focusSeventhEditorGroup"
+  },
+  {
+    "key": "cmd+8",
+    "command": "-workbench.action.focusEighthEditorGroup"
+  },
+  {
+    "key": "cmd+9",
+    "command": "-workbench.action.lastEditorInGroup"
+  },
+  {
+    "key": "cmd+0",
+    "command": "-workbench.action.focusSideBar"
+  },
+  {
+    "key": "shift+cmd+g",
+    "command": "-editor.action.previousMatchFindAction",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+cmd+g",
+    "command": "-workbench.action.terminal.findPrevious",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "shift+cmd+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+cmd+`",
     "command": "workbench.action.toggleMaximizedPanel"
-  },
-
-  // Switch to tabs with CMD + N
-  {
-      "key": "cmd+1",
-      "command": "workbench.action.openEditorAtIndex1"
-  },
-  {
-      "key": "cmd+2",
-      "command": "workbench.action.openEditorAtIndex2"
-  },
-  {
-      "key": "cmd+3",
-      "command": "workbench.action.openEditorAtIndex3"
-  },
-  {
-      "key": "cmd+4",
-      "command": "workbench.action.openEditorAtIndex4"
-  },
-  {
-      "key": "cmd+5",
-      "command": "workbench.action.openEditorAtIndex5"
-  },
-  {
-      "key": "cmd+6",
-      "command": "workbench.action.openEditorAtIndex6"
-  },
-  {
-      "key": "cmd+7",
-      "command": "workbench.action.openEditorAtIndex7"
-  },
-  {
-      "key": "cmd+8",
-      "command": "workbench.action.openEditorAtIndex8"
-  },
-  {
-      "key": "cmd+9",
-      "command": "workbench.action.lastEditorInGroup"
-  },
-
-  // Switch to editor groups (panes?) with CTRL + N
-  {
-      "key": "ctrl+1",
-      "command": "workbench.action.focusFirstEditorGroup"
-  },
-  {
-      "key": "ctrl+2",
-      "command": "workbench.action.focusSecondEditorGroup"
-  },
-  {
-      "key": "ctrl+3",
-      "command": "workbench.action.focusThirdEditorGroup"
-  },
-
-  // CTRL + h/l (vim & tmux bindings) to switch panes
-  {
-    "key": "ctrl+h",
-    "command": "workbench.action.focusLeftGroup"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "workbench.action.focusRightGroup"
   },
 ]

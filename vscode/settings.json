@@ -1,72 +1,58 @@
 {
-    "workbench.startupEditor": "newUntitledFile",
-    "editor.rulers": [
-        79
-    ],
-    "python.linting.mypyEnabled": true,
-    "window.zoomLevel": 0,
-    "breadcrumbs.enabled": true,
-    "files.exclude": {
-        "**/__pycache__/": true,
-        ".mypy_cache/": true,
-        ".idea/": true,
-        // ".vscode/": true,
-        "venv/": true,
+    "[python]": {
+        "editor.formatOnType": true
     },
-
-    "explorer.openEditors.visible": 0,
-
-    "workbench.panel.defaultLocation": "bottom",
-    "workbench.editor.showIcons": false,
-    "workbench.statusBar.feedback.visible": false,
-
-    "editor.fontFamily": "'Menlo'",
-
-    "search.smartCase": true,
-
-    "vim.useSystemClipboard": true,
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.hovers.enabled": false,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    // "vim.statusBarColorControl": true,
-
-    "python.pythonPath": "${workspaceFolder}/venv/bin/python",
-
-    "todo.embedded.exclude": [
-        "**/venv/**",
-    ],
-    "todo.symbols.box": "[ ]",
-    "todo.symbols.cancelled": "[-]",
-    "todo.symbols.done": "[x]",
-    "editor.fontSize": 12,
-
+    "editor.inlineSuggest.enabled": true,
+    "notebook.cellToolbarLocation": {
+        "default": "hidden"
+    },
+    "notebook.globalToolbar": false,
+    "notebook.insertToolbarLocation": "notebookToolbar",
+    "notebook.showFoldingControls": "always",
+    "breadcrumbs.enabled": false,
+    "editor.smoothScrolling": true,
+    "editor.mouseWheelScrollSensitivity": 0.6,
+    "workbench.list.mouseWheelScrollSensitivity": 0.6,
+    "workbench.list.smoothScrolling": true,
+    "github.copilot.enable": {
+        "quarto": false,
+        "*": true
+    },
     "editor.minimap.enabled": false,
+    "editor.accessibilitySupport": "off",
+    "editor.experimental.asyncTokenization": true,
+    "editor.folding": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.decorations.badges": false,
+    "explorer.decorations.colors": false,
+    "workbench.tree.renderIndentGuides": "none",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "scm.diffDecorations": "gutter",
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.overviewRulerBorder": false,
+    "workbench.editor.showTabs": false,
+    "workbench.statusBar.visible": false,
+    "editor.lineNumbers": "off",
+    "zenMode.fullScreen": false,
+    "zenMode.centerLayout": false,
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.startupEditor": "none",
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.tips.enabled": false,
+    "workbench.activityBar.visible": false,
+    "vim.leader": ",",
+    "workbench.editor.decorations.colors": false,
 
-    // "workbench.activityBar.visible": false,
-
-    "python.jediEnabled": false,
-    // "python.autoComplete.preloadModules": [
-    //     "numpy",
-    //     "pandas",
-    //     "matplotlib",
-    //     "keras",
-    //     "django",
-    // ],
-    "workbench.fontAliasing": "auto",
-    "latex-workshop.view.pdf.viewer": "tab",
-    // "python.jediEnabled": false,
-
-    // "terminal.integrated.env.osx": {
-    //     "PATH": ""
-    // }
-
-    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
-
-    "vim.easymotion": true,
-
-    "vim.ignorecase": false,
-
-    "editor.lineNumbers": "relative",
-    "workbench.colorTheme": "Iceberg"
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // {
+        //     "before": ["<leader>", "s"],
+        //     "commands": ["workbench.action.files.save"]
+        // },
+        // {
+        //     "before": ["<leader>", "f"],
+        //     "commands": ["workbench.action.quickOpen"]
+        // },
+    ]
 }
