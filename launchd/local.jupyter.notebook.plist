@@ -10,7 +10,7 @@
     <true/>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/seem/.pyenv/shims/jupyter-notebook</string>
+        <string>/Users/seem/.pyenv/shims/jupyter-lab</string>
         <string>--debug</string>
     </array>
     <key>StandardErrorPath</key>
