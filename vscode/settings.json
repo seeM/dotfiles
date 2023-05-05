@@ -41,7 +41,7 @@
     "workbench.startupEditor": "none",
     "workbench.editor.untitled.hint": "hidden",
     "workbench.tips.enabled": false,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "vim.leader": ",",
     "workbench.editor.decorations.colors": false,
 
@@ -70,4 +70,16 @@
     "gitlens.showWhatsNewAfterUpgrades": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.statusBar.enabled": false,
+
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.experimentalLinkProvider": false,
+    "terminal.integrated.rendererType": "auto",
+    "workbench.editorAssociations": {
+        "*.qmd": "quarto.visualEditor"
+    },
+    "window.title": "${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
+    "workbench.editor.labelFormat": "medium",
 }
