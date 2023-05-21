@@ -14,10 +14,12 @@
  :applications {:chrome         ["^com\\.google\\.Chrome$"]
                 :emacs-disabled ["^com\\.googlecode\\.iterm2$"
                                  "^io\\.alacritty$"
+                                 "^org\\.alacritty$"
                                  "^org\\.gnu\\.Emacs$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
-                :alacritty      ["^io\\.alacritty$"]
+                :alacritty      ["^io\\.alacritty$"
+                                 "^org\\.alacritty$"]
                 :bear           ["^net\\.shinyfrog\\.bear$"]
                 :dbeaver        ["^org\\.jkiss\\.dbeaver\\.core\\.product$"]
                 :onenote        ["^com\\.microsoft\\.onenote\\.mac"]}
