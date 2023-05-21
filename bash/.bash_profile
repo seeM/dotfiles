@@ -24,3 +24,5 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ] && source "$HOME/google-cloud-sdk/completion.bash.inc" # enables shell completion
 
 [ -f "$HOME/.work_profile" ] && source "$HOME/.work_profile"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
