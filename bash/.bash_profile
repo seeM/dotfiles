@@ -26,3 +26,10 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 [ -f "$HOME/.work_profile" ] && source "$HOME/.work_profile"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+. "$HOME/.cargo/env"
+
+[ -s ~/.cargo/env ] && source ~/.cargo/env
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+. "$HOME/.cargo/env"

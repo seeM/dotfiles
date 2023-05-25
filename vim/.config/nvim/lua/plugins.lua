@@ -55,14 +55,15 @@ local function init()
     end,
   }
 
-  use {
-    'ludovicchabant/vim-gutentags',
-    config = function()
-      local gutentags_cache_dir = vim.fn.expand('$HOME') .. '/.gutentags'
-      vim.fn.system({ 'mkdir', '-p', gutentags_cache_dir})
-      vim.g.gutentags_cache_dir = gutentags_cache_dir
-    end,
-  }
+  -- NOTE: Causes a hang on exit in large repos
+  -- use {
+  --   'ludovicchabant/vim-gutentags',
+  --   config = function()
+  --     local gutentags_cache_dir = vim.fn.expand('$HOME') .. '/.gutentags'
+  --     vim.fn.system({ 'mkdir', '-p', gutentags_cache_dir})
+  --     vim.g.gutentags_cache_dir = gutentags_cache_dir
+  --   end,
+  -- }
 
   use {
     'ervandew/supertab',
