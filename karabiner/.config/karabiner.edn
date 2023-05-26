@@ -25,7 +25,7 @@
                 :onenote        ["^com\\.microsoft\\.onenote\\.mac"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
-           :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}]
+           :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}, {:device_id 4294969254}]
            :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}, {:vendor_id 1452 :product_id 638}]}
 
  :templates {:open "open \"%s\""}
@@ -67,8 +67,7 @@
                  [:!S##escape :!Sgrave_accent_and_tilde]
                  [:grave_accent_and_tilde :escape]]}
         {:des   "magic us keyboard"
-         :rules [:magic
-                 [:##non_us_backslash :##grave_accent_and_tilde]
+         :rules [[:##non_us_backslash :##grave_accent_and_tilde]
                  [:##grave_accent_and_tilde :##non_us_backslash]]}
         {:des   "cmd -> cmd+tab"
          :rules [[:left_command :left_command nil {:alone :!Ctab}]
