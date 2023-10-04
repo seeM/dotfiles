@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
-if which pyenv-virtualenv-init > /dev/null; then
-    eval "$(pyenv virtualenv-init -)";
-fi
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH:/Users/seem/.local/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin/":$PATH
+
 export JAVA_HOME=/usr/local/opt/openjdk@11
 export PATH="$JAVA_HOME/bin:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/usr/local/opt/openssl@3/lib -L/usr/local/opt/lapack/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I/usr/local/opt/openssl@3/include -I/usr/local/opt/lapack/include"
@@ -23,7 +20,6 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 
 [ -f "$HOME/.work_profile" ] && source "$HOME/.work_profile"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 . "$HOME/.cargo/env"
 
 [ -s ~/.cargo/env ] && source ~/.cargo/env
