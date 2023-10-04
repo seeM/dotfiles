@@ -9,8 +9,6 @@ if which pyenv-virtualenv-init > /dev/null; then
     eval "$(pyenv virtualenv-init -)";
 fi
 
-[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
-
 export PATH="$PATH:/Users/seem/.local/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin/":$PATH
@@ -33,3 +31,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 . "$HOME/.cargo/env"
+
+[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"

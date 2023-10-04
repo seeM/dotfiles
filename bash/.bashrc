@@ -128,14 +128,14 @@ get_venv_name() {
 
 venv() {
   if [ ! -f .python-version ]; then
-    pyenv virtualenv "$(get_venv_name)"
+    pyenv virtualenv "$(get_venv_name)" &&
     pyenv local "$(get_venv_name)"
   fi
 }
 
 venv_delete() {
   if [ -f .python-version ]; then
-    pyenv virtualenv-delete -f "$(get_venv_name)"
+    pyenv virtualenv-delete -f "$(get_venv_name)" &&
     rm .python-version
   fi
 }
@@ -165,6 +165,8 @@ alias gm='git commit --amend --verbose'
 
 alias gd='git diff'
 alias gdc='git diff --cached'
+
+alias gsu='git submodule update --recursive'
 
 alias gcb='git rev-parse --abbrev-ref HEAD'
 alias gp="git push \$(git_origin_or_fork) \$(gcb)"
@@ -197,20 +199,24 @@ git_default_branch() {
   basename "$(git symbolic-ref refs/remotes/origin/HEAD)"
 }
 
+git_has_upstream() {
+  git remote | grep -qe upstream
+}
+
 synk() {
   # TODO: allow to run from another branch without affecting branch or unstaged changes
   default=$(git_default_branch)
   if [ "$(git_current_branch)" != "$default" ]; then
-    echo 'Not on master'
+    echo 'ERROR: Not on main.'
     return 1
   fi
-  if ! git remote | grep -qe upstream; then
-    echo 'No upstream remote'
+  if ! git_has_upstream; then
+    echo 'ERROR: No upstream remote.'
     return 1
   fi
   if ! git diff --quiet; then
     # TODO: auto stash and unstash changes?
-    echo 'Unstaged changes'
+    echo 'ERROR: Unstaged changes.'
     return 1
   fi
   git fetch upstream "$default" &&
@@ -234,8 +240,15 @@ alias squash='git rebase -i $(git merge-base HEAD master)'
 
 close() {
   current=$(git_current_branch)
+  if [ "$current" == "$default" ]; then
+    echo "ERROR: Can't close main."
+    return 1
+  fi
   git checkout "$(git_default_branch)" &&
-  synk &&
+  git pull || return 1
+  if git_has_upstream; then
+    synk || return 1
+  fi
   git branch --delete "$current"
 }
 
@@ -341,3 +354,5 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 # --------------------------------------------------------------------
 pyvim() { vim "$(python -c "import ${1} as o; print(o.__file__)")"; }
 pyshow() { pygmentize "$(python -c "import ${1} as o; print(o.__file__)")"; }
+
+[ -f "$HOME/.workrc" ] && source "$HOME/.workrc"
