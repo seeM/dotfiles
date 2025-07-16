@@ -1,33 +1,16 @@
-local packer = nil
-local function init()
-  if packer == nil then
-    packer = require('packer')
-    packer.init({ disable_commands = true })
-  end
-
-  local use = packer.use
-  packer.reset()
-
-  use 'wbthomason/packer.nvim'
-
+return {
   -- Basics
-
-  use {
-    'tpope/vim-commentary',      -- Comment verbs
-    config = function()
-      -- TODO: handle vscode?
-    end,
-  }
-  use 'tpope/vim-endwise'         -- wisely add "end"
-  use 'rstacruz/vim-closer'       -- endwise for brackets
-  use 'tpope/vim-eunuch'          -- UNIX shell commands
-  use 'tpope/vim-repeat'          -- . command for plugins
-  use 'tpope/vim-rsi'             -- Emacs keys in command mode
-  use 'tpope/vim-surround'        -- Objects and verbs for "surroundings"
-  use 'tpope/vim-vinegar'         -- Enhance netrw (built-in file browser)
-  use 'tpope/vim-unimpaired'      -- Convenient mappings on [* and ]*
-  use 'tpope/vim-ragtag'          -- HTML tag completion
-  use {
+  'tpope/vim-commentary',      -- Comment verbs
+  'tpope/vim-endwise',           -- wisely add "end"
+  'rstacruz/vim-closer',         -- endwise for brackets
+  'tpope/vim-eunuch',            -- UNIX shell commands
+  'tpope/vim-repeat',            -- . command for plugins
+  'tpope/vim-rsi',               -- Emacs keys in command mode
+  'tpope/vim-surround',          -- Objects and verbs for "surroundings"
+  'tpope/vim-vinegar',           -- Enhance netrw (built-in file browser)
+  'tpope/vim-unimpaired',        -- Convenient mappings on [* and ]*
+  'tpope/vim-ragtag',            -- HTML tag completion
+  {
     'tpope/vim-fugitive',        -- Git interface
     config = function()
       -- v for vcs
@@ -35,84 +18,88 @@ local function init()
       -- TODO: Probably better to use an autocmd for the <c-w>o part?
       -- vim.cmd[[autocmd BufNewFile,BufRead */.git/index :normal <c-w>o]]
     end,
-  }
-  use 'tpope/vim-sleuth'          -- Infer shiftwidth and expandtab
+  },
+  'tpope/vim-sleuth',            -- Infer shiftwidth and expandtab
 
-  use {
+  {
     'github/copilot.vim',
     cond = not_in_vscode,
-  }
+  },
 
-  use 'romainl/vim-cool'          -- Only highlight while searching
+  'romainl/vim-cool',            -- Only highlight while searching
 
-  use {
+  {
     'hynek/vim-python-pep8-indent',
-    cond = vim.g.vscode == nil,
-  }
+    cond = function() return vim.g.vscode == nil end,
+  },
 
-  use {
+  {
     'jpalardy/vim-slime',
     config = function()
       vim.g.slime_target = 'tmux'
       vim.g.slime_default_config = { socket_name = 'default', target_pane = '{right}' }
       vim.g.slime_python_ipython = 1
     end,
-  }
+  },
 
-  use {
+  {
     'AndrewRadev/splitjoin.vim',  -- Syntax-aware line split/join 
     config = function()
       vim.g.splitjoin_trailing_comma = 1
       vim.g.splitjoin_python_brackets_on_separate_lines = 1
       vim.g.splitjoin_quiet = 1
     end,
-  }
+  },
 
   -- NOTE: Causes a hang on exit in large repos
-  -- use {
+  -- {
   --   'ludovicchabant/vim-gutentags',
   --   config = function()
   --     local gutentags_cache_dir = vim.fn.expand('$HOME') .. '/.gutentags'
   --     vim.fn.system({ 'mkdir', '-p', gutentags_cache_dir})
   --     vim.g.gutentags_cache_dir = gutentags_cache_dir
   --   end,
-  -- }
+  -- },
 
-  use {
+  {
     'ervandew/supertab',
+    commit = '6ce779367e2c4947367fcce401b77251d2bb47ab',
     config = function()
     end,
-  }
+  },
 
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+      'nvimtools/none-ls-extras.nvim',
+    },
     cond = not_in_vscode,
     config = function()
-      require('null-ls').setup({
+      local null_ls = require('null-ls')
+      null_ls.setup({
         debounce = 100,
         sources = {
           -- JavaScript
-          require("null-ls").builtins.formatting.eslint,
-          -- Shell
-          require("null-ls").builtins.diagnostics.shellcheck,
+          require("none-ls.diagnostics.eslint"),
           -- Lua
-          require("null-ls").builtins.formatting.stylua,
+          null_ls.builtins.formatting.stylua,
           -- Python
-          -- require("null-ls").builtins.diagnostics.flake8,
-          require("null-ls").builtins.formatting.black,
-          require("null-ls").builtins.formatting.isort,
+          -- null_ls.builtins.diagnostics.flake8,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.isort,
         },
         on_attach = custom_on_attach,
       })
     end
-  }
+  },
 
-  use {
+  {
     'nvim-telescope/telescope.nvim',  -- Fuzzy finder
-    requires = {
-      {'nvim-lua/plenary.nvim'},
-      {'nvim/telescope/telescope-fzf-native.nvim'},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzf-native.nvim',
     },
     cond = not_in_vscode,
     config = function()
@@ -135,33 +122,40 @@ local function init()
       }
       telescope.load_extension('fzf')
     end,
-  }
+  },
 
-  use {
+  {
     'nvim-telescope/telescope-fzf-native.nvim',
     cond = not_in_vscode,
-    run = 'make',
-  }
+    build = 'make',
+  },
 
   -- Don't actually use much but would like to
 
-  -- use 'tpope/vim-dispatch'        -- Manage builds
-  -- use 'tpope/vim-jdaddy'          -- JSON mappings
-  -- use 'tpope/vim-projectionist'   -- Project configuration
-  -- use 'tpope/vim-rhubarb'         -- GitHub for fugitive
+  -- 'tpope/vim-dispatch',        -- Manage builds
+  -- 'tpope/vim-jdaddy',          -- JSON mappings
+  -- 'tpope/vim-projectionist',   -- Project configuration
+  -- 'tpope/vim-rhubarb',         -- GitHub for fugitive
 
-  -- use 'easymotion/vim-easymotion'
+  -- 'easymotion/vim-easymotion',
 
   -- Colorschemes
 
-  use 'cocopon/iceberg.vim'
-  use 'romainl/Apprentice'
+  {
+    'cocopon/iceberg.vim',
+    lazy = false,  -- Load immediately since it's the main colorscheme
+    priority = 1000, -- Load before other plugins
+    config = function()
+      vim.cmd[[colorscheme iceberg]]
+    end,
+  },
+  'romainl/Apprentice',
 
   -- Language server
 
-  use {
+  {
     'neovim/nvim-lspconfig',      -- Simplify lsp configuration
-    cond = vim.g.vscode == nil,
+    cond = function() return vim.g.vscode == nil end,
     config = function()
       local nvim_lsp = require('lspconfig')
       -- Use an on_attach function to only map the following keys
@@ -189,11 +183,11 @@ local function init()
         buf_set_keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
         buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
         buf_set_keymap('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-        buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
       end
 
       -- nvim-cmp supports additional completion capabilities
@@ -201,15 +195,16 @@ local function init()
 
       -- Use a loop to conveniently call 'setup' on multiple servers and
       -- map buffer local keybindings when the language server attaches
-      local servers = { 'sqlls', 'terraformls', 'tsserver' }
-      -- local servers = { 'terraformls', 'tsserver' }
+      local servers = { 'sqlls', 'terraformls', 'tsserver', 'bashls', 'ruff' }
       for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {
+        vim.lsp.enable(lsp)
+        vim.lsp.config(lsp, {
           on_attach = custom_on_attach,
           capabilities = capabilities,
-        }
+        })
       end
-      nvim_lsp.pyright.setup {
+      vim.lsp.enable('pyright')
+      vim.lsp.config('pyright', {
         on_attach = custom_on_attach,
         capabilities = capabilities,
         settings = {
@@ -219,10 +214,10 @@ local function init()
             }
           }
         }
-      }
+      })
     end,
-  }
-  use {
+  },
+  {
     'hrsh7th/nvim-cmp',           -- Autocomplete
     cond = not_in_vscode,
     config = function()
@@ -257,8 +252,8 @@ local function init()
         },
       })
     end,
-  }
-  -- use {
+  },
+  -- {
   --   'ray-x/lsp_signature.nvim',   -- Function signature popup with arg highlighting
   --   config = function()
   --     require'lsp_signature'.setup({
@@ -269,24 +264,24 @@ local function init()
   --         }
   --       })
   --   end,
-  -- }
+  -- },
   -- Completion sources
-  use {
+  {
     'hrsh7th/cmp-buffer',
     cond = not_in_vscode,
-  }
-  use {
+  },
+  {
     'hrsh7th/cmp-nvim-lsp',
     cond = not_in_vscode,
-  }
+  },
 
   -- Languages
 
-  use 'hashivim/vim-terraform'
+  'hashivim/vim-terraform',
 
-  -- use {
+  -- {
   --   'nvim-treesitter/nvim-treesitter',
-  --   run = ':TSUpdate',
+  --   build = ':TSUpdate',
   --   config = function()
   --     require('nvim-treesitter.configs').setup {
   --       highlight = {
@@ -309,14 +304,14 @@ local function init()
   --       },
   --     }
   --   end
-  -- }
+  -- },
 
-  -- use {
+  -- {
   --   'ms-jpq/coq_nvim',
   --   branch = 'coq',
-  -- }
+  -- },
 
-  -- use {
+  -- {
   --   'dense-analysis/ale',
   --   config = function()
   --     vim.g.ale_fixers = {
@@ -333,24 +328,14 @@ local function init()
   --     vim.api.nvim_set_keymap('n', 'gk', "<cmd>ALEPreviousWrap<cr>", { noremap = true, silent = true })
   --     vim.api.nvim_set_keymap('n', '<leader>x', "<cmd>ALEFix<cr>", { noremap = true, silent = true })
   --   end,
-  -- }
+  -- },
 
-  use {
+  {
     'iamcco/markdown-preview.nvim',
     cond = not_in_vscode,
     config = function()
     end,
-    run = 'cd app && yarn install',
+    build = 'cd app && yarn install',
     -- cmd = 'MarkdownPreview',
-  }
-
-end
-
-local plugins = setmetatable({}, {
-  __index = function(_, key)
-    init()
-    return packer[key]
-  end,
-})
-
-return plugins
+  },
+}

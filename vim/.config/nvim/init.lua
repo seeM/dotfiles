@@ -1,14 +1,6 @@
 -- Plugin manager
 -------------------------------------------------------------------------------
 
--- Bootstrap packer (plugin manager)
-local fn = vim.fn
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd 'packadd packer.nvim'
-end
-
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
@@ -66,7 +58,6 @@ vim.g.python3_host_prog = 'python'
 -------------------------------------------------------------------------------
 
 vim.o.termguicolors = true
-vim.cmd [[colorscheme iceberg]]
 vim.o.cursorline = true
 vim.o.listchars = [[tab:» ,extends:›,precedes:‹,nbsp:·,trail:·]]
 vim.o.tabstop = 4
@@ -205,14 +196,8 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 ]]
 
--- Packer commands
-
-vim.cmd [[command! PackerInstall packadd packer.nvim | lua require('plugins').install()]]
-vim.cmd [[command! PackerUpdate packadd packer.nvim | lua require('plugins').update()]]
-vim.cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
-vim.cmd [[command! PackerClean packadd packer.nvim | lua require('plugins').clean()]]
-vim.cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
-
 -- Open .jupyterlab-settings as json
 
 vim.cmd[[autocmd BufNewFile,BufRead *.jupyterlab-settings set syntax=json]]
+
+require("config.lazy")
