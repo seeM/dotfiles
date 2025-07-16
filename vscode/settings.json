@@ -32,7 +32,7 @@
     "scm.diffDecorations": "gutter",
     "editor.hideCursorInOverviewRuler": true,
     "editor.overviewRulerBorder": false,
-    "workbench.editor.showTabs": false,
+    "workbench.editor.showTabs": "single",
     "workbench.statusBar.visible": false,
     "editor.lineNumbers": "off",
     "zenMode.fullScreen": false,
@@ -41,7 +41,6 @@
     "workbench.startupEditor": "none",
     "workbench.editor.untitled.hint": "hidden",
     "workbench.tips.enabled": false,
-    "workbench.activityBar.visible": true,
     "vim.leader": ",",
     "workbench.editor.decorations.colors": false,
 

@@ -8,6 +8,10 @@
     "preprocessors": [
       "jupyter_contrib_nbextensions.nbconvert_support.CodeFoldingPreprocessor",
       "jupyter_contrib_nbextensions.nbconvert_support.PyMarkdownPreprocessor"
+    ],
+    "extra_template_paths": [
+      ".",
+      "/Users/seem/.pyenv/versions/3.9.18/lib/python3.9/site-packages/jupyter_contrib_nbextensions/templates"
     ]
   }
 }

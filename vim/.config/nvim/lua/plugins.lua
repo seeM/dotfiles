@@ -12,7 +12,12 @@ local function init()
 
   -- Basics
 
-  use 'tpope/vim-commentary'      -- Comment verbs
+  use {
+    'tpope/vim-commentary',      -- Comment verbs
+    config = function()
+      -- TODO: handle vscode?
+    end,
+  }
   use 'tpope/vim-endwise'         -- wisely add "end"
   use 'rstacruz/vim-closer'       -- endwise for brackets
   use 'tpope/vim-eunuch'          -- UNIX shell commands
@@ -33,9 +38,17 @@ local function init()
   }
   use 'tpope/vim-sleuth'          -- Infer shiftwidth and expandtab
 
+  use {
+    'github/copilot.vim',
+    cond = not_in_vscode,
+  }
+
   use 'romainl/vim-cool'          -- Only highlight while searching
 
-  use 'hynek/vim-python-pep8-indent'
+  use {
+    'hynek/vim-python-pep8-indent',
+    cond = vim.g.vscode == nil,
+  }
 
   use {
     'jpalardy/vim-slime',
@@ -74,6 +87,7 @@ local function init()
   use {
     'jose-elias-alvarez/null-ls.nvim',
     requires = { {'nvim-lua/plenary.nvim'}, {'neovim/nvim-lspconfig'} },
+    cond = not_in_vscode,
     config = function()
       require('null-ls').setup({
         debounce = 100,
@@ -100,6 +114,7 @@ local function init()
       {'nvim-lua/plenary.nvim'},
       {'nvim/telescope/telescope-fzf-native.nvim'},
     },
+    cond = not_in_vscode,
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }, previewer = false })<cr>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'telescope.builtin'.buffers()<cr>", { noremap = true, silent = true })
@@ -124,6 +139,7 @@ local function init()
 
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
+    cond = not_in_vscode,
     run = 'make',
   }
 
@@ -145,6 +161,7 @@ local function init()
 
   use {
     'neovim/nvim-lspconfig',      -- Simplify lsp configuration
+    cond = vim.g.vscode == nil,
     config = function()
       local nvim_lsp = require('lspconfig')
       -- Use an on_attach function to only map the following keys
@@ -207,6 +224,7 @@ local function init()
   }
   use {
     'hrsh7th/nvim-cmp',           -- Autocomplete
+    cond = not_in_vscode,
     config = function()
       vim.o.completeopt = 'menuone,noselect'
       local cmp = require'cmp'
@@ -253,8 +271,14 @@ local function init()
   --   end,
   -- }
   -- Completion sources
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lsp'
+  use {
+    'hrsh7th/cmp-buffer',
+    cond = not_in_vscode,
+  }
+  use {
+    'hrsh7th/cmp-nvim-lsp',
+    cond = not_in_vscode,
+  }
 
   -- Languages
 
@@ -313,6 +337,7 @@ local function init()
 
   use {
     'iamcco/markdown-preview.nvim',
+    cond = not_in_vscode,
     config = function()
     end,
     run = 'cd app && yarn install',

@@ -5,7 +5,8 @@
     "collapsible_headings/main": true,
     "hide_input/main": true,
     "toc2/main": true,
-    "spellchecker/main": true
+    "spellchecker/main": true,
+    "contrib_nbextensions_help_item/main": true
   },
   "rise": {
     "enable_chalkboard": false,
@@ -13,7 +14,7 @@
   },
   "Notebook": {
     "Header": false,
-    "Toolbar": false
+    "Toolbar": true
   },
   "toc2": {
     "number_sections": false

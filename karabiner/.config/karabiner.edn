@@ -15,7 +15,8 @@
                 :emacs-disabled ["^com\\.googlecode\\.iterm2$"
                                  "^io\\.alacritty$"
                                  "^org\\.alacritty$"
-                                 "^org\\.gnu\\.Emacs$"]
+                                 "^org\\.gnu\\.Emacs$"
+                                 "^com\\.microsoft\\.VSCode$"]
                 :firefox        ["^org\\.mozilla\\.firefox$"]
                 :iterm          ["^com\\.googlecode\\.iterm2$"]
                 :alacritty      ["^io\\.alacritty$"
@@ -25,15 +26,17 @@
                 :onenote        ["^com\\.microsoft\\.onenote\\.mac"]}
 
  :devices {:wasd              [{:vendor_id 1241 :product_id 321}]
-           :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}, {:device_id 4294969254}]
-           :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}, {:vendor_id 1452 :product_id 638}]}
+           :macbook-internal  [{:vendor_id 1452 :product_id 631}, {:vendor_id 1452 :product_id 833}, {:device_id 4294969254} {:is_built_in_keyboard true} {:vendor_id 1133 :product_id 45915}]
+           :magic             [{:vendor_id 1452 :product_id 615}, {:vendor_id 76 :product_id 615}, {:vendor_id 1452 :product_id 638}]
+           :glove             [{:product_id 10203 :vendor_id 5824}]}
 
  :templates {:open "open \"%s\""}
 
  :simlayers {:launch-mode {:key :w}}
 
  :main [{:des   "caps to ctrl"
-         :rules [[:##caps_lock :left_control]]}
+         :rules [:!glove
+                 [:##caps_lock :left_control]]}
         {:des   "global emacs keys"
          :rules [:!emacs-disabled
                  [:!T##b :left_arrow]
@@ -45,9 +48,9 @@
         {:des   "fn arrow key shortcuts"
          :rules [[:!FSj :!Fleft_arrow]
                  [:!FSl :!Fright_arrow]
-                 [:!F##j :left_arrow]
-                 [:!F##i :up_arrow]
-                 [:!F##k :down_arrow]
+                 [:!F##h :left_arrow]
+                 [:!F##k :up_arrow]
+                 [:!F##j :down_arrow]
                  [:!F##l :right_arrow]]}
         {:des   "fn media key shortcuts"
          :rules [[:!Fw :play_or_pause]
@@ -55,22 +58,23 @@
                  [:!Fe :fastforward]]}
         {:des   "ctrl-[ to esc"
          :rules [[:!Topen_bracket :escape]]}
+        {:des   "ctrl-m to enter"
+         :rules [[:!Tm :return_or_enter]]}
         {:des   "meta key"
-         :rules [:!emacs-disabled
+         :rules [:!emacs-disabed
                  [:!O#Sb :!Oleft_arrow]
                  [:!O#Sf :!Oright_arrow]
                  [:!Od :!Odelete_forward]
                  [:!Oh :!Odelete_or_backspace]]}
-        {:des   "esc key on 60 key kb"
+        {:des   "wasd keyboard esc to tilde"
          :rules [:wasd
-                 [:##escape :##grave_accent_and_tilde]
-                 [:!S##escape :!Sgrave_accent_and_tilde]
+                 [:##escape :##non_us_backslash]
+                 [:!TSgrave_accent_and_tilde :!TSnon_us_backslash]
+                 ; Trying to include ## here breaks the escape to tilde rule.
                  [:grave_accent_and_tilde :escape]]}
-        {:des   "magic us keyboard"
-         :rules [[:##non_us_backslash :##grave_accent_and_tilde]
-                 [:##grave_accent_and_tilde :##non_us_backslash]]}
         {:des   "cmd -> cmd+tab"
-         :rules [[:left_command :left_command nil {:alone :!Ctab}]
+         :rules [:!glove
+                 [:left_command :left_command nil {:alone :!Ctab}]
                  [:right_command :right_command nil {:alone :!Ctab}]]}
         {:des   "emacs keys in dbeaver"
          :rules [:dbeaver :onenote
@@ -102,6 +106,30 @@
                  [:!Ch [:!Tt :h]]
                  [:!Ck [:!Tt :k]]
                  [:!Cj [:!Tt :j]]]}
-        ]
+        {:des    "glove caps -> fn"
+         :rules  [:glove
+                  [:##caps_lock :fn]]}
+
+        ; {:des    "glove control <-> command"
+        ;  :rules  [:glove
+        ;           [:##left_control :##left_command]
+        ;           [:##right_control :##right_command]]}
+        ; {:des    "glove command <-> control"
+        ;  :rules  [:glove
+        ;           [:##left_command :##left_control]
+        ;           [:##right_command :##right_control]]}
+        ; {:des    "glove escape <-> control"
+        ;  :rules  [:glove
+        ;           [:##escape :##left_control nil {:alone :escape}]]}
+        ; {:des    "glove plus <-> tilde"
+        ;  :rules  [:glove
+        ;           [:##escape :##left_control]]}
+        ; {:des    "glove up <-> down"
+        ;  :rules  [:glove
+        ;           [:##up_arrow :##down_arrow]]}
+        ; {:des    "glove down <-> up"
+        ;  :rules  [:glove
+        ;           [:##down_arrow :##up_arrow]]}
+         ]
  :simlayer-threshold 210
  :alone 120}

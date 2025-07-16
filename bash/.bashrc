@@ -91,8 +91,8 @@ fi
 
 alias tmux='tmux -2'
 
-command -v bat > /dev/null 2>&1 && alias ls=bat
-command -v exa > /dev/null 2>&1 && alias ls=exa
+# command -v bat > /dev/null 2>&1 && alias ls=bat
+# command -v exa > /dev/null 2>&1 && alias ls=exa
 command -v batman > /dev/null 2>&1 && alias man=batman
 command -v nvim > /dev/null 2>&1 && alias vi=nvim && alias vim=nvim
 alias batlog='bat --paging=never -l log'
@@ -355,4 +355,10 @@ command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | he
 pyvim() { vim "$(python -c "import ${1} as o; print(o.__file__)")"; }
 pyshow() { pygmentize "$(python -c "import ${1} as o; print(o.__file__)")"; }
 
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 [ -f "$HOME/.workrc" ] && source "$HOME/.workrc"
+

@@ -18,3 +18,4 @@ ipython/.ipython/profile_default/history.sqlite
 *.stdout
 *.jupyterlab-workspace
 migrated
+dhist
