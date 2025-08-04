@@ -75,7 +75,8 @@
     "workbench.editorAssociations": {
         "*.qmd": "quarto.visualEditor"
     },
-    "window.title": "${activeEditorShort} • ${activeFolderMedium} • ${rootNameShort}",
+    "window.title": "${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootNameShort}",
     "workbench.editor.labelFormat": "medium",
     "vim.useSystemClipboard": true,
+    "window.titleSeparator": " • ",
 }
