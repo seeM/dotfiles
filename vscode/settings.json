@@ -10,14 +10,8 @@
     "notebook.insertToolbarLocation": "notebookToolbar",
     "notebook.showFoldingControls": "always",
     "breadcrumbs.enabled": false,
-    "editor.smoothScrolling": true,
     "editor.mouseWheelScrollSensitivity": 0.6,
     "workbench.list.mouseWheelScrollSensitivity": 0.6,
-    "workbench.list.smoothScrolling": true,
-    "github.copilot.enable": {
-        "quarto": false,
-        "*": true
-    },
     "editor.minimap.enabled": false,
     "editor.accessibilitySupport": "off",
     "editor.experimental.asyncTokenization": true,
@@ -37,22 +31,25 @@
     "editor.lineNumbers": "off",
     "zenMode.fullScreen": false,
     "zenMode.centerLayout": false,
-    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorTheme": "Iceberg",
     "workbench.startupEditor": "none",
-    "workbench.editor.untitled.hint": "hidden",
     "workbench.tips.enabled": false,
     "vim.leader": ",",
     "workbench.editor.decorations.colors": false,
 
     "vim.normalModeKeyBindingsNonRecursive": [
-        // {
-        //     "before": ["<leader>", "s"],
-        //     "commands": ["workbench.action.files.save"]
-        // },
-        // {
-        //     "before": ["<leader>", "f"],
-        //     "commands": ["workbench.action.quickOpen"]
-        // },
+        {
+            "before": ["<leader>", "s"],
+            "commands": ["workbench.action.files.save"]
+        },
+        {
+            "before": ["<leader>", "p"],
+            "commands": ["workbench.action.openRecent"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
     ],
     "vim.handleKeys": {
         "<C-a>": false,
@@ -78,6 +75,7 @@
     "workbench.editorAssociations": {
         "*.qmd": "quarto.visualEditor"
     },
-    "window.title": "${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
+    "window.title": "${activeEditorShort} • ${activeFolderMedium} • ${rootNameShort}",
     "workbench.editor.labelFormat": "medium",
+    "vim.useSystemClipboard": true,
 }
