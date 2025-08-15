@@ -1,3 +1,17 @@
+;; !  | means mandatory
+;; #  | means optional
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+;; P  | caps_lock
+;; !! | mandatory command + control + optional + shift (hyper)
+;; ## | optional any
 {:profiles
  {:Default {:default true
             :sim 10
@@ -63,6 +77,7 @@
         {:des   "meta key"
          :rules [:!emacs-disabed
                  [:!O#Sb :!Oleft_arrow]
+                 [:!W#Rb :!Oleft_arrow]
                  [:!O#Sf :!Oright_arrow]
                  [:!Od :!Odelete_forward]
                  [:!Oh :!Odelete_or_backspace]]}
@@ -116,9 +131,13 @@
                  [:!Q0 [:!Tt :0]]
                  ; Panes
                  [:!Cl [:!Tt :l]]
+                 [:!Ql [:!Tt :l]]
                  [:!Ch [:!Tt :h]]
+                 [:!Qh [:!Tt :h]]
                  [:!Ck [:!Tt :k]]
-                 [:!Cj [:!Tt :j]]]}
+                 [:!Qk [:!Tt :k]]
+                 [:!Cj [:!Tt :j]]
+                 [:!Qj [:!Tt :j]]]}
         {:des    "glove caps -> fn"
          :rules  [:glove
                   [:##caps_lock :fn]]}
