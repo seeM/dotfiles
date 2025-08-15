@@ -87,20 +87,33 @@
          :rules [:iterm :alacritty
                  ; Tabs
                  [:!Ct [:!Tt :c]]
+                 [:!Qt [:!Tt :c]]
                  [:!CSd [:!Tt :s]]
+                 [:!QRd [:!Tt :s]]
                  [:!Cd [:!Tt :v]]
+                 [:!Qd [:!Tt :v]]
                  [:!CSopen_bracket [:!Tt :p]]
                  [:!CSclose_bracket [:!Tt :n]]
                  [:!C1 [:!Tt :1]]
+                 [:!Q1 [:!Tt :1]]
                  [:!C2 [:!Tt :2]]
+                 [:!Q2 [:!Tt :2]]
                  [:!C3 [:!Tt :3]]
+                 [:!Q3 [:!Tt :3]]
                  [:!C4 [:!Tt :4]]
+                 [:!Q4 [:!Tt :4]]
                  [:!C5 [:!Tt :5]]
+                 [:!Q5 [:!Tt :5]]
                  [:!C6 [:!Tt :6]]
+                 [:!Q6 [:!Tt :6]]
                  [:!C7 [:!Tt :7]]
+                 [:!Q7 [:!Tt :7]]
                  [:!C8 [:!Tt :8]]
+                 [:!Q8 [:!Tt :8]]
                  [:!C9 [:!Tt :9]]
+                 [:!Q9 [:!Tt :9]]
                  [:!C0 [:!Tt :0]]
+                 [:!Q0 [:!Tt :0]]
                  ; Panes
                  [:!Cl [:!Tt :l]]
                  [:!Ch [:!Tt :h]]
@@ -109,27 +122,6 @@
         {:des    "glove caps -> fn"
          :rules  [:glove
                   [:##caps_lock :fn]]}
-
-        ; {:des    "glove control <-> command"
-        ;  :rules  [:glove
-        ;           [:##left_control :##left_command]
-        ;           [:##right_control :##right_command]]}
-        ; {:des    "glove command <-> control"
-        ;  :rules  [:glove
-        ;           [:##left_command :##left_control]
-        ;           [:##right_command :##right_control]]}
-        ; {:des    "glove escape <-> control"
-        ;  :rules  [:glove
-        ;           [:##escape :##left_control nil {:alone :escape}]]}
-        ; {:des    "glove plus <-> tilde"
-        ;  :rules  [:glove
-        ;           [:##escape :##left_control]]}
-        ; {:des    "glove up <-> down"
-        ;  :rules  [:glove
-        ;           [:##up_arrow :##down_arrow]]}
-        ; {:des    "glove down <-> up"
-        ;  :rules  [:glove
-        ;           [:##down_arrow :##up_arrow]]}
          ]
  :simlayer-threshold 210
  :alone 120}
