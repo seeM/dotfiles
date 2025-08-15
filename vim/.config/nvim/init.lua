@@ -64,6 +64,10 @@ vim.o.tabstop = 4
 vim.o.list = true
 vim.o.showbreak = '↪ '
 
+-- Hybrid line numbers: absolute on current line, relative on others
+vim.o.number = true
+vim.o.relativenumber = true
+
 -- Highlight git merge conflict markers using the ErrorMsg highlight group
 vim.cmd [[match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$']]
 
