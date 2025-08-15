@@ -9,7 +9,6 @@
     "notebook.globalToolbar": false,
     "notebook.insertToolbarLocation": "notebookToolbar",
     "notebook.showFoldingControls": "always",
-    "breadcrumbs.enabled": false,
     "editor.mouseWheelScrollSensitivity": 0.6,
     "workbench.list.mouseWheelScrollSensitivity": 0.6,
     "editor.minimap.enabled": false,
@@ -26,9 +25,7 @@
     "scm.diffDecorations": "gutter",
     "editor.hideCursorInOverviewRuler": true,
     "editor.overviewRulerBorder": false,
-    "workbench.editor.showTabs": "single",
-    "workbench.statusBar.visible": false,
-    "editor.lineNumbers": "off",
+    "editor.lineNumbers": "relative",
     "zenMode.fullScreen": false,
     "zenMode.centerLayout": false,
     "workbench.colorTheme": "Iceberg",
@@ -40,15 +37,35 @@
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": ["<leader>", "s"],
-            "commands": ["workbench.action.files.save"]
+            "commands": ["workbench.action.files.save"],
         },
         {
             "before": ["<leader>", "p"],
-            "commands": ["workbench.action.openRecent"]
+            "commands": ["workbench.action.openRecent"],
         },
         {
             "before": ["<leader>", "f"],
-            "commands": ["workbench.action.quickOpen"]
+            "commands": ["workbench.action.quickOpen"],
+        },
+        {
+            "before": ["u"],
+            "commands": ["undo"],
+        },
+        {
+            "before": ["<C-r>"],
+            "commands": ["redo"],
+        },
+        {
+            "before": ["g", "p"],
+            "commands": ["editor.action.marker.prevInFiles"],
+        },
+        {
+            "before": ["g", "n"],
+            "commands": ["editor.action.marker.nextInFiles"],
+        },
+        {
+            "before": ["<leader>", "t", "t"],
+            "commands": ["testing.runAtCursor"],
         },
     ],
     "vim.handleKeys": {
@@ -75,8 +92,16 @@
     "workbench.editorAssociations": {
         "*.qmd": "quarto.visualEditor"
     },
-    "window.title": "${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootNameShort}",
     "workbench.editor.labelFormat": "medium",
     "vim.useSystemClipboard": true,
     "window.titleSeparator": " • ",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "git.autofetch": true,
+    "githubPullRequests.pullBranch": "never",
+    "[typescript]": {
+    
+    },
+    "git.confirmSync": false,
+    "git.replaceTagsWhenPull": true,
+    "diffEditor.renderSideBySide": false,
 }
