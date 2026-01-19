@@ -1,68 +1,48 @@
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the start of this file.
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-#### END FIG ENV VARIABLES ####
-# Source: https://github.com/seem/dotfiles
-
-# System default
-# --------------------------------------------------------------------
-
-
-
-
-# TODO: Remove all plugins...
-# TODO: Custom prompt...
-# TODO: Join back into a single file...
+# Source modular config files
 source ~/.zsh/00-environment.zsh
 source ~/.zsh/01-history.zsh
 source ~/.zsh/02-keybindings.zsh
 source ~/.zsh/03-aliases.zsh
+source ~/.zsh/04-git.zsh
+source ~/.zsh/05-fzf.zsh
 
-source ~/.zplug/init.zsh
+# Zinit plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
-zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
-zplug load
+# Plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light Aloxaf/fzf-tab
+zinit light hlissner/zsh-autopair
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light wfxr/forgit
 
-PROMPT="%F{green}%B%n@%m%f:%F{blue}%~%f%b$ "
-
-# zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
-# zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
-
-# Use menu-styled completion
+# Completions
 zstyle ':completion:*' menu select
+autoload -Uz compinit && compinit
 
-# Source plugins and add commands to $PATH
-# zplug load
-
-# autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
-# Disables flow control (I think?) so we can use ctrl-s to forward search.
-stty stop undef
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/seem/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/seem/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/seem/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/seem/google-cloud-sdk/completion.zsh.inc'; fi
-
-export GREP_OPTIONS="--color"
-
-# export WORDCHARS='*?[]~&;!$%^<>'
-[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
-
-export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
-
-# Disables ctrl-q + ctrl-s (I think), so we can use ctrl-q in vim mappings
+# Disable ctrl-s/ctrl-q
 stty -ixon
 
-# FZF
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-# export FZF_DEFAULT_COMMAND='ag -l --hidden'
+# Starship prompt
+eval "$(starship init zsh)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Zoxide (smarter cd)
+eval "$(zoxide init zsh)"
+
+# Atuin (better shell history)
+eval "$(atuin init zsh)"
+
+# Direnv (auto-load .envrc)
+eval "$(direnv hook zsh)"
+
+# Work config
+[ -f "$HOME/.workrc" ] && source "$HOME/.workrc"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -78,4 +58,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-

@@ -1,100 +1,93 @@
+# Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-alias vi='vim'
+alias notes='cd ~/Google\ Drive/My\ Drive/notes'
+alias co='cd ~/code/$(ls ~/code | fzf)'
 
-alias psql="/Applications/Postgres.app/Contents/Versions/10/bin/psql"
-
-alias venv='source .venv/bin/activate'
-
-# -h : human-readable file sizes (bytes, etc.)
-# -a : show hidden files
-# -l : list files
-# -G : colorize output
+# Files
 alias ls='ls -G'
 alias l='ls'
 alias ll='ls -halG'
 
-alias e="vim"
+# Tools
+alias grep='grep --color'
+alias k5='kill -9 %%'
+alias tmux='tmux -2'
+command -v batman > /dev/null 2>&1 && alias man=batman
+command -v nvim > /dev/null 2>&1 && alias vi=nvim && alias vim=nvim
+alias batlog='bat --paging=never -l log'
 
-# Git
-alias g="git"
-alias ga="git add"
-alias gc="git commit"
-alias gs="git status"
-alias gd="git diff"
-alias gf="git fetch"
-alias gm="git merge"
-alias gr="git rebase"
-alias gp="git push"
-alias gl="git pull"
-alias gu="git unstage"
-alias gg="git graph"
-alias ggg="git graphgpg"
-alias gco="git checkout"
-alias gpr="hub pull-request"
+# Quick Look & macOS
+alias ql='qlmanage -p'
+alias ocr='shortcuts run ocr'
 
-# docker
+# nbdev
+alias nbdev_switch='~/dotfiles/bin/nbdev_switch.js'
+alias ns=nbdev_switch
+alias ne=nbdev_export
+alias nt=nbdev_test
+alias nc=nbdev_clean
+alias np=nbdev_prepare
+alias nd=nbdev_docs
+alias nr=nbdev_preview
+alias nf=nbdev_fix
+alias nu=nbdev_update
+
+# Docker
 alias dcd='docker compose down'
+alias dcb='docker compose build'
 alias dcu='docker compose up'
+alias dcr='docker compose run'
+alias dcp='docker compose ps'
+alias dce='docker compose exec'
 alias lzd='lazydocker'
 
-# Configs
-alias vrc='vim ~/.vimrc'
+# Quarto
+alias qi='wget $(curl https://latest.fast.ai/pre/quarto-dev/quarto-cli/macos.pkg) && sudo installer -pkg quarto*.pkg -target / && rm quarto*.pkg'
+alias qr='quarto preview'
+alias qp='quarto publish'
+
+# Python
+alias pi="pip install -e '.[dev]'"
+alias venv='source .venv/bin/activate'
+
+# Dotfiles
+alias brc='vim ~/.zshrc'
+alias vrc='vim ~/.config/nvim'
 alias zrc='vim ~/.zshrc'
 alias trc='vim ~/.tmux.conf'
+alias krc='vim ~/.config/karabiner.edn'
+
+# Repos
+alias ro='python ~/code/alfred-repos/cli.py open $(python ~/code/alfred-repos/cli.py list | fzf)'
+alias rv='open $(repo-links code)'
+alias rc='open $(repo-links ci)'
+
+alias v='vim .'
 
 # Tmux
 function t() {
     if [[ $# -eq 0 ]]; then
-        # If no args, try to attach to a session, create a new session
-        # if none exist.
         tmux attach-session 1>/dev/null 2>&1 || tmux new-session
     else
-        # If args, try to attach to that session with that name if it exists,
-        # otherwise create a new session.
         tmux new-session -A -s $1
     fi
 }
 alias tl="tmux list-sessions"
 function ta() {
-    target_session=$1
     if [[ $# -eq 0 ]]; then
         tmux attach-session
     else
-        tmux attach-session -t $target_session
+        tmux attach-session -t $1
     fi
 }
 alias tn="tmux new-session -s"
 alias td="tmux detach-client"
 
-# Note-taking and journalling
-alias pnotes='ranger ~/gdrive'
-alias wnotes='ranger ~/gdrive-dp'
-
-JOURNAL_DIR=~/gdrive/journal
-
-# Open today's journal entry.
-function journal_today() {
-    date=$(date +'%Y-%m-%d')
-    file=$JOURNAL_DIR/$date.md
-    if ! test -f $file; then
-        echo "# $date\n\n" > $file
-    fi
-    vim + '+ normal $' $file
-}
-
-# Main journal entrypoint.
-function jrnl() {
-    if [[ $# -eq 0 ]]; then
-        journal_today
-    elif [[ "$1" == "ls" ]]; then
-        ranger "$JOURNAL_DIR"
-    # TODO: Add elif that checks if an entry exists for the arg and opens it.
-    #       Could even filter down by year / month in a vim buffer or similar...
-    fi
-}
-
+# Misc functions
+pyvim() { vim "$(python -c "import ${1} as o; print(o.__file__)")"; }
+pyshow() { pygmentize "$(python -c "import ${1} as o; print(o.__file__)")"; }

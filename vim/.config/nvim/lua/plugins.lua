@@ -183,9 +183,9 @@ return {
         buf_set_keymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
         buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-        buf_set_keymap('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-        buf_set_keymap('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+        buf_set_keymap('n', '<leader>le', '<cmd>lua vim.diagnostic.open_float({source = "always"})<CR>', opts)
+        buf_set_keymap('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev({float = {source = "always"}})<CR>', opts)
+        buf_set_keymap('n', 'gj', '<cmd>lua vim.diagnostic.goto_next({float = {source = "always"}})<CR>', opts)
         buf_set_keymap('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
         buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
       end
@@ -212,6 +212,16 @@ return {
             analysis = {
               typeCheckingMode = "off"
             }
+          }
+        }
+      })
+      vim.lsp.enable('eslint')
+      vim.lsp.config('eslint', {
+        on_attach = custom_on_attach,
+        capabilities = capabilities,
+        settings = {
+          experimental = {
+            useFlatConfig = true
           }
         }
       })

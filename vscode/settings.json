@@ -1,107 +1,141 @@
 {
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "editor.inlineSuggest.enabled": true,
-    "notebook.cellToolbarLocation": {
-        "default": "hidden"
-    },
-    "notebook.globalToolbar": false,
-    "notebook.insertToolbarLocation": "notebookToolbar",
-    "notebook.showFoldingControls": "always",
-    "editor.mouseWheelScrollSensitivity": 0.6,
-    "workbench.list.mouseWheelScrollSensitivity": 0.6,
-    "editor.minimap.enabled": false,
-    "editor.accessibilitySupport": "off",
-    "editor.experimental.asyncTokenization": true,
-    "editor.folding": false,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "explorer.decorations.badges": false,
-    "explorer.decorations.colors": false,
-    "workbench.tree.renderIndentGuides": "none",
-    "workbench.view.alwaysShowHeaderActions": true,
-    "scm.diffDecorations": "gutter",
-    "editor.hideCursorInOverviewRuler": true,
-    "editor.overviewRulerBorder": false,
-    "editor.lineNumbers": "relative",
-    "zenMode.fullScreen": false,
-    "zenMode.centerLayout": false,
-    "workbench.colorTheme": "Iceberg",
-    "workbench.startupEditor": "none",
-    "workbench.tips.enabled": false,
-    "vim.leader": ",",
-    "workbench.editor.decorations.colors": false,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.inlineSuggest.enabled": true,
+  "notebook.showFoldingControls": "always",
+  "editor.mouseWheelScrollSensitivity": 0.6,
+  "workbench.list.mouseWheelScrollSensitivity": 0.6,
+  "editor.accessibilitySupport": "off",
+  "editor.experimental.asyncTokenization": true,
+  "editor.folding": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.decorations.badges": false,
+  "explorer.decorations.colors": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "scm.diffDecorations": "gutter",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.overviewRulerBorder": false,
+  "editor.lineNumbers": "relative",
+  "zenMode.fullScreen": false,
+  "zenMode.centerLayout": false,
+  "workbench.colorTheme": "Iceberg",
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "vim.leader": ",",
+  "workbench.editor.decorations.colors": false,
 
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<leader>", "s"],
-            "commands": ["workbench.action.files.save"],
-        },
-        {
-            "before": ["<leader>", "p"],
-            "commands": ["workbench.action.openRecent"],
-        },
-        {
-            "before": ["<leader>", "f"],
-            "commands": ["workbench.action.quickOpen"],
-        },
-        {
-            "before": ["u"],
-            "commands": ["undo"],
-        },
-        {
-            "before": ["<C-r>"],
-            "commands": ["redo"],
-        },
-        {
-            "before": ["g", "p"],
-            "commands": ["editor.action.marker.prevInFiles"],
-        },
-        {
-            "before": ["g", "n"],
-            "commands": ["editor.action.marker.nextInFiles"],
-        },
-        {
-            "before": ["<leader>", "t", "t"],
-            "commands": ["testing.runAtCursor"],
-        },
-    ],
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-e>": false,
-        "<C-k>": false,
-        "<C-y>": false,
-        "<C-d>": true,
-        "<C-s>": false,
-        "<C-z>": false
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.files.save"]
     },
+    {
+      "before": ["<leader>", "p"],
+      "commands": ["workbench.action.openRecent"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["u"],
+      "commands": ["undo"]
+    },
+    {
+      "before": ["<C-r>"],
+      "commands": ["redo"]
+    },
+    {
+      "before": ["g", "p"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["g", "n"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["<leader>", "t", "t"],
+      "commands": ["testing.runAtCursor"]
+    },
+    {
+      "before": ["g", "D"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.goToReferences"]
+    },
+    {
+      "before": ["<C-o>"],
+      "commands": ["workbench.action.navigateBack"]
+    },
+    {
+      "before": ["<C-i>"],
+      "commands": ["workbench.action.navigateForward"]
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-e>": false,
+    "<C-k>": false,
+    "<C-y>": false,
+    "<C-d>": true,
+    "<C-s>": false,
+    "<C-z>": false
+  },
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.statusBar.enabled": false,
 
-    "workbench.editor.enablePreview": false,
-    "gitlens.showWelcomeOnInstall": false,
-    "gitlens.showWhatsNewAfterUpgrades": false,
-    "gitlens.plusFeatures.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.statusBar.enabled": false,
-
-    "terminal.integrated.allowChords": false,
-    "terminal.integrated.drawBoldTextInBrightColors": false,
-    "terminal.integrated.experimentalLinkProvider": false,
-    "terminal.integrated.rendererType": "auto",
-    "workbench.editorAssociations": {
-        "*.qmd": "quarto.visualEditor"
-    },
-    "workbench.editor.labelFormat": "medium",
-    "vim.useSystemClipboard": true,
-    "window.titleSeparator": " • ",
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "git.autofetch": true,
-    "githubPullRequests.pullBranch": "never",
-    "[typescript]": {
-    
-    },
-    "git.confirmSync": false,
-    "git.replaceTagsWhenPull": true,
-    "diffEditor.renderSideBySide": false,
+  "terminal.integrated.allowChords": false,
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.experimentalLinkProvider": false,
+  "terminal.integrated.rendererType": "auto",
+  "workbench.editorAssociations": {
+    "*.qmd": "quarto.visualEditor",
+    "git-rebase-todo": "gitlens.rebase"
+  },
+  "workbench.editor.labelFormat": "medium",
+  "vim.useSystemClipboard": true,
+  "window.titleSeparator": " • ",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "git.autofetch": true,
+  "githubPullRequests.pullBranch": "never",
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "git.confirmSync": false,
+  "git.replaceTagsWhenPull": true,
+  "diffEditor.renderSideBySide": false,
+  "gitlens.currentLine.enabled": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "blender.executables": [
+    {
+      "name": "",
+      "isDebug": false,
+      "path": "/Applications/Blender.app/Contents/MacOS/blender"
+    }
+  ],
+  "github.copilot.enable": {
+    "*": true,
+    "quarto": false
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "notebook.outline.showCodeCells": true,
+  "notebook.outline.showMarkdownHeadersOnly": false,
+  "claudeCode.preferredLocation": "sidebar",
+  "claudeCode.selectedModel": "us.anthropic.claude-opus-4-5-20251101-v1:0",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "explorer.confirmDragAndDrop": false
 }
