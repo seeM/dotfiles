@@ -29,12 +29,6 @@ autoload -Uz compinit && compinit
 # Disable ctrl-s/ctrl-q
 stty -ixon
 
-# Starship prompt
-eval "$(starship init zsh)"
-
-# Zoxide (smarter cd)
-eval "$(zoxide init zsh)"
-
 # Atuin (better shell history)
 eval "$(atuin init zsh)"
 
@@ -58,3 +52,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Zoxide (smarter cd) - must be at the end to prevent hook conflicts
+eval "$(zoxide init zsh)"

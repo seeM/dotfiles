@@ -22,3 +22,11 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # See: https://superuser.com/questions/645599/why-is-a-percent-sign-appearing-before-each-prompt-on-zsh-in-windows
 export PROMPT_EOL_MARK=""
+
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' %F{245}%b%f'
+setopt PROMPT_SUBST
+PROMPT='%B%F{blue}%~%f%b${vcs_info_msg_0_}
+%F{yellow}>%f '
+
