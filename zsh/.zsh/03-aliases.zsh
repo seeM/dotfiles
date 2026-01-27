@@ -1,4 +1,9 @@
 # Navigation
+daily() {
+  dir=~/daily/$(date +%Y/%m/%d)
+  mkdir -p "$dir" && cd "$dir"
+}
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
