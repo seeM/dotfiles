@@ -50,6 +50,12 @@ I used to use iTerm, but Alacritty feels more lightweight and better suited to h
 
 Alfred's main advantage over the standard launcher is custom workflows.
 
+Set the sync folder to load preferences and workflows from this repo:
+
+```bash
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/dotfiles/alfred"
+```
+
 #### Disable <kbd>ctrl</kbd> to _Show Actions_
 
 Since I rebind <kbd>ctrl-p/n</kbd> to up/down using Karabiner, this option breaks browsing the search list.
