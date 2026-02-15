@@ -25,10 +25,12 @@ alias tmux='tmux -2'
 command -v batman > /dev/null 2>&1 && alias man=batman
 command -v nvim > /dev/null 2>&1 && alias vi=nvim && alias vim=nvim
 alias batlog='bat --paging=never -l log'
+alias cc='claude'
 
 # Quick Look & macOS
 alias ql='qlmanage -p'
 alias ocr='shortcuts run ocr'
+alias beep='afplay /System/Library/Sounds/Funk.aiff'
 
 # nbdev
 alias nbdev_switch='~/dotfiles/bin/nbdev_switch.js'
