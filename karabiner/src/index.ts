@@ -31,7 +31,7 @@ const wasd = ifDevice({ vendor_id: 1241, product_id: 321 })
 writeToProfile('Default', [
   // caps to ctrl (not on glove)
   rule('caps to ctrl').condition(glove.unless()).manipulators([
-    map('caps_lock').to('left_control'),
+    map('caps_lock', { optional: '⌘⌥⇧'}).to('<⌃'),
   ]),
 
   // global emacs keys (not in terminal/emacs apps)
@@ -143,17 +143,13 @@ writeToProfile('Default', [
     map(0 as NumberKeyValue, 'right_command').to('t', '⌃').to(0 as NumberKeyValue),
     // Panes
     map('l', '⌘').to('t', '⌃').to('l'),
-    map('l', 'right_command').to('t', '⌃').to('l'),
     map('h', '⌘').to('t', '⌃').to('h'),
-    map('h', 'right_command').to('t', '⌃').to('h'),
     map('k', '⌘').to('t', '⌃').to('k'),
-    map('k', 'right_command').to('t', '⌃').to('k'),
     map('j', '⌘').to('t', '⌃').to('j'),
-    map('j', 'right_command').to('t', '⌃').to('j'),
   ]),
 
   // glove caps -> fn
   rule('glove caps -> fn').condition(glove).manipulators([
-    map('caps_lock').to('fn'),
+    map('caps_lock', { optional: '<⌘⌥⌃⇧'}).to('fn'),
   ]),
 ])
