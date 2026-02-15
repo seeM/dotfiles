@@ -103,7 +103,6 @@
   },
   "workbench.editor.labelFormat": "medium",
   "vim.useSystemClipboard": true,
-  "window.titleSeparator": " • ",
   "github.copilot.nextEditSuggestions.enabled": true,
   "git.autofetch": true,
   "githubPullRequests.pullBranch": "never",
@@ -137,5 +136,8 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
-  "explorer.confirmDragAndDrop": false
+  "explorer.confirmDragAndDrop": false,
+  "window.titleSeparator": " • ",
+  "window.title": "${activeEditorShort}${separator}${folderName}",
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }
