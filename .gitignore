@@ -12,10 +12,10 @@ vim/.config/nvim/plugin/
 emacs/.emacs.d/
 !emacs/.emacs.d/init.el
 Brewfile.lock.json
-karabiner/.config/karabiner/
 ipython/.ipython/profile_default/history.sqlite
 *.stderr
 *.stdout
 *.jupyterlab-workspace
 migrated
 dhist
+node_modules/
