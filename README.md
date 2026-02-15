@@ -11,10 +11,10 @@
 ## Installation
 
 1. Manually configure [macOS settings](#macos-settings).
-2. Clone and `cd` into this repo _with submodules_:
+2. Clone and `cd` into this repo:
 
     ```bash
-    $ git clone --recurse-submodules git@github.com:seem/dotfiles ~/dotfiles
+    $ git clone git@github.com:seem/dotfiles ~/dotfiles
     $ cd ~/dotfiles
     ```
 3. Install [Homebrew](#homebrew).
@@ -23,38 +23,21 @@
     ```bash
     brew bundle install
     ```
-5. Install vim plugins using [packer](https://github.com/wbthomason/packer.nvim):
+5. Launch `nvim` — plugins will be installed automatically via [lazy.nvim](https://github.com/folke/lazy.nvim) on first run.
+6. Manually install remaining [MacOS apps](#macos-apps).
+7. Link VSCode settings:
 
     ```bash
-    $ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-    ```
-7. Manually install remaining [MacOS apps](#macos-apps).
-8. Link VSCode settings (replace `Code\ -\ Insiders` with `Code` if necessary):
-
-    ```bash
-    rm ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
-    rm ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
-    ln -s $(pwd)/vscode/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
-    ln -s $(pwd)/vscode/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+    stow --target="$HOME/Library/Application Support/Code/User" vscode
     ```
 
 ## MacOS apps
 
 ### [1Password](https://1password.com/) - Password manager
 
-### [Alacritty](https://github.com/alacritty/alacritty) - Terminal emulator
-
-I used to use iTerm, but Alacritty feels more lightweight and better suited to how I use the terminal (with tmux).
-
 ### [Alfred](https://www.alfredapp.com/) - Launcher
 
 Alfred's main advantage over the standard launcher is custom workflows.
-
-Set the sync folder to load preferences and workflows from this repo:
-
-```bash
-defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string "~/dotfiles/alfred"
-```
 
 #### Disable <kbd>ctrl</kbd> to _Show Actions_
 
@@ -62,44 +45,37 @@ Since I rebind <kbd>ctrl-p/n</kbd> to up/down using Karabiner, this option break
 
 Alfred Preferences → Features → Universal Actions → General → Show Actions (uncheck ctrl).
 
-#### [`alfred-github-workflow`](https://github.com/gharlan/alfred-github-workflow)
-
-#### [`alfred-emoji`](https://github.com/jsumners/alfred-emoji)
-
-### [Flux](https://justgetflux.com/) - Blue light controller
-
-### [GIMP-2.10](https://www.gimp.org/) - Image manipulation
-
-### [Google Chrome](https://www.google.co.za/chrome/) - Browser
+### [Arc](https://arc.net/) - Browser
 
 **Extensions:**
 
 - 1Password
-- Vimium (only occasionally use it)
-- Twemex (Twitter sidebar)
-- Some ad blocker
+- Vimium
+- uBlock Origin
+
+### [Ghostty](https://ghostty.org/) - Terminal emulator
+
+### [GIMP](https://www.gimp.org/) - Image manipulation
 
 ### [IINA](https://iina.io/) - Video player
 
 ### [Inkscape](https://inkscape.org/) - Vector graphics
 
-Lots of confusing installation instructions out there, but `brew install inkspace` seems to work fine.
+Installed via `home.Brewfile` (`brew bundle install --file=home.Brewfile`).
 
 ### [Karabiner](https://pqrs.org/osx/karabiner/) - Keyboard remapping
 
-[`karabiner.edn`](./karabiner/.config/karabiner.edn) is written in the Karabiner domain specific language [Goku](#goku).
+Configuration is managed via [`karabiner.ts`](https://github.com/mxstbr/karabiner). `stow` the `karabiner` package to link the config, then build:
 
-Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` package, and run `goku`.
+```bash
+npm --prefix karabiner run build
+```
 
 ### [Keyboard Maestro](https://www.keyboardmaestro.com/) – Mac automation
-
-### [LibreOffice](https://www.libreoffice.org/) - Office suite
 
 ### [Obsidian](https://obsidian.md/) - Writing
 
 ### [Rectangle](https://rectangleapp.com/) - Window manager
-
-### [Spotify](https://www.spotify.com/us/) - Music
 
 ### [Transmission](https://www.transmissionbt.com/) - BitTorrent client
 
@@ -165,8 +141,6 @@ Ensure that both Karabiner and Goku are installed, then `stow` the `karabiner` p
 
 See my [`Brewfile`](./Brewfile) for the full list of terminal applications I use. The most important ones are listed here.
 
-### [Goku](https://github.com/yqrashawn/GokuRakuJoudo) - Simple Karabiner configuration
-
 ### [Homebrew](https://brew.sh/) - Package manager
 
 ### [Tmux](https://github.com/tmux/tmux) - Terminal window manager
@@ -227,7 +201,7 @@ I've setup tmux and Karabiner so that many of these work in the terminal too! I 
 
 I use [Alfred](#alfred) instead of the defualt launcher. I don't use too many of its features or custom workflows anymore. It's also been a long time since I used the default launcher so I'm not even sure how much they differ anymore.
 
-I mostly use Alfred by pressing <kbd>cmd-space</kbd> typing in a few characters to fuzzily search for the application I want to launch or switch to, and hitting <kbd>return</kbd>. After a while, you remember short letter combinations (usually two letters) needed for each application. For example, <kbd>cmd-space</kbd> <kbd>`ch`</kbd> <kbd>enter</kbd> switches to Chrome. Similarly, `al` for Alacritty (terminal), `ob` for Obsidian (notes), `di` for Discord, and so on.
+I mostly use Alfred by pressing <kbd>cmd-space</kbd> typing in a few characters to fuzzily search for the application I want to launch or switch to, and hitting <kbd>return</kbd>. After a while, you remember short letter combinations (usually two letters) needed for each application. For example, <kbd>cmd-space</kbd> <kbd>`ar`</kbd> <kbd>enter</kbd> switches to Arc. Similarly, `gh` for Ghostty (terminal), `ob` for Obsidian (notes), `di` for Discord, and so on.
 
 It also has a built-in calculator which I find very convenient. You can type basic math directly into the search prompt and hit <kbd>enter</kbd> to paste the result into your clipboard.
 
