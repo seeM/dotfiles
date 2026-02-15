@@ -1,0 +1,5 @@
+filter_mode = "session-preload"
+
+[keys]
+# left arrow at start of query accepts the selection onto the prompt for editing
+accept_past_line_start = true
