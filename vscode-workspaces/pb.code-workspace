@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "${userHome}/posit/positron-review"
+		},
+		{
+			"path": "${userHome}/posit/positron-review/extensions/positron-python"
+		}
+	],
+	"settings": {
+		"search.followSymlinks": false
+    }
+}
