@@ -90,8 +90,8 @@ writeToProfile('Default', [
 
   // cmd -> cmd+tab (not on glove)
   rule('cmd -> cmd+tab').condition(glove.unless()).manipulators([
-    map('left_command').to('left_command').toIfAlone('tab', '⌘'),
-    map('right_command').to('right_command').toIfAlone('tab', '⌘'),
+    map('left_command').to('left_command').toIfAlone('tab', '⌘').parameters({'basic.to_if_alone_timeout_milliseconds': 200}),
+    map('right_command').to('right_command').toIfAlone('tab', '⌘').parameters({'basic.to_if_alone_timeout_milliseconds': 200}),
   ]),
 
   // emacs keys in dbeaver/onenote
