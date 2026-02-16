@@ -30,6 +30,22 @@
     "command": "notebook.focusBottom",
     "when": "notebookEditorFocused && !inputFocus"
   },
+  {
+    "key": "alt+f",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001bf"
+    },
+    "when": "terminalFocus && !terminalTextSelected"
+  },
+  {
+    "key": "alt+b",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001bb"
+    },
+    "when": "terminalFocus && !terminalTextSelected"
+  },
   // TODO: This doesn't work correctly. Given a selection, pressing j or k deselects but then causes list.expandSelection{Up,Down} to no longer include the currently selected cell
   // {
   //   "key": "j",
@@ -150,5 +166,5 @@
   {
     "key": "ctrl+cmd+`",
     "command": "workbench.action.toggleMaximizedPanel"
-  },
+  }
 ]
