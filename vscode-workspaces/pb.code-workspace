@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "${userHome}/posit/positron-review"
+			"path": "../../posit/positron-review"
 		},
 		{
-			"path": "${userHome}/posit/positron-review/extensions/positron-python"
+			"path": "../../posit/positron-review/extensions/positron-python"
 		}
 	],
 	"settings": {
