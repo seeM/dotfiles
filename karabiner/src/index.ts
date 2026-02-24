@@ -36,10 +36,10 @@ writeToProfile('Default', [
 
   // global emacs keys (not in terminal/emacs apps)
   rule('global emacs keys').condition(emacsDisabledApps.unless()).manipulators([
-    map('b', '⌃').to('←'),
-    map('p', '⌃').to('↑'),
-    map('n', '⌃').to('↓'),
-    map('f', '⌃').to('→'),
+    map('b', '⌃', '⇧').to('←'),
+    map('p', '⌃', '⇧').to('↑'),
+    map('n', '⌃', '⇧').to('↓'),
+    map('f', '⌃', '⇧').to('→'),
     map('m', '⌃').to('⏎'),
     map('h', '⌃').to('⌫'),
   ]),
@@ -74,9 +74,9 @@ writeToProfile('Default', [
   // meta key (option as meta, not in terminal/emacs apps)
   // Note: original .edn had typo ":!emacs-disabed" — fixed here
   rule('meta key').condition(emacsDisabledApps.unless()).manipulators([
-    map('b', '⌥').to('←', '⌥'),
+    map('b', '⌥', '⇧').to('←', '⌥'),
     map('b', 'right_control').to('←', '⌥'),
-    map('f', '⌥').to('→', '⌥'),
+    map('f', '⌥', '⇧').to('→', '⌥'),
     map('d', '⌥').to('⌦', '⌥'),
     map('h', '⌥').to('⌫', '⌥'),
   ]),
@@ -103,8 +103,8 @@ writeToProfile('Default', [
       ]
     }),
   ).manipulators([
-    map('a', '⌃').to('←', '⌘'),
-    map('e', '⌃').to('→', '⌘'),
+    map('a', '⌃', '⇧').to('←', '⌘'),
+    map('e', '⌃', '⇧').to('→', '⌘'),
     map('k', '⌃').to('→', ['⌘', '⇧']).to('x', '⌘'),
     map('y', '⌃').to('v', '⌘'),
   ]),
