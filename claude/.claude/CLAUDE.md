@@ -1,0 +1,1 @@
+- Don't use `git`'s `-C` arg, `cd` to the directory instead

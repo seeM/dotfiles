@@ -1,0 +1,22 @@
+{
+  "awsAuthRefresh": "aws sso login",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "us.anthropic.claude-opus-4-6-v1",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-4-6",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "AWS_PROFILE": "claude",
+    "AWS_REGION": "us-east-1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(gh pr view)"
+    ]
+  },
+  "model": "us.anthropic.claude-opus-4-6-v1",
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
+  "enabledPlugins": {
+    "clean-pr@clean-pr": true
+  }
+}
