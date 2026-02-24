@@ -126,6 +126,9 @@
   ],
   "github.copilot.enable": {
     "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
     "quarto": false
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -138,6 +141,5 @@
   },
   "explorer.confirmDragAndDrop": false,
   "window.titleSeparator": " • ",
-  "window.title": "${activeEditorShort}${separator}${folderName}",
   "javascript.updateImportsOnFileMove.enabled": "always"
 }
