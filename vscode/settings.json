@@ -76,7 +76,11 @@
     {
       "before": ["<C-i>"],
       "commands": ["workbench.action.navigateForward"]
-    }
+    },
+    {
+      "before": ["g", "s"],
+      "commands": ["editor.splitJoin"]
+    },
   ],
   "vim.handleKeys": {
     "<C-a>": false,
@@ -114,7 +118,7 @@
   "diffEditor.renderSideBySide": false,
   "gitlens.currentLine.enabled": false,
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "blender.executables": [
